@@ -7,6 +7,7 @@
 \usepackage{natbib, url}
 \usepackage[english, french]{babel}
 \usepackage{amsfonts, amsmath, amssymb}
+\usepackage{amsthm}
 \usepackage{color}
 \usepackage{tabularx, booktabs} 
 \usepackage{graphicx}
@@ -239,8 +240,189 @@ Soit $X_1, X_2,\dots$, une séquence de variables indépendantes, identiquement 
 {\Pr{\{ X>u+y\ |\ X>u \}} = \frac{1-F(u+y)}{1- F(u)}}
 \end{equation}
 
-Si le comportement exact de $F$ était connu, la distribution de l'excès de seuil serait également connue. Cependant, en pratique, cette situation est rare et des approximations sont alors applicables lorsque $u$ est assez grand. 
+Si le comportement exact de $F$ était connu, la distribution de l'excès de seuil serait également connue. Cependant, en pratique, cette situation est rare et des approximations sont alors applicables lorsque $u$ est assez grand. \\
 
+\begin{theorem}\label{theor:1.2}
+Nous savons déjà que $\Pr\{ \max\{X_1,\dots,X_n\} \le z \}\approx G(z)$
+où
+\begin{equation*}
+{G(z) = \exp \Bigg\{ - \Big[ 1 +\xi\Big(\frac{z-\mu}{\sigma}\Big) \Big]^{-1/\xi}  \Bigg\}}
+\end{equation*}
+Ensuite, pour $u$ assez grand, la fonction de répartition de $X-u\ |\ X>u$ est environ:
+\begin{equation*}
+H(y) = 1 - \Big(1+\frac{\xi y}{\tilde\sigma}\Big)^{-1/\xi},\ \{y:\ y>0\ \ \text{et}\ \ (1+ \xi y/\tilde{\sigma})>0 \} 
+\end{equation*}
+où
+\begin{equation*}
+{\tilde{\sigma} = \sigma + \xi(u-\mu)}
+\end{equation*}
+Il s'agit ici de la famille de distributions Pareto généralisée.
+\end{theorem}
+
+Nous avons donc comme théorème que si les maximums ont comme distribution approximative $G$, les excès de seuil ont comme distribution approximative un membre de la famille Pareto généralisée. De plus, les paramètres de $H$ sont uniquement déterminés par ceux de la distribution \textit{GEV}. $\xi$ conserve la même valeur, par exemple. La valeur de $n$ influence les paramètres de $G$, mais pas ceux de $H$.
+
+\begin{proof}[Démonstration du théorème \ref{theor:1.2}]
+
+\begin{equation*}
+\begin{split}
+F^n(z) \approx \exp \Bigg\{ - \Big[ 1 +\xi\Big(\frac{z-\mu}{\sigma}\Big) \Big]^{-1/\xi}  \Bigg\}\\
+\Rightarrow n\log F(z) \approx - \Big[ 1 +\xi\Big(\frac{z-\mu}{\sigma}\Big) \Big]^{-1/\xi} 
+\end{split}
+\end{equation*}
+
+Pour $n$ assez grand, un développement de Taylor donne:
+\begin{equation*}
+\begin{split}
+\log F(z) \approx -(1-F(z))\\
+\Rightarrow 1-F(u) \approx \frac{1}{n} \Big[ 1 +\xi\Big(\frac{u-\mu}{\sigma}\Big) \Big]^{-1/\xi}\\
+\Rightarrow 1-F(u+y) \approx \frac{1}{n} \Big[ 1 +\xi\Big(\frac{u+y-\mu}{\sigma}\Big) \Big]^{-1/\xi}
+\end{split}
+\end{equation*}
+
+\begin{equation*}
+\begin{split}
+\Rightarrow \Pr{\{ X>u+y\ |\ X>u \}} &\approx \frac{n^{-1}[1 + \xi(u+y-\mu)/\sigma]^{-1/\xi}}{n^{-1}[1 + \xi(u-\mu)/\sigma]^{-1/\xi}} \\
+    &= \Bigg[ 1 + \frac{\xi(u+y-\mu)/\sigma}{1 + \xi(u-\mu)/\sigma}\Bigg]^{-1/\xi} \\
+    &= \Bigg[1 + \frac{\xi y}{\tilde\sigma} \Bigg]^{-1/\xi},\ \ \tilde{\sigma} = \sigma + \xi(u - \mu)
+\end{split}
+\end{equation*}
+
+\end{proof}
+
+
+On propose le cadre suivant pour la modélisation de valeurs extrêmes: les données brutes représentent une séquence de valeurs indépendantes et identiquement distribuées $x_1,\dots,x_n$ et les valeurs extrêmes sont identifiées en définissant un seuil de grande valeur $u$. Les observations qui dépassent ce seuil sont définies par $x_{(1)},\dots,x_{(k)}$ et les excès de seuil par $y_j = x_{(j)} - u,\ j=1,\dots,k$. Ensuite, les $y_j$ sont reconnues comme des réalisations indépendantes d'une variable aléatoire dont la distribution peut être approximée par un membre de la famille Pareto généralisée.\\
+
+Un des défis de cette démarche est le choix de la valeur de $u$, où il faut trouver une bonne balance entre la variance et le biais du modèle. La pratique standard est de choisir le plus petit $u$ possible qui respecte les hypothèses du modèle. Une première méthode est basée sur la moyenne de la distribution Pareto généralisée:
+
+\begin{equation}\label{eq:1.2.2}
+{\text{E}(Y) = \frac{\sigma}{1-\xi},\ \ \xi <1}
+\end{equation}
+Si la distribution est appropriée pour modéliser les excès d'un seuil $u_0$:
+\begin{equation}\label{eq:1.2.3}
+{\text{E}(X-u_0\ |\ X>u_0) = \frac{\sigma_{u_{0}}}{1- \xi}}
+\end{equation}
+où nous utilisons $\sigma_{u_{0}}$ pour le paramètre d'échelle des excès du seuil $u_0$. De plus, si la distribution est adéquate pour $u_0$, elle l'est également pour tous les seuils $u>u_0$ avec un changement approprié du paramètre d'échelle:
+
+\begin{equation}\label{eq:1.2.4}
+\begin{split}
+\text{E}(X-u\ |\ X>u) &= {\frac{\sigma_u}{1-\xi}}\\
+    &= {\frac{\sigma_{u_0} + \xi{(u-u_0)}}{1-\xi}}
+\end{split}
+\end{equation}
+Donc, $\text{E}(X-u\ |\ X>u)$ est une fonction linéaire de $u$ et est également la moyenne des excès du seuil $u$. Cette moyenne peut être empiriquement approximée pour les données disponibles. Nous savons que ces approximés devraient changer linéairement avec $u$ quand la valeur de $u$ est appropriée pour le modèle Pareto généralisé. \\
+
+Tout ceci mène finalement à la première procédure: nous considérons les points suivants:
+\begin{equation}\label{eq:1.2.5}
+\Bigg\{\Bigg(u,\ \frac{1}{n_u}\sum_{i=1}^{n_u}(x_{(i)} - u) \Bigg): u<x_{\text{max}}  \Bigg\}
+\end{equation}
+
+Cette séquence de points correspond au \textit{mean residual plot}. Après un seuil $u_0$ pour lequel la distribution Pareto généralisée fournie une approximation adéquate pour les excès, le graphique devrait être linéaire en $u$. Toutefois, il peut parfois être difficile d'interpréter ce type de graphique en pratique. \\
+
+La deuxième méthode propose d'estimer le modèle pour différents seuils. Après un seuil $u_0$ pour lequel la distribution Pareto généralisée fournie une approximation adéquate pour les excès, les estimés du paramètre de forme $\xi$ devraient rester constants et les estimés de $\sigma_u$ devraient être linéaires en $u$ à moins que $\xi =0$, car $\sigma_u = \sigma_{u_0} + \xi(u - u_0)$. Nous pouvons également modifier le paramètre d'échelle de la distribution: $\sigma^* = \sigma_u - \xi u$. Avec cette paramétrisation, $\sigma^*$ et $\xi$ devraient rester constants au-delà de $u_0$. Nous pouvons donc tracer les graphiques de $\hat\sigma^*$ et $\hat\xi$ par rapport à $u$ et sélectionner $u_0$ comme la plus petite valeur of $u$ pour laquelle les estimés sont presque constants.\\ 
+
+Après avoir choisi un seuil, les paramètres de la distribution Pareto généralisée peuvent être estimés avec la méthode du maximum de vraisemblance. Définissons $y_1,\dots,y_k$ comme les $k$ excès du seuil $u$. Pour $\xi \ne 0$, la log-vraisemblance est:
+\begin{equation}\label{eq:1.2.6}
+{\ell(\sigma, \xi) = -k\log\sigma - (1+1/\xi)\sum_{i=1}^{k}\log(1+\xi{y_i}/\sigma),\ \ (1+\xi{y_i}/\sigma) >0}
+\end{equation}
+Si $\xi =0$:
+\begin{equation}\label{eq:1.2.7}
+{\ell(\sigma) = -k\log\sigma - (1/\sigma)\sum_{i=1}^{k}y_i}
+\end{equation}
+Tout comme avec les maximums, des techniques numériques sont nécessaires pour la maximisation.\\
+
+Pour les niveaux de retour, nous avons:
+\begin{equation}\label{eq:1.2.8}
+\begin{split}
+{\Pr\{ X>x\ |\ X>u\} = \Big[ 1 + \xi \Big( \frac{x-u}{\sigma}\Big)\Big]^{-1/\xi}}\\
+{\Rightarrow \Pr\{X>x\} = \zeta_u \Big[1 + \xi \Big( \frac{x-u}{\sigma}\Big)\Big]^{-1/\xi}}
+\end{split}
+\end{equation}
+où $\zeta_u = \Pr\{X>u\}$. Ensuite, le niveau $x_m$ qui est dépassé en moyenne une fois chaque $m$ observations est obtenu comme suit:
+
+\begin{equation}\label{eq:1.2.9}
+\begin{split}
+{\frac{1}{m} = \zeta_u \Big[1 + \xi \Big( \frac{x-u}{\sigma}\Big)\Big]^{-1/\xi}}\\
+{\Rightarrow x_m = u + \frac{\sigma}{\xi} \Big[(m\zeta_u)^\xi -1\Big],\ \ x_m>u}
+\end{split}
+\end{equation}
+
+Si $\xi =0$:
+\begin{equation}\label{eq:1.2.10}
+x_m = u + \sigma\log(m\zeta_u)
+\end{equation}
+\\
+
+Il est souvent plus utile d'obtenir le niveau  qui est dépassé en moyenne une fois chaque $N$ années. S'il y a $n_y$ observations par années, le niveau de retour \textit{N-années} est défini comme suit:
+\begin{equation}\label{eq:1.2.11}
+z_N = u + \frac{\sigma}{\xi} \Big[(Nn_y \zeta_u)^\xi -1\Big]
+\end{equation}
+Si $\xi =0$:
+\begin{equation}\label{eq:1.2.12}
+z_N = u + \sigma\log(Nn_y\zeta_u)
+\end{equation} 
+\\
+
+Pour estimer les niveaux de retour, il suffit de remplacer les paramètres par leur estimation. Pour $\xi$ et $\sigma$, il s'agit tout simplement de $\hat\xi$ et $\hat\sigma$ obtenus avec la méthode du maximum de vraisemblance et $\hat\zeta_u = k/n$, la proportion des données observées qui dépassent $u$. De plus, $\text{Var}(\hat\zeta_u) \approx \hat\zeta_u/(1- \hat\zeta_u)$, car $k \sim \text{Bin}(n,\zeta_u)$. 
+
+En appliquant la méthode delta:
+\begin{equation}\label{eq:1.2.13}
+\text{Var}(\hat{x}_m) \approx \nabla x^{\top}_m V \nabla x_m
+\end{equation}
+où $V$ correspond à la matrice variance-covariance de $(\hat\zeta_u,\hat\sigma, \hat\xi)$ et
+\begin{equation}\label{eq:1.2.14}
+\begin{split}
+\nabla x^{\top}_m &= \Big[ \frac{\partial x_m}{\partial \zeta_u}, \frac{\partial x_m}{\partial \sigma}, \frac{\partial x_m}{\partial \xi}\Big] \\
+&= \Big[\sigma^\xi \zeta^{\xi -1}_u,\ \xi^{-1} \{(m\zeta_u)^{\xi} -1\},\ -\sigma\xi^{-2}\{(m\zeta_u)^{\xi} -1\} + \sigma\xi^{-1}(m\zeta_u)^{\xi}\log(m\zeta_u)\Big]\Bigg|_{(\hat\zeta_u, \hat\sigma, \hat\xi)}
+\end{split}
+\end{equation}
+
+De plus, pour la deuxième méthode de sélection de seuil, nous avons:
+\begin{equation}\label{eq:1.2.15}
+\text{Var}(\sigma^*) \approx \nabla \sigma^{*\top} V \nabla \sigma^*
+\end{equation}
+et 
+\begin{equation}\label{eq:1.2.16}
+\begin{split}
+\nabla \sigma^{*\top} &= \Bigg[ \frac{\partial \sigma^*}{\partial \sigma_u}, \frac{\partial \sigma^*}{\partial \xi}\Bigg] \\
+    &= [1, -u]
+\end{split}
+\end{equation}
+
+Tout comme avec les maximums, ces quatre graphiques sont utiles pour la validation du modèle:
+
+\begin{itemize}
+\item Graphique \textit{P-P}
+\item Graphique \textit{Q-Q}
+\item Graphique du niveau de retour
+\item Histogramme des données avec la densité prédite par le modèle 
+\end{itemize}
+
+Le graphique \textit{P-P} est constitué des points:
+\begin{equation*}
+\{ ((i/(k+1), \hat{H}(y_{(i)}));\ i=1,\dots,k\}
+\end{equation*}
+où
+\begin{equation*}
+\hat{H}(y) = 1 - \Bigg(1+\frac{\hat\xi y}{\hat\sigma}\Bigg)^{-1/\hat\xi}
+\end{equation*}
+
+Le graphique \textit{Q-Q} est constitué des points:
+\begin{equation*}
+\{(\hat{H}^{-1}(i/(k+1)), y_{(i)});\ i=1,\dots,k\}
+\end{equation*}
+où
+\begin{equation*}
+\hat{H}^{-1}(y) = u + \frac{\hat\sigma}{\hat\xi}\Big[y^{-\hat\xi}-1\Big]
+\end{equation*}
+
+Le graphique du niveau de retour est constitué des points:
+\begin{equation*}
+\{(m, \hat{x}_m)\}
+\end{equation*}
+où
+\begin{equation*}
+{\hat{x}_m = u + \frac{\hat\sigma}{\hat\xi} \Big[(m {\hat\zeta}_u)^{\hat\xi} -1\Big]}
+\end{equation*}
 
 
 \section{Modèles additifs généralisés et splines}
