@@ -1,0 +1,268 @@
+\documentclass[11pt]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{apacite}
+\usepackage{natbib, url}
+\usepackage[english, french]{babel}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{color}
+\usepackage{tabularx, booktabs} 
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{hyperref}
+
+\setlength\parindent{0pt}
+
+\frenchbsetup{%
+    StandardItemizeEnv=true,       
+    ThinSpaceInFrenchNumbers=true, 
+    og=«, fg=»                     
+  }
+
+
+\newtheorem{theorem}{Theorème}[chapter]
+\numberwithin{equation}{section}
+
+\usepackage{Sweave}
+\begin{document}
+\input{MAIN-concordance}
+
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+        
+        \Large
+        \textbf{Modélisation statistique d'évènements extrêmes}
+        
+        \large
+        \vspace{0.4cm}
+        
+        Application dynamique aux catastrophes naturelles de l'Océanie
+ 
+        \vspace{3cm}
+ 
+        \textit{Rapport soumis dans le cadre du cours ACT-2101 du} \\
+        Baccalauréat en actuariat
+ 
+        \vspace{1cm}
+        
+        \textit{Par}
+ 
+        \textbf{Marc-Olivier Ricard}
+        
+        \vspace{1cm}
+        
+        \textit{Présenté à}
+ 
+        \textbf{Marie-Pier Côté}
+ 
+        \vfill
+ 
+        \includegraphics[width=0.3\textwidth]{Laval.PNG}
+        
+        \vspace{1.5cm}
+ 
+        École d'actuariat\\
+        Université Laval\\
+        
+        \vspace{0.5cm}
+        
+        Décembre 2019
+ 
+    \end{center}
+\end{titlepage}
+
+
+\tableofcontents
+\cleardoublepage
+
+
+\chapter*{Résumé}
+\label{chap:résumé} 
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:résumé}}
+
+
+\chapter*{Introduction}
+\label{chap:introduction} 
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:introduction}}
+
+L'objectif principal d'une analyse de valeur extrême est d'être capable de quantifier le comportement stochastique d'un processus à des niveaux exceptionnellement élevés ou bas. De plus, ce type d'analyse a souvent comme but d'estimer la probabilité de réalisation d'évènements qui sont encore plus extrêmes que n'importe quel évènement passé. La théorie des valeurs extrêmes rend ce genre d'extrapolation possible.
+
+\chapter{Notions préliminaires}
+\label{chap:notions} 
+
+\section{Théorie classique des valeurs extrêmes}
+
+Posons $M_n = \max\{X_1, \dots, X_n\}$, le maximum des n observations indépendantes et de distribution commune. Dans le cas où le comportement des $X_i$ serait connu, il serait facile d'obtenir le comportement exact de $M_n$, mais, en pratique, cette situation est très rare. Par contre, sous des hypothèses appropriées et pour ${n \to \infty}$, il est possible d'approximer le comportement de $M_n$ et d'obtenir une famille de modèles qui peuvent être ajustés avec les différentes valeurs observées. On appelle cette approche le paradigme des valeurs extrêmes. Il faut ensuite être en mesure d'estimer les différents paramètres du modèle, de quantifier l'incertitude, d'évaluer le modèle et finalement de maximiser l'utilisation de l'information disponible.\\
+
+Dans cette section, on étudie le modèle qui s'intéresse au comportement statistique de $M_n$. Nous pourrions utiliser la distribution théorique:
+
+\begin{equation}\label{eq:1.1.1}
+\begin{split}
+P\{M_n \le z\} &= P\{X_1 \le z, \dots, X_n \le z\} \\
+              &= P\{X_1 \le z\} \times \dots \times P\{X_n \le z\} \\
+              &= \{F(z)\}^n
+\end{split}
+\end{equation}
+
+Par contre, en pratique, $F$ est inconnu et donc, cette approche n'est pas utile. Il serait possible d'estimer $F$ avec les valeurs observées, mais la moindre erreur dans l'estimation pourrait mener à une très grande erreur pour $F^n$. L'approche alternative est d'approximer directement $F^n$ avec seulement les valeurs extrêmes. Étant donné que la distribution de $M_n$ est dégénératrice à un certain point, nous normalisons $M_n$: 
+
+\begin{equation}\label{eq:1.1.2}
+M^*_n = \frac{M_n - b_n}{a_n}
+\end{equation}
+
+\begin{theorem}\label{theor:1.1}
+S'il existe des séquences de constantes $\{a_n > 0\}$ et $\{b_n\}$ tel que $$P\Bigg\{\frac{M_n - b_n}{a_n} \le z \Bigg\}\to G(z), \ \ \  \text{quand} \ \ {n \to \infty}$$ où $G$ est une fonction de répartition non-dégénératrice. Alors, $G$ appartient à une des distributions de valeur extrême, soit les lois Gumbel, Fréchet et Weibull. Donc, peu importe la distribution ${F_X}_i$, les trois dernières lois sont les seules distributions limites pour $M^*_n$.
+\end{theorem}
+
+Malgré qu'il pourrait sembler logique de choisir une des trois distributions et d'estimer ses paramètres, cette piste possède deux faiblesses: une technique est nécessaire pour choisir la distribution la plus appropriée et dès que cette décision est prise, les inférences qui suivent présument que le bon choix a été fait. Une meilleure analyse est possible en combinant en une seule distribution les distributions Gumbel, Fréchet et Weibull:
+
+\begin{equation}\label{eq:1.1.3}
+\begin{gathered}
+G(z) = \exp \Bigg\{ - \Big[ 1 +\xi\Big(\frac{z-\mu}{\sigma}\Big) \Big]^{-1/\xi}  \Bigg\}, \\
+\{z: (1 + \xi(z- \mu)/\sigma) >0\},\ -\infty<\mu>\infty,\ \  \sigma>0,\ -\infty<\xi>\infty
+\end{gathered}
+\end{equation}
+
+Ceci est la famille de distributions d'extremum généralisée (GEV). Comme on peut voir, le modèle possède trois paramètres: $\mu$ (paramètre de position), $\sigma$ (paramètre d'échelle), $\xi$ (paramètre de forme).\\
+
+Si nous revenons au Théorème \ref{theor:1.1}, une autre difficulté est le fait que, en pratique, les constantes de normalisation $a_n$ et $b_n$ sont inconnus. Ce problème est facilement résolu: 
+
+\begin{equation*}
+\text{Nous savons déjà que} \ P\Bigg\{\frac{M_n - b_n}{a_n} \le z \Bigg\} \approx G(z), \ \ \text{quand} \ n\to\infty 
+\end{equation*}
+
+\begin{equation*}
+\Rightarrow P\{M_n\le z\} \approx G\Bigg\{\frac{z- b_n}{a_n}\Bigg\} = G^*(z), 
+\end{equation*}
+
+où $G^*(z)$ est simplement un autre membre de la famille \textit{GEV}. Étant donné qu'en pratique, les paramètres doivent être estimés, ceci ne change rien au modèle proposé.\\
+
+Tout ceci mène à une première méthodologie pour modéliser les valeurs extrêmes:
+
+\begin{itemize}
+\item Les données sont groupées en séquence de longueur $n$
+\item Le maximum de chaque séquence est calculé
+\item Une distribution \textit{GEV} est calibrée à ces maximums
+\item La distribution peut être manipulée pour obtenir différentes statistiques
+\end{itemize}
+
+La distribution permet, par exemple, d'obtenir les très grands quantiles et ceux-ci sont obtenus comme ceci:
+\begin{equation}\label{eq:1.1.4}
+z_p =
+\begin{cases}
+\mu - \frac{\sigma}{\xi}\Big[1 - \{\log(1-p)\}^{-\xi}\Big], & \xi \ne 0 \\
+\mu - \sigma\log\{-\log(1-p)\}, & \xi = 0
+\end{cases}
+\end{equation}
+où:
+\begin{itemize}
+\item $G(z_p) = 1-p$
+\item $z_p$ est le niveau de retour correspondant à la période de retour ${1}/{p}$
+\item On s'attend à ce que le niveau $z_p$ soit dépassé en moyenne une fois chaque $1/p$ année.
+\item Chaque année, le niveau $z_p$ est dépassé avec probabilité $p$
+\end{itemize}
+
+Nous pouvons également poser $y_p = -\log(1-p)$ pour obtenir:
+\begin{equation}\label{eq:1.1.5}
+z_p =
+\begin{cases}
+\mu - \frac{\sigma}{\xi}\Big[1 - {y_p}^{-\xi}\Big], & \xi \ne 0 \\
+\mu - \sigma\log{y_p}, & \xi = 0
+\end{cases}
+\end{equation}
+\\
+
+Nous simplifions maintenant la notation en dénotant les maximums par $Z_1,\dots,Z_m$, on assume que ce sont des variables indépendantes d'une distribution \textit{GEV} dont il faut estimer les paramètres. À noter, que même si les $X_i$ sont dépendants, il peut être raisonnable d'assumer que les $Z_i$ sont indépendants.
+
+La méthode la plus populaire pour l'estimation des paramètres est la méthode du maximum de vraisemblance. À noter, que si $\xi \le -0.5$,  il est fort probable qu'il sera impossible d'obtenir des estimateurs valides. Cependant, en pratique, cette situation est plutôt rare.\\
+
+La log-vraisemblance va comme suit dans le cas où $\xi \ne 0$:
+
+\begin{equation}\label{eq:1.1.6}
+\begin{gathered}
+\ell(\mu,\sigma,\xi) = -m\log\sigma - (1+{1/\xi})\sum_{i = 1}^{m}\log\Big[1+\xi\Big(\frac{z_i- \mu}{\sigma} \Big) \Big] - 
+\sum_{i = 1}^{m}\Big[1+\xi\Big(\frac{z_i- \mu}{\sigma} \Big) \Big]^{-1/\xi},\\
+1+\xi\Big(\frac{z_i- \mu}{\sigma}\Big) > 0,\ \ i=1,\dots,m
+\end{gathered}
+\end{equation}
+
+Dans le cas où $\xi = 0$, il faut utiliser la limite Gumbel de la distribution:
+
+\begin{equation}\label{eq:1.1.7}
+\ell(\mu,\sigma) = -m\log\sigma - \sum_{i = 1}^{m}\Big(\frac{z_i- \mu}{\sigma} \Big)  -
+\sum_{i = 1}^{m}\exp\Big[-\Big(\frac{z_i- \mu}{\sigma} \Big) \Big]
+\end{equation}
+\\
+
+Après l'estimation des paramètres, nous pouvons estimer différents niveaux de retour:
+
+\begin{equation}\label{eq:1.1.8}
+\hat{z_p} = 
+\begin{cases}
+\hat\mu - \frac{\hat\sigma}{\hat\xi}\Big[1 - {y_p}^{-\hat\xi}\Big], & \hat\xi \ne 0 \\
+\hat\mu - \hat\sigma\log{y_p}, & \hat\xi = 0
+\end{cases}
+\end{equation}
+
+\begin{equation}\label{eq:1.1.9}
+\text{Var}(\hat{z_p}) \approx \nabla z_p^T V \nabla z_p
+\end{equation}
+où $V$ correspond à la matrice variance-covariance de $(\hat\mu, \hat\sigma, \hat\xi)$ et
+
+\begin{equation}\label{eq:1.1.10}
+\begin{split}
+\nabla z_p^T &= \Big[ \frac{\partial z_p}{\partial \mu}, \frac{\partial z_p}{\partial \sigma}, \frac{\partial z_p}{\partial \xi}\Big] \\
+&= [1,\ -\xi^{-1}(1-y_p^{-\xi}),\ \sigma\xi^{-2}(1-y_p^{-\xi}) - \sigma\xi^{-1}y_p^{-\xi}\log y_p]\Bigg|_{(\hat\mu, \hat\sigma, \hat\xi)}
+\end{split}
+\end{equation}
+\\
+
+Même s'il est impossible de valider l'extrapolation faite par le modèle, on peut tout de même vérifier la qualité du modèle avec les données observées. Ces quatre graphiques sont utiles à cet effet:
+\begin{itemize}
+\item Graphique \textit{P-P}
+\item Graphique \textit{Q-Q}
+\item Graphique du niveau de retour
+\item Histogramme des données avec la densité prédite par le modèle 
+\end{itemize}
+
+
+\section{Méthode par l'approche POT (\textit{Peaks over threshold})}
+
+Un des inconvénients de la modélisation avec les maximums est qu'il y a potentiellement des données utiles qui ne sont pas utilisées étant donné que celles-ci ne sont pas le maximum de leur séquence, mais qui auraient pu être celui d'une autre séquence. La méthode présentée dans cette section fait une meilleure utilisation des données.\\
+
+Soit $X_1, X_2,\dots$, une séquence de variables indépendantes, identiquement distribuées et avec fonction de répartition marginale $F$. Nous considérons comme évènements extrêmes ceux qui dépassent un certain seuil $u$. Le comportement stochastique d'un évènement extrême peut donc être décrit comme suit:
+
+\begin{equation}\label{eq:1.2.1}
+{\Pr{\{ X>u+y\ |\ X>u \}} = \frac{1-F(u+y)}{1- F(u)}}
+\end{equation}
+
+Si le comportement exact de $F$ était connu, la distribution de l'excès de seuil serait également connue. Cependant, en pratique, cette situation est rare et des approximations sont alors applicables lorsque $u$ est assez grand. 
+
+
+
+\section{Modèles additifs généralisés et splines}
+
+\section{Techniques de bootstrap}
+
+\chapter{Article étudié}
+\label{chap:article} 
+
+
+\chapter{Application à des données réelles}
+\label{chap:application} 
+
+
+\chapter*{Conclusion}
+\label{chap:conclusion} 
+\phantomsection\addcontentsline{toc}{chapter}{\nameref{chap:conclusion}}
+
+
+
+
+% \bibliography{biblio} 
+
+\end{document}
