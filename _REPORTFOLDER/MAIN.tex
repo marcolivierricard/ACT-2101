@@ -41,7 +41,7 @@
         \large
         \vspace{0.4cm}
         
-        Application dynamique aux catastrophes naturelles de l'Océanie
+        Application multivariée dynamique aux catastrophes de l'Océanie
  
         \vspace{3cm}
  
@@ -439,8 +439,36 @@ où
 \chapter{Application à des données réelles}
 \label{chap:application} 
 
-Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}
+Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes pour l'Australie ainsi que pour la Nouvelle-Zélande.
 
+
+\begin{Schunk}
+\begin{Sinput}
+> require(CASdatasets)
+> require(xtable)
+> options(xtable.floating = FALSE)
+> options(xtable.timestamp = "")
+> data(norfire)
+> print(xtable(head(norfire)))
+\end{Sinput}
+% latex table generated in R 3.6.1 by xtable 1.8-4 package
+% 
+\begin{tabular}{rrrr}
+  \hline
+ & Year & Loss & Loss2012 \\ 
+  \hline
+1 & 1972.00 & 520 & 3345.11 \\ 
+  2 & 1972.00 & 529 & 3403.00 \\ 
+  3 & 1972.00 & 530 & 3409.43 \\ 
+  4 & 1972.00 & 530 & 3409.43 \\ 
+  5 & 1972.00 & 544 & 3499.50 \\ 
+  6 & 1972.00 & 545 & 3505.93 \\ 
+   \hline
+\end{tabular}\begin{Sinput}
+> 
+> 
+\end{Sinput}
+\end{Schunk}
 
 \chapter*{Conclusion}
 \label{chap:conclusion} 

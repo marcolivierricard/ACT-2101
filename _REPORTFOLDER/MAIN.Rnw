@@ -40,7 +40,7 @@
         \large
         \vspace{0.4cm}
         
-        Application dynamique aux catastrophes naturelles de l'Océanie
+        Application multivariée dynamique aux catastrophes de l'Océanie
  
         \vspace{3cm}
  
@@ -438,8 +438,21 @@ où
 \chapter{Application à des données réelles}
 \label{chap:application} 
 
-Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}.
+Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes pour l'Australie ainsi que pour la Nouvelle-Zélande.
 
+
+<<results=tex>>=
+require(CASdatasets)
+require(xtable)
+
+options(xtable.floating = FALSE)
+options(xtable.timestamp = "")
+
+data(norfire)
+print(xtable(head(norfire)))
+
+
+@
 
 \chapter*{Conclusion}
 \label{chap:conclusion} 
