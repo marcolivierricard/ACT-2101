@@ -426,8 +426,10 @@ où
 
 
 \section{Modèles additifs généralisés et splines}
+À compléter...
 
 \section{Techniques de bootstrap}
+À compléter...
 
 \chapter{Article étudié}
 \label{chap:article} 
@@ -435,6 +437,8 @@ où
 
 \chapter{Application à des données réelles}
 \label{chap:application} 
+
+Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}.
 
 
 \chapter*{Conclusion}
@@ -444,6 +448,6 @@ où
 
 
 
-% \bibliography{biblio} 
+%\bibliography{biblio} 
 
 \end{document}
