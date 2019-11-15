@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage{hyperref}
+\usepackage{caption}
 
 \setlength\parindent{0pt}
 
@@ -40,7 +41,7 @@
         \large
         \vspace{0.4cm}
         
-        Application multivariée dynamique aux catastrophes de l'Océanie
+        Application multivariée dynamique aux catastrophes naturelles de l'Océanie
  
         \vspace{3cm}
  
@@ -362,7 +363,7 @@ z_N = u + \sigma\log(Nn_y\zeta_u)
 \end{equation} 
 \\
 
-Pour estimer les niveaux de retour, il suffit de remplacer les paramètres par leur estimation. Pour $\xi$ et $\sigma$, il s'agit tout simplement de $\hat\xi$ et $\hat\sigma$ obtenus avec la méthode du maximum de vraisemblance et $\hat\zeta_u = k/n$, la proportion des données observées qui dépassent $u$. De plus, $\text{Var}(\hat\zeta_u) \approx \hat\zeta_u/(1- \hat\zeta_u)$, car $k \sim \text{Bin}(n,\zeta_u)$. 
+Pour estimer les niveaux de retour, il suffit de remplacer les paramètres par leur estimation. Pour $\xi$ et $\sigma$, il s'agit tout simplement de $\hat\xi$ et $\hat\sigma$ obtenus avec la méthode du maximum de vraisemblance et $\hat\zeta_u = k/n$, la proportion des données observées qui dépassent $u$. De plus, $\text{Var}(\hat\zeta_u) \approx \hat\zeta_u/(1- \hat\zeta_u)$, car $k \sim \text{Bin}(n,\zeta_u)$. \\
 
 En appliquant la méthode delta:
 \begin{equation}\label{eq:1.2.13}
@@ -438,21 +439,109 @@ où
 \chapter{Application à des données réelles}
 \label{chap:application} 
 
-Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes pour l'Australie ainsi que pour la Nouvelle-Zélande.
+Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande. Les deux jeux de données contiennent également différentes statistiques de ces catastrophes. Voici une liste des variables disponibles:
+\begin{itemize}
+\item \texttt{Year}: l'année d'occurence de la catastrophe.
+\item \texttt{Quarter}: le trimestre d'occurence de la catastrophne.
+\item \texttt{Date}: la date d'occurence complète de la catastrophe.
+\item \texttt{FirstDay}: la date de la première journée d'occurence de la catastrophe.
+\item \texttt{LastDay}: la date de la dernière journée de la catastrophe (seulement disponible pour l'Australie).
+\item \texttt{Event}: une description de la catastrophe.
+\item \texttt{Type}: le type de catastrophe.
+\item \texttt{Location}: une description du lieu de la catastrophe.
+\item \texttt{OriginalCost}: coût original de la catastrophe en millions de \textit{AUD} ou \textit{NZD}.
+\item \texttt{NormCost2011}: coût normalisé en millions de dollars de 2011 (inflation, richesse et population).
+\item \texttt{NormCost2014}: coût normalisé en millions de dollars de 2014 (inflation, richesse et population).
+\end{itemize}
+\
 
+Les tables \ref{tab:3.1} et \ref{tab:3.2} contiennent un résumé statistique des données australiennes:
+<<echo=FALSE, results=hide>>=
+libs <- c('dplyr', 'ggplot2', 'ismev', 'evir', 'xtable',
+          'summarytools', 'utils', 'QRM', 'CASdatasets', 'tidyr')
+sapply(libs, require, character.only = T)
 
-<<results=tex>>=
-require(CASdatasets)
-require(xtable)
-
-options(xtable.floating = FALSE)
-options(xtable.timestamp = "")
-
-data(norfire)
-print(xtable(head(norfire)))
-
-
+data("auscathist")
+data("nzcathist")
 @
+
+<<echo=FALSE, results=tex>>=
+print(
+  xtable(descr(auscathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour l'Australie", label="tab:3.1", align=rep("c",8), digits=0)
+)
+
+print(
+xtable(freq(auscathist$Type), caption = "Distribution du Type de catastrophe pour l'Australie", label="tab:3.2", align=rep("c",6), digits=0)
+)
+@
+
+Les tables \ref{tab:3.3} et \ref{tab:3.4} contiennent le même type de résumé pour la Nouvelle-Zélande:
+<<echo=FALSE, results=tex>>=
+print(
+  xtable(descr(nzcathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour la Nouvelle-Zélande", label="tab:3.3", align=rep("c",8), digits=0)
+)
+
+print(
+xtable(freq(nzcathist$Type), caption = "Distribution du Type de catastrophe pour la Nouvelle-Zélande", label="tab:3.4", align=rep("c",6), digits=0)
+)
+@
+\
+
+Pour chaque jeu de données, une nouvelle variable du montant de catastrophe est créée à partir de la variable \texttt{NormCost2014} (\texttt{CostUS2019}). Cette nouvelle variable représente le coût ajusté au niveau du 30 juin 2019 en considérant l'indice du prix à la consommation de chaque pays et le coût est également converti en dollar américain. La table \ref{tab:3.5} contient les chiffres utilisés \footnote{https://www.rateinflation.com/consumer-price-index  \newline https://www.exchange-rates.org/Rate/AUD/USD/6-30-2019}.
+
+<<echo=FALSE, results=tex>>=
+tab <- data.frame(c(105.9, 974.7), c(114.8, 1039.0), c(0.7031, 0.6722))
+rownames(tab) <- c("AUS", "NZ")
+colnames(tab) <- c("IPC 2014", "IPC 2019", "Taux de change 2019")
+
+print(
+  xtable(tab, caption="Valeurs utilisées pour CostUS2019", label="tab:3.5", align=rep("c",4), digits=4)
+)
+@
+\
+
+Étant donné que les deux jeux de données sont très semblables, ceux-ci sont regroupés en un seul jeu de données et une variable \texttt{Country} est rajoutée. Étant donné le nombre limité de données disponibles et pour rendre l'analyse pertinente et possible, seulement les variables \texttt{CostUS2019}, \texttt{Year}, \texttt{Country} et \texttt{Type} sont conservées. Les figures \ref{fig:3.1}, \ref{fig:3.2}, \ref{fig:3.3} et \ref{fig:3.4} résument bien le jeu de données final utilisé pour l'analyse.
+
+
+\begin{figure}
+\begin{center}
+<<plot1, echo=FALSE, fig=TRUE, height=4, width=6>>=
+
+auscathist <- auscathist %>%
+    select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
+    mutate(Country = as.factor("Australie"))
+
+nzcathist <- nzcathist %>%
+    select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
+    mutate(Country = as.factor("Nouvelle-Zélande"))
+
+auscathist <- auscathist %>%
+    mutate(CostUS2019 = NormCost2014 * (114.8/105.9) * .7032) %>%
+    select(-NormCost2014)
+
+nzcathist <- nzcathist %>%
+    mutate(CostUS2019 = NormCost2014 * (1039.0/974.7) * .6727) %>%
+    select(-NormCost2014)
+
+pacicathist <- rbind(auscathist, nzcathist) %>%
+    dplyr::filter(CostUS2019 > 0) %>%
+    mutate(Type = as.factor(Type)) %>%
+    select(Year, Type, Country, CostUS2019)
+
+colnames(pacicathist) <- c("Année", "Type", "Pays", "Montant")
+
+pacicathist %>%
+    ggplot(aes(log(Montant))) +
+    geom_density(alpha=.44, fill=1) +
+    theme_minimal() +
+    labs(x="log(Montant) (M USD)", y="Densité")
+@
+\end{center}
+\caption{Densité du logarithme du montant des catastrophes}
+\label{fig:3.1}
+\end{figure}
+
+
 
 \chapter*{Conclusion}
 \label{chap:conclusion} 
