@@ -506,7 +506,6 @@ print(
 \begin{figure}
 \begin{center}
 <<plot1, echo=FALSE, fig=TRUE, height=4, width=6>>=
-
 auscathist <- auscathist %>%
     select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
     mutate(Country = as.factor("Australie"))
@@ -540,6 +539,8 @@ pacicathist %>%
 \caption{Densité du logarithme du montant des catastrophes}
 \label{fig:3.1}
 \end{figure}
+
+
 
 
 
