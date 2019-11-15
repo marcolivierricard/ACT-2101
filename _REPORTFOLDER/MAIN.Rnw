@@ -22,6 +22,9 @@
     ThinSpaceInFrenchNumbers=true, 
     og=«, fg=»                     
   }
+  
+  \bibliographystyle{francais}
+
 
 
 \newtheorem{theorem}{Theorème}[chapter]
@@ -29,6 +32,7 @@
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
+% \SweaveOpts{concordance=TRUE}
 
 
 \begin{titlepage}
