@@ -1,0 +1,67 @@
+\documentclass[11pt]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{apacite}
+\usepackage{natbib, url}
+\usepackage[english, french]{babel}
+\usepackage{amsfonts, amsmath, amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{tabularx, booktabs} 
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{hyperref}
+\usepackage{caption}
+
+\setlength\parindent{0pt}
+
+\frenchbsetup{%
+    StandardItemizeEnv=true,       
+    ThinSpaceInFrenchNumbers=true, 
+    og=«, fg=»                     
+  }
+  
+  \bibliographystyle{francais}
+
+
+
+\newtheorem{theorem}{Theorème}[chapter]
+\numberwithin{equation}{section}
+
+\begin{document}
+% Tu gardes le strict minimum dans ton main (il sert juste à tout remettre ensemble pour compiler).
+% Page titre dans un fichier séparé
+\input{pagetitre}
+
+\tableofcontents
+\cleardoublepage
+
+
+\include{resume}
+
+\include{introduction}
+
+
+\include{notions-preliminaires}
+
+
+\include{article-etudie}
+
+
+\include{application-donnees-reelles}
+
+
+\bibliography{biblio}
+
+
+
+
+
+
+
+
+
+
+\end{document}
