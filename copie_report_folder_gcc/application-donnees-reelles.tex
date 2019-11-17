@@ -5,7 +5,9 @@
 \chapter{Application à des données réelles}
 \label{chap:application} 
 
-Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande. Les deux jeux de données contiennent également différentes statistiques de ces catastrophes. Voici une liste des variables disponibles:
+\section{Analyse de données}
+
+Pour mettre en application l'approche proposée par \cite{chavez2016extreme}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande. Les deux jeux de données contiennent également différentes statistiques de ces catastrophes. Voici une liste des variables disponibles:
 \begin{itemize}
 \item \texttt{Year}: l'année d'occurence de la catastrophe.
 \item \texttt{Quarter}: le trimestre d'occurence de la catastrophne.
@@ -21,10 +23,11 @@ Pour mettre en application l'approche proposée par \textit{chavez2016extreme***
 \end{itemize}
 \
 
-Les tables \ref{tab:3.1} et \ref{tab:3.2} contiennent un résumé statistique des données australiennes:
+Les tables \ref{tab:3.1} et \ref{tab:3.2} contiennent un résumé statistique des données australiennes. Les tables \ref{tab:3.3} et \ref{tab:3.4} contiennent le même type de résumé pour la Nouvelle-Zélande.
+
 
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Thu Nov 14 22:18:50 2019
+% Sat Nov 16 19:51:58 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccccc}
@@ -41,7 +44,7 @@ NormCost2011 & 254 & 589 & 2 & 66 & 4296 & 190 & 92 \\
 \caption{Résumé statistique des variables numériques pour l'Australie} 
 \label{tab:3.1}
 \end{table}% latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Thu Nov 14 22:18:50 2019
+% Sat Nov 16 19:51:58 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -64,26 +67,25 @@ Bushfire & 26 & 13 & 13 & 13 & 13 \\
 \caption{Distribution du Type de catastrophe pour l'Australie} 
 \label{tab:3.2}
 \end{table}
-Les tables \ref{tab:3.3} et \ref{tab:3.4} contiennent le même type de résumé pour la Nouvelle-Zélande:
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Thu Nov 14 22:18:50 2019
+% Sat Nov 16 19:51:58 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccccc}
   \hline
  & Mean & Std.Dev & Min & Median & Max & N.Valid & Pct.Valid \\ 
   \hline
-NormCost2011 & 17 & 41 & 0 & 5 & 371 & 129 & 89 \\ 
-  NormCost2014 & 138 & 1437 & 0 & 6 & 17321 & 145 & 100 \\ 
-  OriginalCost & 125 & 1370 & 0 & 4 & 16500 & 145 & 100 \\ 
-  Quarter & 2 & 1 & 1 & 2 & 4 & 145 & 100 \\ 
-  Year & 1999 & 11 & 1968 & 2001 & 2014 & 145 & 100 \\ 
+NormCost2011 & 17.169 & 40.885 & 0.010 & 5.270 & 371.120 & 129.000 & 88.966 \\ 
+  NormCost2014 & 137.777 & 1437.470 & 0.000 & 5.870 & 17320.680 & 145.000 & 100.000 \\ 
+  OriginalCost & 124.591 & 1369.525 & 0.000 & 3.500 & 16500.000 & 145.000 & 100.000 \\ 
+  Quarter & 2.262 & 1.143 & 1.000 & 2.000 & 4.000 & 145.000 & 100.000 \\ 
+  Year & 1999.448 & 10.674 & 1968.000 & 2001.000 & 2014.000 & 145.000 & 100.000 \\ 
    \hline
 \end{tabular}
 \caption{Résumé statistique des variables numériques pour la Nouvelle-Zélande} 
 \label{tab:3.3}
 \end{table}% latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Thu Nov 14 22:18:50 2019
+% Sat Nov 16 19:51:58 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -106,12 +108,12 @@ Cyclone & 4 & 3 & 3 & 3 & 3 \\
 \end{tabular}
 \caption{Distribution du Type de catastrophe pour la Nouvelle-Zélande} 
 \label{tab:3.4}
-\end{table}\
+\end{table}
 
 Pour chaque jeu de données, une nouvelle variable du montant de catastrophe est créée à partir de la variable \texttt{NormCost2014} (\texttt{CostUS2019}). Cette nouvelle variable représente le coût ajusté au niveau du 30 juin 2019 en considérant l'indice du prix à la consommation de chaque pays et le coût est également converti en dollar américain. La table \ref{tab:3.5} contient les chiffres utilisés \footnote{https://www.rateinflation.com/consumer-price-index  \newline https://www.exchange-rates.org/Rate/AUD/USD/6-30-2019}.
 
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Thu Nov 14 22:18:50 2019
+% Sat Nov 16 19:51:58 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccc}
@@ -126,15 +128,129 @@ AUS & 105.9000 & 114.8000 & 0.7031 \\
 \label{tab:3.5}
 \end{table}\
 
-Étant donné que les deux jeux de données sont très semblables, ceux-ci sont regroupés en un seul jeu de données et une variable \texttt{Country} est rajoutée. Étant donné le nombre limité de données disponibles et pour rendre l'analyse pertinente et possible, seulement les variables \texttt{CostUS2019}, \texttt{Year}, \texttt{Country} et \texttt{Type} sont conservées. Les figures \ref{fig:3.1}, \ref{fig:3.2}, \ref{fig:3.3} et \ref{fig:3.4} résument bien le jeu de données final utilisé pour l'analyse.
+Étant donné que les deux jeux de données sont très semblables, ceux-ci sont regroupés en un seul jeu de données et une variable \texttt{Country} est rajoutée. Étant donné le nombre limité de données disponibles et pour rendre l'analyse pertinente et possible, seulement les variables \texttt{CostUS2019}, \texttt{Year}, \texttt{Country} et \texttt{Type} sont conservées. Les figures \ref{fig:3.1}, \ref{fig:3.2}, \ref{fig:3.3} ainsi que la table \ref{tab:3.6} résument bien le jeu de données final utilisé pour commencer l'analyse.
 
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
-\includegraphics{images/fig-plot1}
+\includegraphics{images/fig-005}
 \end{center}
 \caption{Densité du logarithme du montant des catastrophes}
 \label{fig:3.1}
 \end{figure}
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics{images/fig-006}
+\end{center}
+\caption{Nombre cumulatif de catastrophes par pays}
+\label{fig:3.2}
+\end{figure}
 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics{images/fig-007}
+\end{center}
+\caption{Évolution des catastrophes par pays}
+\label{fig:3.3}
+\end{figure}   
+
+% latex table generated in R 3.6.1 by xtable 1.8-4 package
+% Sat Nov 16 19:52:00 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccccccc}
+  \hline
+Type & N & Moyenne & Écart & Minimum & Médiane & Q3 & Maximum \\ 
+  \hline
+Bushfire & 26 & 143 & 259 & 7 & 39 & 134 & 1217 \\ 
+  Cyclone & 37 & 325 & 675 & 2 & 88 & 217 & 3343 \\ 
+  Earthquake & 10 & 315 & 824 & 0 & 28 & 82 & 2648 \\ 
+  Flood & 83 & 62 & 230 & 0 & 5 & 39 & 2010 \\ 
+  Flood, Storm & 36 & 54 & 79 & 1 & 24 & 71 & 414 \\ 
+  Hailstorm & 41 & 274 & 606 & 0 & 75 & 235 & 3511 \\ 
+  Other & 12 & 121 & 296 & 2 & 6 & 50 & 1035 \\ 
+  Power outage & 2 & 6 & 6 & 1 & 6 & 8 & 11 \\ 
+  Storm & 86 & 97 & 228 & 0 & 28 & 57 & 1424 \\ 
+  Tornado & 12 & 7 & 13 & 0 & 3 & 7 & 47 \\ 
+  Weather & 4 & 11 & 11 & 2 & 6 & 13 & 27 \\ 
+   \hline
+\end{tabular}
+\caption{Résumé statistique des montants de catastrophes par Type} 
+\label{tab:3.6}
+\end{table}
+\clearpage
+\section{Approche classique}
+
+Avant d'essayer la nouvelle méthode proposée, les méthodes classiques présentées à au chapitre \ref{chap:notions} sont appliquées pour être en mesure d'évaluer la valeur de la nouvelle méthode. Plus spécifiquement, l'approche \textit{POT} présentée à la section \ref{sec:pot} est appliquée dans la présente section étant donné que c'est ce type de modèle qui est appliqué dans les prochaines sections. À noter que les différents calculs de cette section nécessitant des techniques numériques sont faits avec le paquetage \texttt{ismev}. L'approche ici est donc de prendre l'ensemble des données, de choisir un seuil $u$ approprié et d'estimer les paramètres de la loi Pareto généralisée avec les excès de seuil, le tout en tenant compte d'aucunes variables exogènes. Comme mentionné, la première étape de cette méthodologie est le choix de la valeur du seuil $u$. La première méthode demande de tracer le \textit{mean residual plot} dont les points mentionnés dans l'équation \ref{eq:1.2.5}. Après un certaine valeur $u$ pour lequel la distribution est appropriée, le graphique devrait être linéaire en $u$. La figure \ref{fig:3.4} montre que déjà à partir de petites valeurs, cette conditon est respectée, il est ensuite difficile, voire subjectif de choisir une valeur précise. Ici, le graphique suggère de sélectionner une valeur entre 0 et 10.
+\begin{figure}[h]
+\begin{center}
+\includegraphics{images/fig-009}
+\end{center}
+\caption{\textit{Mean residual plot}}
+\label{fig:3.4}
+\end{figure}
+
+La deuxième méthode mentionnée à la section \ref{sec:pot} propose d'estimer les paramètres du modèle pour différentes valeurs de $u$. Comme expliqué dans cette section, $\sigma^*$ et $\xi$ devraient rester constants au-delà de $u_0$. La figure \ref{fig:3.5} montre des résulats plus concluants que la figure \ref{fig:3.4}. En effet, les valeurs de $\sigma^*$ et de $\xi$ deviennent constantes environ à $u=10$. L'analyse des deux différentes techniques de sélection de seuil mènent donc à une sélection de $u=10$. Environ 64\% des données dépassent ce seuil, un bon nombre de données est donc utile pour la modélisation des excès.
+\begin{figure}[h]
+\begin{center}
+\includegraphics{images/fig-010}
+\end{center}
+\caption{Estimation des paramètres du modèle pour différents seuils}
+\label{fig:3.5}
+\end{figure}
+
+Après avoir sélectionné le seuil, il faut ensuite estimer les paramètres de la loi Pareto généralisée avec la méthode du maximum de vraisemblance. Les différents détails de ce calcul se trouvent dans les équations \ref{eq:1.2.6} et \ref{eq:1.2.7}. Voici les résultats obtenus avec un intarvalle de confiance de 95 \%.
+
+\begin{equation*}
+\begin{gathered}
+(\hat\sigma,\hat\xi) = (49.329951;\ 0.941132)\\
+\ell(\hat\sigma,\hat\xi) = -1308.013\\
+\text{Var}(\hat\sigma) = 41.9446912\\
+\text{Var}(\hat\xi) = 0.01673518
+\end{gathered}
+\end{equation*}
+\
+
+\begin{equation*}
+\begin{gathered}
+\hat\zeta_u = 0.6418338\\
+\text{Var}(\hat\zeta_u) = 0.000658691
+\end{gathered}
+\end{equation*}
+\
+
+\begin{equation*}
+\begin{gathered}
+IC_{\hat\sigma} = (36.6362993;\ 62.023603)\\
+IC_{\hat\xi} = (0.6875822;\ 1.194682)\\
+IC_{\hat\zeta_u} = (0.5915314;\ 0.6921362)
+\end{gathered}
+\end{equation*}
+\
+
+Suite aux résultats obtenus, les graphiques de validation mentionnés à la section \ref{sec:pot} peuvent être tracés pour juger de la qualité du modèle. La figure \ref{fig:3.6} montre des résultats qui ne sont pas désastreux, mais qui sont loin d'être concluants en ce qui concerne l'ajustement des données au modèle proposé dans la présente section. Le graphique \textit{P-P} est tout de même adéquat, mais les trois autres graphiques sont loins de l'être. Les graphiques \textit{Q-Q} et celui de la densité obtenue montrent que le modèle représentent mal les données utilisées et le graphique des niveaux de retour montre que dès que la période de retour est un peu élevé, le niveau obtenu est extrêmement volatile. 
+\
+
+
+Pour conclure, le modèle proposé dans cette section représente un modèle de base qui considère toutes les données de la manière sans égard aux informations supplémentaires disponibles par rapport aux montants des catastrophes. Il n'est donc pas surprenant de voir que cette aproche n'est pas tout à fait adéquate dans le cas présent, mais reste que cette approche est viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles. Il est également important de savoir que le modèle testé dans cette section est la base de tous autres modèles plus avancés, tous comme les modèles qui seront testés aux prochaines sections.
+\begin{figure}[h]
+\begin{center}
+\includegraphics{images/fig-011}
+\end{center}
+\caption{Graphiques de validation du modèle}
+\label{fig:3.6}
+\end{figure}
+
+
+\clearpage
+\section{Approche dynamique à deux variables}
+\label{sec:3.3}
+
+Cette section applique la méthodologie et le modèle proposés au chapitre \ref{chap:article} avec deux variables, l'année et le pays. On considère donc une variable numérique de temps ainsi qu'une variable catégorique à deux niveaux. Seulement deux variables sont initialemment utilisées étant donné que c'est ce que l'article étudié utilise pour ilustrer la méthode. De plus, étant donné le nombre limité de données disponibles, il est préférable de ne pas commencer avec un nombre de sous-groupes élevés. Une troisième variable sera considéré à la section \ref{sec:3.4}.
+
+
+\clearpage
+\section{Approche dynamique à trois variables}
+\label{sec:3.4}

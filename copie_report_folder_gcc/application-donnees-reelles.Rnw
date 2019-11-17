@@ -5,7 +5,9 @@
 \chapter{Application à des données réelles}
 \label{chap:application} 
 
-Pour mettre en application l'approche proposée par \textit{chavez2016extreme***}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande. Les deux jeux de données contiennent également différentes statistiques de ces catastrophes. Voici une liste des variables disponibles:
+\section{Analyse de données}
+
+Pour mettre en application l'approche proposée par \cite{chavez2016extreme}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. Ces données représentent respectivement l'historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande. Les deux jeux de données contiennent également différentes statistiques de ces catastrophes. Voici une liste des variables disponibles:
 \begin{itemize}
 \item \texttt{Year}: l'année d'occurence de la catastrophe.
 \item \texttt{Quarter}: le trimestre d'occurence de la catastrophne.
@@ -21,9 +23,10 @@ Pour mettre en application l'approche proposée par \textit{chavez2016extreme***
 \end{itemize}
 \
 
-Les tables \ref{tab:3.1} et \ref{tab:3.2} contiennent un résumé statistique des données australiennes:
+Les tables \ref{tab:3.1} et \ref{tab:3.2} contiennent un résumé statistique des données australiennes. Les tables \ref{tab:3.3} et \ref{tab:3.4} contiennent le même type de résumé pour la Nouvelle-Zélande.
+
 <<echo=FALSE, results=hide>>=
-libs <- c('dplyr', 'ggplot2', 'ismev', 'evir', 'xtable',
+libs <- c('dplyr', 'ggplot2', 'gridExtra', 'ismev', 'evir', 'xtable',
           'summarytools', 'utils', 'QRM', 'CASdatasets', 'tidyr')
 sapply(libs, require, character.only = T)
 
@@ -33,25 +36,24 @@ data("nzcathist")
 
 <<echo=FALSE, results=tex>>=
 print(
-  xtable(descr(auscathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour l'Australie", label="tab:3.1", align=rep("c",8), digits=0)
+  xtable(descr(auscathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour l'Australie", label="tab:3.1", align=rep("c",8), digits=0, table.placement="h")
 )
 
 print(
-xtable(freq(auscathist$Type), caption = "Distribution du Type de catastrophe pour l'Australie", label="tab:3.2", align=rep("c",6), digits=0)
+xtable(freq(auscathist$Type), caption = "Distribution du Type de catastrophe pour l'Australie", label="tab:3.2", align=rep("c",6), digits=0, table.placement="h")
 )
 @
 
-Les tables \ref{tab:3.3} et \ref{tab:3.4} contiennent le même type de résumé pour la Nouvelle-Zélande:
 <<echo=FALSE, results=tex>>=
 print(
-  xtable(descr(nzcathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour la Nouvelle-Zélande", label="tab:3.3", align=rep("c",8), digits=0)
+  xtable(descr(nzcathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour la Nouvelle-Zélande", label="tab:3.3", align=rep("c",8), digits=3, table.placement="h")
 )
 
 print(
-xtable(freq(nzcathist$Type), caption = "Distribution du Type de catastrophe pour la Nouvelle-Zélande", label="tab:3.4", align=rep("c",6), digits=0)
+xtable(freq(nzcathist$Type), caption = "Distribution du Type de catastrophe pour la Nouvelle-Zélande", label="tab:3.4", align=rep("c",6), digits=0, table.placement="h")
 )
 @
-\
+
 
 Pour chaque jeu de données, une nouvelle variable du montant de catastrophe est créée à partir de la variable \texttt{NormCost2014} (\texttt{CostUS2019}). Cette nouvelle variable représente le coût ajusté au niveau du 30 juin 2019 en considérant l'indice du prix à la consommation de chaque pays et le coût est également converti en dollar américain. La table \ref{tab:3.5} contient les chiffres utilisés \footnote{https://www.rateinflation.com/consumer-price-index  \newline https://www.exchange-rates.org/Rate/AUD/USD/6-30-2019}.
 
@@ -61,24 +63,24 @@ rownames(tab) <- c("AUS", "NZ")
 colnames(tab) <- c("IPC 2014", "IPC 2019", "Taux de change 2019")
 
 print(
-  xtable(tab, caption="Valeurs utilisées pour CostUS2019", label="tab:3.5", align=rep("c",4), digits=4)
+  xtable(tab, caption="Valeurs utilisées pour CostUS2019", label="tab:3.5", align=rep("c",4), digits=4, table.placement="h")
 )
 @
 \
 
-Étant donné que les deux jeux de données sont très semblables, ceux-ci sont regroupés en un seul jeu de données et une variable \texttt{Country} est rajoutée. Étant donné le nombre limité de données disponibles et pour rendre l'analyse pertinente et possible, seulement les variables \texttt{CostUS2019}, \texttt{Year}, \texttt{Country} et \texttt{Type} sont conservées. Les figures \ref{fig:3.1}, \ref{fig:3.2}, \ref{fig:3.3} et \ref{fig:3.4} résument bien le jeu de données final utilisé pour l'analyse.
+Étant donné que les deux jeux de données sont très semblables, ceux-ci sont regroupés en un seul jeu de données et une variable \texttt{Country} est rajoutée. Étant donné le nombre limité de données disponibles et pour rendre l'analyse pertinente et possible, seulement les variables \texttt{CostUS2019}, \texttt{Year}, \texttt{Country} et \texttt{Type} sont conservées. Les figures \ref{fig:3.1}, \ref{fig:3.2}, \ref{fig:3.3} ainsi que la table \ref{tab:3.6} résument bien le jeu de données final utilisé pour commencer l'analyse.
 
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
-<<plot1, echo=FALSE, fig=TRUE, height=4, width=6>>=
+<<echo=FALSE, fig=TRUE, height=3, width=6>>=
 auscathist <- auscathist %>%
     select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
-    mutate(Country = as.factor("Australie"))
+    mutate(Country = as.factor("AUS"))
 
 nzcathist <- nzcathist %>%
     select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
-    mutate(Country = as.factor("Nouvelle-Zélande"))
+    mutate(Country = as.factor("N-Z"))
 
 auscathist <- auscathist %>%
     mutate(CostUS2019 = NormCost2014 * (114.8/105.9) * .7032) %>%
@@ -95,15 +97,171 @@ pacicathist <- rbind(auscathist, nzcathist) %>%
 
 colnames(pacicathist) <- c("Année", "Type", "Pays", "Montant")
 
-pacicathist %>%
+pacicathist <- pacicathist %>% 
+    dplyr::filter(Montant < 4000)
+
+
+grid.arrange(
+  pacicathist %>%
     ggplot(aes(log(Montant))) +
     geom_density(alpha=.44, fill=1) +
     theme_minimal() +
-    labs(x="log(Montant) (M USD)", y="Densité")
+    labs(x="log(Montant) (M USD)", y="Densité"),
+
+  pacicathist %>% 
+    ggplot(aes(log(Montant), fill=Pays)) + 
+    geom_density(alpha=.44) + 
+    theme_minimal() +
+    labs(x="log(Montant) (M USD)", y="Densité") + 
+    theme(legend.position = c(.9,.9)),
+  
+  ncol=2
+)
 @
 \end{center}
 \caption{Densité du logarithme du montant des catastrophes}
 \label{fig:3.1}
 \end{figure}
 
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, fig=TRUE, height=3, width=6>>=
 
+levels(pacicathist$Pays)[levels(pacicathist$Pays)=="AUS"] <- "Australie"
+levels(pacicathist$Pays)[levels(pacicathist$Pays)=="N-Z"] <- "Nouvelle-Zélande"
+
+pacicathist %>% 
+    group_by(Pays) %>%
+    arrange(Année) %>% 
+    mutate(cun = cumsum(as.numeric(Montant>0))) %>% 
+    ungroup() %>% 
+    ggplot(aes(x=Année, y=cun, col=Pays)) + 
+    geom_line() +
+    theme_minimal() +
+    labs(y="N") + 
+    theme(legend.position = c(.25,.8))
+@
+\end{center}
+\caption{Nombre cumulatif de catastrophes par pays}
+\label{fig:3.2}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, fig=TRUE, height=3, width=6>>=
+pacicathist %>% 
+    ggplot() +
+    geom_point(aes(x=Année, y=Montant, col=Pays)) + 
+    facet_wrap(~Pays, scales="free") + 
+    theme_bw() +
+    theme(legend.position = "")+
+    labs(y="Montant (M USD)")
+@
+\end{center}
+\caption{Évolution des catastrophes par pays}
+\label{fig:3.3}
+\end{figure}   
+
+<<echo=FALSE, results=tex>>=
+print(
+  xtable(data.frame(pacicathist %>% 
+    group_by(Type) %>% 
+    summarise(N = n(),
+              Moyenne = mean(Montant),
+              Écart = sd(Montant), 
+              Minimum = min(Montant),
+              Médiane = median(Montant),
+              Q3 = quantile(Montant, .75),
+              Maximum = max(Montant))), 
+    caption = "Résumé statistique des montants de catastrophes par Type", label="tab:3.6", align=rep("c",9), digits=0, table.placement="t"), include.rownames = FALSE)
+@
+
+\clearpage
+\section{Approche classique}
+
+Avant d'essayer la nouvelle méthode proposée, les méthodes classiques présentées à au chapitre \ref{chap:notions} sont appliquées pour être en mesure d'évaluer la valeur de la nouvelle méthode. Plus spécifiquement, l'approche \textit{POT} présentée à la section \ref{sec:pot} est appliquée dans la présente section étant donné que c'est ce type de modèle qui est appliqué dans les prochaines sections. À noter que les différents calculs de cette section nécessitant des techniques numériques sont faits avec le paquetage \texttt{ismev}. L'approche ici est donc de prendre l'ensemble des données, de choisir un seuil $u$ approprié et d'estimer les paramètres de la loi Pareto généralisée avec les excès de seuil, le tout en tenant compte d'aucunes variables exogènes. Comme mentionné, la première étape de cette méthodologie est le choix de la valeur du seuil $u$. La première méthode demande de tracer le \textit{mean residual plot} dont les points mentionnés dans l'équation \ref{eq:1.2.5}. Après un certaine valeur $u$ pour lequel la distribution est appropriée, le graphique devrait être linéaire en $u$. La figure \ref{fig:3.4} montre que déjà à partir de petites valeurs, cette conditon est respectée, il est ensuite difficile, voire subjectif de choisir une valeur précise. Ici, le graphique suggère de sélectionner une valeur entre 0 et 10.
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, fig=TRUE, height=4, width=7>>=
+par(mfrow=c(1,2))
+mrl.plot(pacicathist$Montant)
+mrl.plot(pacicathist$Montant, umax = 25)
+@
+\end{center}
+\caption{\textit{Mean residual plot}}
+\label{fig:3.4}
+\end{figure}
+
+La deuxième méthode mentionnée à la section \ref{sec:pot} propose d'estimer les paramètres du modèle pour différentes valeurs de $u$. Comme expliqué dans cette section, $\sigma^*$ et $\xi$ devraient rester constants au-delà de $u_0$. La figure \ref{fig:3.5} montre des résulats plus concluants que la figure \ref{fig:3.4}. En effet, les valeurs de $\sigma^*$ et de $\xi$ deviennent constantes environ à $u=10$. L'analyse des deux différentes techniques de sélection de seuil mènent donc à une sélection de $u=10$. Environ 64\% des données dépassent ce seuil, un bon nombre de données est donc utile pour la modélisation des excès.
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, fig=TRUE, height=5, width=6>>=
+par(mfrow=c(1,1))
+gpd.fitrange(pacicathist$Montant, 
+             nint=20,
+             umin=1, 
+             umax = 50)
+@
+\end{center}
+\caption{Estimation des paramètres du modèle pour différents seuils}
+\label{fig:3.5}
+\end{figure}
+
+Après avoir sélectionné le seuil, il faut ensuite estimer les paramètres de la loi Pareto généralisée avec la méthode du maximum de vraisemblance. Les différents détails de ce calcul se trouvent dans les équations \ref{eq:1.2.6} et \ref{eq:1.2.7}. Voici les résultats obtenus avec un intarvalle de confiance de 95 \%.
+
+\begin{equation*}
+\begin{gathered}
+(\hat\sigma,\hat\xi) = (49.329951;\ 0.941132)\\
+\ell(\hat\sigma,\hat\xi) = -1308.013\\
+\text{Var}(\hat\sigma) = 41.9446912\\
+\text{Var}(\hat\xi) = 0.01673518
+\end{gathered}
+\end{equation*}
+\
+
+\begin{equation*}
+\begin{gathered}
+\hat\zeta_u = 0.6418338\\
+\text{Var}(\hat\zeta_u) = 0.000658691
+\end{gathered}
+\end{equation*}
+\
+
+\begin{equation*}
+\begin{gathered}
+IC_{\hat\sigma} = (36.6362993;\ 62.023603)\\
+IC_{\hat\xi} = (0.6875822;\ 1.194682)\\
+IC_{\hat\zeta_u} = (0.5915314;\ 0.6921362)
+\end{gathered}
+\end{equation*}
+\
+
+Suite aux résultats obtenus, les graphiques de validation mentionnés à la section \ref{sec:pot} peuvent être tracés pour juger de la qualité du modèle. La figure \ref{fig:3.6} montre des résultats qui ne sont pas désastreux, mais qui sont loin d'être concluants en ce qui concerne l'ajustement des données au modèle proposé dans la présente section. Le graphique \textit{P-P} est tout de même adéquat, mais les trois autres graphiques sont loins de l'être. Les graphiques \textit{Q-Q} et celui de la densité obtenue montrent que le modèle représentent mal les données utilisées et le graphique des niveaux de retour montre que dès que la période de retour est un peu élevé, le niveau obtenu est extrêmement volatile. 
+\
+
+
+Pour conclure, le modèle proposé dans cette section représente un modèle de base qui considère toutes les données de la manière sans égard aux informations supplémentaires disponibles par rapport aux montants des catastrophes. Il n'est donc pas surprenant de voir que cette aproche n'est pas tout à fait adéquate dans le cas présent, mais reste que cette approche est viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles. Il est également important de savoir que le modèle testé dans cette section est la base de tous autres modèles plus avancés, tous comme les modèles qui seront testés aux prochaines sections.
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=5.5, width=7>>=
+gpd.diag(gpd.fit(pacicathist$Montant, 10, show=FALSE))
+@
+\end{center}
+\caption{Graphiques de validation du modèle}
+\label{fig:3.6}
+\end{figure}
+
+
+\clearpage
+\section{Approche dynamique à deux variables}
+\label{sec:3.3}
+
+Cette section applique la méthodologie et le modèle proposés au chapitre \ref{chap:article} avec deux variables, l'année et le pays. On considère donc une variable numérique de temps ainsi qu'une variable catégorique à deux niveaux. Seulement deux variables sont initialemment utilisées étant donné que c'est ce que l'article étudié utilise pour ilustrer la méthode. De plus, étant donné le nombre limité de données disponibles, il est préférable de ne pas commencer avec un nombre de sous-groupes élevés. Une troisième variable sera considérée à la section \ref{sec:3.4}.
+
+
+
+
+\clearpage
+\section{Approche dynamique à trois variables}
+\label{sec:3.4}

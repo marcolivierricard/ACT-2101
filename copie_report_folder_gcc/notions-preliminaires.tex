@@ -140,6 +140,7 @@ Même s'il est impossible de valider l'extrapolation faite par le modèle, on pe
 
 
 \section{Méthode par l'approche POT (\textit{Peaks over threshold})}
+\label{sec:pot} 
 
 Un des inconvénients de la modélisation avec les maximums est qu'il y a potentiellement des données utiles qui ne sont pas utilisées étant donné que celles-ci ne sont pas le maximum de leur séquence, mais qui auraient pu être celui d'une autre séquence. La méthode présentée dans cette section fait une meilleure utilisation des données.\\
 
@@ -170,7 +171,7 @@ Il s'agit ici de la famille de distributions Pareto généralisée.
 
 Nous avons donc comme théorème que si les maximums ont comme distribution approximative $G$, les excès de seuil ont comme distribution approximative un membre de la famille Pareto généralisée. De plus, les paramètres de $H$ sont uniquement déterminés par ceux de la distribution \textit{GEV}. $\xi$ conserve la même valeur, par exemple. La valeur de $n$ influence les paramètres de $G$, mais pas ceux de $H$.
 
-\begin{proof}[Démonstration du théorème \ref{theor:1.2}]
+\begin{proof}[Démonstration du théorème \ref{theor:1.2}] tiré de \cite{coles2001introduction}
 
 \begin{equation*}
 \begin{split}
