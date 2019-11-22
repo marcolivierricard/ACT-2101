@@ -1,0 +1,86 @@
+% Template entête TP pour l'Université Laval
+% Gabriel Crépeault-Cauchon
+% Last update : 8 décembre 2018
+
+% ATTENTION : la référence à ce document (\input) doit être fait après \begin{document} et l'appel aux fonctions \author, \title et \date dans le préambule.
+
+% Copier-coller ce script dans le même dossier que le fichier .tex principal, puis insérer la commande suivante à l'endroit où l'on veut voir apparaître la page titre : 
+% \input{pagetitre_UL}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\begin{titlepage}
+\centering \large
+\begin{flushright}
+Équipe XXX
+\end{flushright}
+
+% ----- COÉQUIPIER 1 -----
+\@author
+\par
+$(000 \ 000 \ 000)$
+\vspace{0.5cm}
+%-----
+
+% ----- COÉQUIPIER 2 -----
+% Nom et prénom
+% \par
+% $(000 \ 000 \ 000)$
+% \vspace{0.5cm}
+%-----
+
+% ----- COÉQUIPIER 3 -----
+% Nom et prénom
+% \par
+% $(000 \ 000 \ 000)$
+% \vspace{0.5cm}
+%-----
+
+% ----- COÉQUIPIER 4 -----
+% Nom et prénom
+% \par
+% $(000 \ 000 \ 000)$
+% \vspace{0.5cm}
+%-----
+
+%------------------------------
+\vfill
+
+
+% ----- NOM DU COURS -----
+{
+\scshape
+Nom du cours
+\par
+ACT-####
+}
+%------------------------------
+\vfill
+
+
+% ----- TITRE DU TRAVAIL -----
+{
+\bfseries \Large
+\@title
+}
+%------------------------------
+\vfill
+
+
+% ----- NOM DU PROFESSEUR -----
+Travail présenté à
+\par
+Professeur
+%------------------------------
+\vfill
+
+% ----- BAS DE PAGE -----
+École d'actuariat
+\par
+Université Laval
+\par 
+\@date
+%------------------------------
+\end{titlepage}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,9 @@
+# Git ignore pour les log files de la compilation
+*.aux
+*.log
+*.out
+*.gz
+*.fls
+*.fdb_latexmk
+*.DS_Store
+*synctex.gz

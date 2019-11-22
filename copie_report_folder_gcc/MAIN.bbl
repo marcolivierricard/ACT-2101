@@ -1,4 +1,4 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{5}
 \ProvideTextCommand{\guillemotleft}{OT1}{%
   \leavevmode\raise .27ex\hbox{$\scriptscriptstyle\ll$}}
 \ProvideTextCommand{\guillemotright}{OT1}{%
@@ -28,5 +28,24 @@ Chavez-Demoulin, V., P.~Embrechts \bbland{} M.~Hofert. 2016, \enquote{An
 Coles, S., J.~Bawa, L.~Trenner \bbland{} P.~Dorazio. 2001, \emph{An
   introduction to statistical modeling of extreme values}, \bblvol{} 208,
   Springer.
+
+\bibitem[{Cox \bbland{} Reid(1987)}]{cox1987parameter}
+Cox, D.~R. \bbland{} N.~Reid. 1987, \enquote{Parameter orthogonality and
+  approximate conditional inference}, \emph{Journal of the Royal Statistical
+  Society: Series B (Methodological)}, \bblvol{}~49, \bblno{}~1, \bblpp{}
+  1--18.
+
+\bibitem[{Green \bbland{} Silverman(1993)}]{green1993nonparametric}
+Green, P.~J. \bbland{} B.~W. Silverman. 1993, \emph{Nonparametric regression
+  and generalized linear models: a roughness penalty approach}, Chapman and
+  Hall/CRC.
+
+\bibitem[{Thiombiano \bbletal{}(2017)Thiombiano, El~Adlouni, St-Hilaire, Ouarda
+  \bbland{} El-Jabi}]{thiombiano2017nonstationary}
+Thiombiano, A.~N., S.~El~Adlouni, A.~St-Hilaire, T.~B. Ouarda \bbland{}
+  N.~El-Jabi. 2017, \enquote{Nonstationary frequency analysis of extreme daily
+  precipitation amounts in southeastern canada using a peaks-over-threshold
+  approach}, \emph{Theoretical and Applied Climatology}, \bblvol{} 129,
+  \bblno{} 1-2, \bblpp{} 413--426.
 
 \end{thebibliography}

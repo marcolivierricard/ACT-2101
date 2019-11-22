@@ -3,51 +3,54 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: MAIN.aux
 The style file: francais.bst
 A level-1 auxiliary file: resume.aux
+A level-1 auxiliary file: remerciments.aux
 A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: notions-preliminaires.aux
 A level-1 auxiliary file: article-etudie.aux
 A level-1 auxiliary file: application-donnees-reelles.aux
 Database file #1: biblio.bib
+Warning--I didn't find a database entry for "chavezextreme2016"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 2 entries,
+You've used 5 entries,
             3466 wiz_defined-function locations,
-            713 strings with 6340 characters,
-and the built_in function-call counts, 1941 in all, are:
-= -- 186
-> -- 67
-< -- 4
-+ -- 33
-- -- 22
-* -- 116
-:= -- 223
-add.period$ -- 4
-call.type$ -- 2
-change.case$ -- 16
-chr.to.int$ -- 3
-cite$ -- 2
-duplicate$ -- 188
-empty$ -- 117
-format.name$ -- 27
-if$ -- 380
+            735 strings with 7056 characters,
+and the built_in function-call counts, 4759 in all, are:
+= -- 479
+> -- 154
+< -- 12
++ -- 72
+- -- 49
+* -- 283
+:= -- 535
+add.period$ -- 10
+call.type$ -- 5
+change.case$ -- 39
+chr.to.int$ -- 6
+cite$ -- 5
+duplicate$ -- 474
+empty$ -- 291
+format.name$ -- 67
+if$ -- 952
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 24
-newline$ -- 24
-num.names$ -- 8
-pop$ -- 86
+missing$ -- 56
+newline$ -- 33
+num.names$ -- 20
+pop$ -- 183
 preamble$ -- 1
-purify$ -- 15
+purify$ -- 36
 quote$ -- 0
-skip$ -- 97
+skip$ -- 272
 stack$ -- 0
-substring$ -- 82
-swap$ -- 144
-text.length$ -- 4
+substring$ -- 205
+swap$ -- 371
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 15
+type$ -- 39
 warning$ -- 0
-while$ -- 10
+while$ -- 27
 width$ -- 0
-write$ -- 39
+write$ -- 71
+(There was 1 warning)
