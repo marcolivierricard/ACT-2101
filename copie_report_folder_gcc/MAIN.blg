@@ -8,13 +8,13 @@ A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: notions-preliminaires.aux
 A level-1 auxiliary file: article-etudie.aux
 A level-1 auxiliary file: application-donnees-reelles.aux
+A level-1 auxiliary file: conclusion.aux
 Database file #1: biblio.bib
-Warning--I didn't find a database entry for "chavezextreme2016"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 You've used 5 entries,
             3466 wiz_defined-function locations,
-            735 strings with 7056 characters,
+            735 strings with 7053 characters,
 and the built_in function-call counts, 4759 in all, are:
 = -- 479
 > -- 154
@@ -53,4 +53,3 @@ warning$ -- 0
 while$ -- 27
 width$ -- 0
 write$ -- 71
-(There was 1 warning)

@@ -98,7 +98,8 @@ pacicathist <- rbind(auscathist, nzcathist) %>%
 colnames(pacicathist) <- c("Année", "Type", "Pays", "Montant")
 
 pacicathist <- pacicathist %>% 
-    dplyr::filter(Montant < 4000)
+    dplyr::filter(Montant < 4000) %>% 
+    dplyr::filter(Type != "Earthquake" | Montant < 2000)
 
 
 grid.arrange(
@@ -174,7 +175,7 @@ print(
               Médiane = median(Montant),
               Q3 = quantile(Montant, .75),
               Maximum = max(Montant))), 
-    caption = "Résumé statistique des montants de catastrophes par Type", label="tab:3.6", align=rep("c",9), digits=0, table.placement="t"), include.rownames = FALSE)
+    caption = "Résumé statistique des montants (M USD) de catastrophes par Type", label="tab:3.6", align=rep("c",9), digits=0, table.placement="t"), include.rownames = FALSE)
 @
 
 \clearpage
@@ -208,7 +209,7 @@ gpd.fitrange(pacicathist$Montant,
 \label{fig:3.5}
 \end{figure}
 
-Après avoir sélectionné le seuil, il faut ensuite estimer les paramètres de la loi Pareto généralisée avec la méthode du maximum de vraisemblance. Les différents détails de ce calcul se trouvent dans les équations \ref{eq:1.2.6} et \ref{eq:1.2.7}. Voici les résultats obtenus avec un intarvalle de confiance de 95 \%.
+Après avoir sélectionné le seuil, il faut ensuite estimer les paramètres de la loi Pareto généralisée avec la méthode du maximum de vraisemblance. Les différents détails de ce calcul se trouvent dans les équations \ref{eq:1.2.6} et \ref{eq:1.2.7}. Voici les résultats obtenus avec un intervalle de confiance de 95 \%.
 
 \begin{equation*}
 \begin{gathered}
@@ -241,7 +242,7 @@ Suite aux résultats obtenus, les graphiques de validation mentionnés à la sec
 \
 
 
-Pour conclure, le modèle proposé dans cette section représente un modèle de base qui considère toutes les données de la manière sans égard aux informations supplémentaires disponibles par rapport aux montants des catastrophes. Il n'est donc pas surprenant de voir que cette aproche n'est pas tout à fait adéquate dans le cas présent, mais reste que cette approche est viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles. Il est également important de savoir que le modèle testé dans cette section est la base de tous autres modèles plus avancés, tous comme les modèles qui seront testés aux prochaines sections.
+Pour conclure, le modèle proposé dans cette section représente un modèle de base qui considère toutes les données de la manière sans égard aux informations supplémentaires disponibles par rapport aux montants des catastrophes. Il n'est donc pas surprenant de voir que cette approche n'est pas tout à fait adéquate dans le cas présent, mais reste que cette approche est viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles. Il est également important de savoir que le modèle testé dans cette section est la base de tous autres modèles plus avancés, tous comme les modèles qui seront testés aux prochaines sections.
 \begin{figure}[h]
 \begin{center}
 <<echo=FALSE, results=tex, fig=TRUE, height=5.5, width=7>>=
@@ -257,11 +258,655 @@ gpd.diag(gpd.fit(pacicathist$Montant, 10, show=FALSE))
 \section{Approche dynamique à deux variables}
 \label{sec:3.3}
 
-Cette section applique la méthodologie et le modèle proposés au chapitre \ref{chap:article} avec deux variables, l'année et le pays. On considère donc une variable numérique de temps ainsi qu'une variable catégorique à deux niveaux. Seulement deux variables sont initialemment utilisées étant donné que c'est ce que l'article étudié utilise pour ilustrer la méthode. De plus, étant donné le nombre limité de données disponibles, il est préférable de ne pas commencer avec un nombre de sous-groupes élevés. Une troisième variable sera considérée à la section \ref{sec:3.4}.
+Cette section applique la méthodologie et le modèle proposés au chapitre \ref{chap:article} avec deux variables, l'année et le pays. On considère donc une variable numérique de temps ainsi qu'une variable catégorique à deux niveaux. Seulement deux variables sont initialemment utilisées étant donné que c'est ce que l'article étudié utilise pour ilustrer la méthode. De plus, étant donné le nombre limité de données disponibles, il est préférable de ne pas commencer avec un nombre de sous-groupes trop élevés. Une troisième variable sera considérée à la section \ref{sec:3.4}. Avant même de commencer, les figures \ref{fig:3.1} et \ref{fig:3.2} suggèrent que les paramètres du modèles devraient bel et bien varier entre les deux pays et à travers le temps. Dans le cadre de la modélisation, seulement l'ajustement du paramètre $\rho$ est inclu dans le rapport, voir \ref{eq:2.2.13}. Un seuil de valeur 10 M USD est toujours utilisé, voir les figures \ref{fig:3.4} et \ref{fig:3.5}. 
+\\
+
+Premièrement, le paramètre $\rho$ du modèle est ajuté aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\rho$ dépend du pays et du temps et a la forme suivante:
+\begin{equation}\label{eq:3.3.1}
+\log\Bigg(\frac{\hat\rho(x,t)}{1-\hat\rho(x,t)}\Bigg) = \hat{f}_\rho(pays) + \hat{h}^{(2)}_\rho(annee)
+\end{equation}
+où ${h}^{(\text{Df})}$ représente une spline naturelle quadratique avec $\text{Df}$ degrés de liberté.
+\\
+
+<<echo=FALSE, results=hide>>=
+paci.1 <- pacicathist %>% 
+    select(-Type)
+
+rate.exc.1 <- as.data.frame(paci.1 %>% 
+                                mutate(rate.exc = as.numeric(Montant > 10)))
 
 
+modrho <- gam(rate.exc ~ Pays + s(Année, fx=TRUE, k=2+1, bs="cr", by=Pays) - 1, 
+              data=rate.exc.1, family=binomial(link=logit)) 
+
+
+rhoFit <- QRM:::get.gam.fit(modrho)   
+
+rhoPred <- QRM:::gam.predict(modrho, alpha=.05, value="rho")
+
+
+rhoPred$predict <- exp(rhoPred$predict) / (exp(rhoPred$predict) + 1)
+rhoPred$CI.low <- exp(rhoPred$CI.low) / (exp(rhoPred$CI.low) + 1)
+rhoPred$CI.up <- exp(rhoPred$CI.up) / (exp(rhoPred$CI.up) + 1)
+
+
+
+results.rho <- data.frame(rhoPred$covar, Pred=rhoPred$predict,
+                          CI.low=rhoPred$CI.low, CI.up=rhoPred$CI.up)
+@
+
+Voici une représentation graphique des résultats obtenus.
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.rho %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Année, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Année, y=Pred, col=Pays)) + 
+    facet_wrap(~Pays) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(rho)))
+@
+\end{center}
+\caption{Prédictions du taux d'excès de seuil avec intervalles de confiance à 95\%}
+\label{fig:3.7}
+\end{figure}
+
+La figure \ref{fig:3.7} indique qu'il y a bel et bien une différence entre les pays et à travers le temps. Plus spécifiquement, les catastrophes australiennes dépassent beaucoup plus souvent le seuil de 10 millions et la figure indique également un paramètre élevé et constant pendant quelques années pour ensuite observé une diminution de celui-ci pour que finalement celui-ci remonte à un certain niveau.
+\\
+
+Ensuite, les paramètres de la loi Pareto généralisée sont ajustés aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\xi$ dépend du pays et non du temps et a la forme suivante:
+\begin{equation}\label{eq:3.3.2}
+\hat\xi(x,t) = \hat{f}_\xi(pays)
+\end{equation}
+
+De son côté, le modèle sélectionné pour $\hat\beta$ dépend du pays et du temps et a la forme suivante:
+\begin{equation}\label{eq:3.3.3}
+\hat\beta(x,t) = \hat{f}_\beta(pays) + \hat{h}^{(3)}_\beta(annee)
+\end{equation}
+
+<<echo=FALSE, results=hide>>=
+bootGPD <- QRM::gamGPDboot(paci.1, B=10, threshold=10, datvar="Montant",
+                         
+                         xiFrhs = ~ Pays - 1, 
+                         nuFrhs = ~ Pays + s(Année, fx=TRUE, k=3+1, bs="cr", by=Pays) - 1, 
+                         
+                         niter=10, eps.xi=.005, eps.nu=.005)
+
+
+
+xibetaFit <- QRM::get.GPD.fit(bootGPD, alpha=.05) 
+
+xibetaPred <- QRM::GPD.predict(bootGPD)
+
+
+results.xi <- data.frame(xibetaFit$xi$covar, Pred=xibetaFit$xi$fit,
+                          CI.low=xibetaFit$xi$CI.low, CI.up=xibetaFit$xi$CI.up)
+
+
+results.beta <- data.frame(xibetaFit$beta$covar, Pred=xibetaFit$beta$fit,
+                         CI.low=xibetaFit$beta$CI.low, CI.up=xibetaFit$beta$CI.up)
+
+@
+
+
+Les figures \ref{fig:3.8} et \ref{fig:3.9} présentent une représentation graphique des résultats obtenus pour les deux paramètres.
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.xi %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Pays, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Pays, y=Pred, size=2, col=Pays)) + 
+    theme_minimal() + 
+    theme(legend.position = "", strip.text = element_text(size=12))+ 
+    labs(y=expression(hat(xi))) +
+    ylim(c(0,1))
+@
+\end{center}
+\caption{Prédictions du paramètre $\xi$ avec intervalles de confiance à 95\%}
+\label{fig:3.8}
+\end{figure}
+
+La figure \ref{fig:3.8} montre qu'il y a bel et bien une différence entre les deux pays et que cette différence est très importante. Le fait que le paramètre de l'Australie soit plus élevé fait du sens, car la distribution des catastrophes australiennes a une queue plus épaisse que celle des catastrophes de la Nouvelle-Zélande. 
+\\
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.beta %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=Pred, col=Pays), size=2) + 
+    geom_line(aes(x=Année, y=Pred)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Pays, scales="free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12))+ 
+    labs(y=expression(hat(beta)))
+@
+\end{center}
+\caption{Prédictions du paramètre $\beta$ avec intervalles de confiance à 95\%}
+\label{fig:3.9}
+\end{figure}
+
+La figure \ref{fig:3.9} montre bien que les deux variables sélectionnées ont bel et bien un impact sur le paramètre $\beta$. Tout comme avec $\xi$, il est logique que les paramètres de la Nouvelle-Zélande soient inférieurs que ceux de l'Australie tout simplement parce que les pertes sont généralement plus élevées, voir la figure \ref{fig:3.1}. La figure montre également que, de façon générale, le paramètre dimiunue avec le temps.
+\\
+
+Même si les paramètres du modèle sont maintenant obtenus, il est important de vérifier l'adéquation du modèle avant d'effectuer n'importe quelle inférence. Comme l'explique l'équation \ref{eq:2.2.12}, une validation possible de vérifier si les $r_i$ se comportent comme des variables aléatoires indépendantes suivant une loi exponentielle standards. Le graphique \textit{Q-Q} de cette loi est donc tracé à la figure \ref{fig:3.10}.
+<<echo=FALSE, results=hide>>=
+covar <- xibetaFit$beta$covar 
+
+
+count.cov <- as.data.frame(covar %>% count(Pays))
+
+vec.cov <- c()
+for (i in nrow(count.cov):1){
+    vec.cov <- c(rep(i, count.cov$n[i]), vec.cov)
+}
+
+
+xibetaFit$xi$fit <- xibetaFit$xi$fit[vec.cov]
+xibetaFit$xi$CI.low <- xibetaFit$xi$CI.low[vec.cov]
+xibetaFit$xi$CI.up <- xibetaFit$xi$CI.up[vec.cov]
+
+xibetaFit$xi$covar <- covar
+
+
+
+xibetaFit.xi.boot2 <- matrix(ncol = 10)
+for (i in nrow(count.cov):1){
+    xibetaFit.xi.boot2 <- rbind(
+        do.call(rbind, replicate(count.cov$n[i], xibetaFit$xi$boot[i,], simplify=FALSE)),
+        xibetaFit.xi.boot2
+    )
+}
+
+xibetaFit$xi$boot <- xibetaFit.xi.boot2[-length(xibetaFit.xi.boot2[, 1]),]
+
+
+
+xiFit.mat <- cbind(xibetaFit$xi$fit, xibetaFit$xi$boot)
+
+betaFit.mat <- cbind(xibetaFit$beta$fit, xibetaFit$beta$boot)
+
+
+rho.res <- data.frame(rhoFit$covar, rhoFit$fit)
+
+rho.res.sel <- covar %>% 
+    inner_join(rho.res)
+
+
+
+final.results <- data.frame(Covar=xibetaFit$beta$covar,
+                            rho = rho.res.sel$rhoFit.fit,
+                            xi = xibetaFit$xi$fit,
+                            xi.low = xibetaFit$xi$CI.low,
+                            xi.up = xibetaFit$xi$CI.up,
+                            beta = xibetaFit$beta$fit,
+                            beta.low = xibetaFit$beta$CI.low,
+                            beta.up = xibetaFit$beta$CI.up)
+
+
+
+
+
+VaR <- cbind(covar, fit=sapply(1:(10+1), function(j)
+    risk.measure(cbind(rho.res.sel$rhoFit.fit, xiFit.mat[,j], betaFit.mat[,j]),
+                 alpha=.99, u=10, method="VaR")
+))
+
+VaR.boot <- VaR %>% select(-Pays, -Année, -fit.1)
+
+VaR.fit <- data.frame(covar, 
+                      fit    = VaR[, "fit.1"], 
+                      CI.low = apply(VaR.boot, 1, quantile, probs=.05/2),
+                      CI.up  = apply(VaR.boot, 1, quantile, probs=1-.05/2))
+
+
+
+final.results <- final.results %>% 
+    rename(Pays = Covar.Pays,
+           Année = Covar.Année) 
+
+
+paci.1.param <- paci.1 %>% 
+    inner_join(final.results) %>% 
+    
+    dplyr::filter(Montant > 10) %>% 
+    mutate(Y = Montant - 10)
+
+
+
+paci.1.param$ri <- sapply(1:nrow(paci.1.param), 
+                          function(i) -log(1 - pGPD(paci.1.param$Y[i], 
+                                                    paci.1.param$xi[i], 
+                                                    paci.1.param$beta[i])))
+
+@
+
+La figure montre que la calibration du modèle n'est pas tout si mal et même bonne dans l'ensemble. Le graphique n'est pas catastrophique et tout de même mieux que celui de la figure \ref{fig:3.6}. Peut-être que l'ajout d'une troisième variable à la section \ref{sec:3.4} va améliorer la qualité du modèle obtenu.
+\\
+
+Ensuite, à l'aide de l'équation \ref{eq:2.2.13}, les différentes $\widehat{\text{VaR}_{0.99}}$ peuvent être calculées. La figure \ref{fig:3.11} montre les résultats. 
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=4, width=6>>=
+require(qqplotr)
+paci.1.param %>% 
+    ggplot(aes(sample = ri)) +
+    stat_qq_band(distribution = "exp", dparams = 1, conf = .95, alpha=.2, fill="blue") +
+    stat_qq_point(distribution = "exp", dparams = 1) + 
+    stat_qq_line(distribution = "exp", dparams = 1,) + 
+    theme_minimal() +
+    labs(x="Valeurs théoriques", y="Quantiles des résidus du modèle")
+  
+@
+\end{center}
+\caption{Graphique \textit{Q-Q} de $\text{Exp}(1)$}
+\label{fig:3.10}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+VaR.fit %>%  
+    ggplot() + 
+    geom_point(aes(x=Année, y=fit, col=Pays), size=2) + 
+    geom_line(aes(x=Année, y=fit)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Pays, scales = "free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) +
+    labs(y=expression(hat(VaR)))
+@
+\end{center}
+\caption{$\widehat{\text{VaR}_{0.99}}$ avec intervalles de confiance à 95\%}
+\label{fig:3.11}
+\end{figure}
+
+Il est logique de voir que la mesure de risque dépend du temps et du pays car celle-ci est obtenue avec les paramètres estimés. Tout comme avec les paramètres, il est logique que les valeurs obtenues pour la Nouvelle-Zélande soient inférieurs que celles de l'Australie tout simplement parce que les pertes sont généralement plus élevées pour l'Australie.
+\\
+
+C'est ce qui conclut cette section. La méthodologie proposée par les auteurs fonctionne et donnent les résultats escomptés lorque le temps ainsi qu'une variable catégorique sont considérés. Le modèle final obtenu n'est pas parfait, mais est tout de même une amélioration du modèle classique vu à la section \ref{sec:pot}.
 
 
 \clearpage
 \section{Approche dynamique à trois variables}
 \label{sec:3.4}
+
+Dans cette section, la même procédure que la section \ref{sec:3.3} est employée, mais la variable représentant le type de catastrophes est maintenant disponible. Un seuil de 10 M USD est toujours utilisé. Il y a 11 types différents dans les données. Une démarche complète de modélisation a été faite avec tous les types non regroupés, mais étant donné le nombre limité de données, les résultats ne furent pas concluants et les détails de ce modèle ne sont pas incluts dans ce rapport. Pour être en mesure de travailler avec cette troisième variable, un regroupement des types a dû être fait. La table \ref{tab:3.7} présente un résumé de ce regroupement. Sans même commencer la modélisation, la table \ref{tab:3.6} montre que le type de catastrophes va probablement s'avérer significatif pour les différents paramètres du modèle étant donnée que la distribution du montant de catastrophe varie beaucoup entre les différents types. 
+
+<<echo=FALSE, results=hide>>=
+paci.3 <- pacicathist
+
+Type2 <- data.frame(Type = c("Bushfire", "Hailstorm", "Cyclone", 
+                             "Flood", "Flood, Storm", "Storm", 
+                             "Other", "Tornado", "Earthquake", "Weather", "Power outage"),
+                    Type2 = c("Bushfire", "Hailstorm", "Cyclone",
+                              rep("Flood, Storm",3), 
+                              rep("Other",5)))
+
+paci.3 <- paci.3 %>% 
+    inner_join(Type2)
+
+paci.3 %>% 
+    count(Type2) %>% 
+    arrange(-n)
+
+
+paci.3 <- paci.3 %>% 
+    mutate(Type=as.factor(Type2)) %>% 
+    select(-Type2)
+
+
+paci.3 <- droplevels(paci.3)
+@
+
+<<echo=FALSE, results=tex>>=
+print(
+  xtable(Type2, caption = "Regroupement des types de catastrophes", label="tab:3.7", align=rep("c",3), digits=0, table.placement="h"), include.rownames = FALSE
+)
+@
+
+Tout comme lors de section précédente, le paramètre $\rho$ du modèle est le premier à être ajusté aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\rho$ dépend du pays, du type et du temps et a la forme suivante:
+\begin{equation}\label{eq:3.4.1}
+\log\Bigg(\frac{\hat\rho(x,t)}{1-\hat\rho(x,t)}\Bigg) = \hat{f}_\rho(pays) + \hat{f}_\rho(type) + \hat{h}^{(2)}_\rho(annee)
+\end{equation}
+
+La figure \ref{fig:3.12} montre les résultats pour l'Australie et la figure ref{fig:3.13} montre ceux pour la Nouvelle-Zélande.
+\\
+
+<<echo=FALSE, results=hide>>=
+rate.exc.3 <- as.data.frame(paci.3 %>% 
+                                mutate(rate.exc = as.numeric(Montant > 10)))
+
+modrho <- gam(rate.exc ~ Pays + s(Année, fx=TRUE, k=2+1, bs="cr", by=Pays) + Type - 1, 
+              data=rate.exc.3, family=binomial(link=logit))
+
+
+rhoFit <- QRM:::get.gam.fit(modrho)   
+
+rhoPred <- QRM:::gam.predict(modrho, alpha=.05, value="rho")
+
+
+rhoPred$predict <- exp(rhoPred$predict) / (exp(rhoPred$predict) + 1)
+rhoPred$CI.low <- exp(rhoPred$CI.low) / (exp(rhoPred$CI.low) + 1)
+rhoPred$CI.up <- exp(rhoPred$CI.up) / (exp(rhoPred$CI.up) + 1)
+
+
+
+results.rho <- data.frame(rhoPred$covar, Pred=rhoPred$predict,
+                          CI.low=rhoPred$CI.low, CI.up=rhoPred$CI.up)
+
+@
+
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.rho %>% 
+    dplyr::filter(Pays == "Australie") %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Année, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Année, y=Pred, col=Type)) + 
+    facet_wrap(~Type) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(rho)))
+@
+\end{center}
+\caption{Prédictions du paramètre $\rho$ pour l'Australie avec intervalles de confiance à 95\%}
+\label{fig:3.12}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.rho %>% 
+    dplyr::filter(Pays == "Nouvelle-Zélande") %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Année, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Année, y=Pred, col=Type)) + 
+    facet_wrap(~Type) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(rho)))
+@
+\end{center}
+\caption{Prédictions du paramètre $\rho$ pour la Nouvelle-Zélande avec intervalles de confiance à 95\%}
+\label{fig:3.13}
+\end{figure}
+
+Les deux figures montrent que, comme dans la section précédente, il est clair que le paramètre est différent entre les deux pays et que celui-ci dépend du temps. De plus, même si cela est moins significatif que les pour les autres variables, les figures montrent également que le type de catastrophes est important pour la détermination du paramètre. Les courbes sont semblables par pays, mais le type amène une certaine translation verticale de la courbe. Cependant, on peut voir que les intervalles de confiance sont plus larges que ceux de la figure \ref{fig:3.7} étant donné qu'il y a maintenant moins de données par sous-groupes de variables.
+\\
+
+Suivant à nouveau la même démarche que la section précédente, les paramètres de la loi Pareto généralisée sont ajustés aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\xi$ dépend du pays, du type et non du temps et a la forme suivante:
+\begin{equation}\label{eq:3.4.2}
+\hat\xi(x,t) = \hat{f}_\xi(pays) + \hat{f}_\xi(type)
+\end{equation}
+
+De son côté, le modèle sélectionné pour $\hat\beta$ dépend du pays, du type et du temps et a la forme suivante:
+\begin{equation}\label{eq:3.4.3}
+\hat\beta(x,t) = \hat{f}_\beta(pays) + \hat{f}_\xi(type) + \hat{h}^{(4)}_\beta(annee)
+\end{equation}
+
+<<echo=FALSE, results=hide>>=
+bootGPD <- QRM::gamGPDboot(paci.3, B=10, threshold=10, datvar="Montant",
+                            
+                            xiFrhs = ~ Pays + Type - 1,  
+                            nuFrhs = ~ Pays + Type + s(Année, fx=TRUE, k=4+1, bs="cr", by=Pays) - 1, 
+                            
+                            niter=10, eps.xi=.005, eps.nu=.005)
+
+
+
+
+
+xibetaFit <- QRM::get.GPD.fit(bootGPD, alpha=.05) 
+
+xibetaPred <- QRM::GPD.predict(bootGPD)
+
+
+
+results.xi <- data.frame(xibetaFit$xi$covar, Pred=xibetaFit$xi$fit,
+                         CI.low=xibetaFit$xi$CI.low, CI.up=xibetaFit$xi$CI.up)
+
+
+results.beta <- data.frame(xibetaFit$beta$covar, Pred=xibetaFit$beta$fit,
+                           CI.low=xibetaFit$beta$CI.low, CI.up=xibetaFit$beta$CI.up)
+
+@
+
+Les figures \ref{fig:3.14}, \ref{fig:3.15} et \ref{fig:3.16} présentent une représentation graphique des résultats obtenus pour les deux paramètres.
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.xi %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Type, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Type, y=Pred, col=Type), size=2.5) + 
+    coord_flip() + 
+    facet_wrap(~Pays) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(xi)))
+
+@
+\end{center}
+\caption{Prédictions du paramètre $\xi$ avec intervalles de confiance à 95\%}
+\label{fig:3.14}
+\end{figure}
+
+La figure \ref{fig:3.14} montre qu'il y a bel et bien une différence entre les différents types et que celle-ci est consirédablement importante. Ici, le comportement entre les types est semblable pour les deux pays, mais la figure montre clairement que les paramètres de l'Australie sont supérieurs à ceux de la Nouvelle-Zélande, ce qui est logique. De plus, contrairement aux résultats obtenus à la figure \ref{fig:3.8} où les résultats étaient non problématiques, les résultats obtenus ici contiennent deux valeurs (pour le même type) supérieures à 1, ce qui représente un modèle à moyenne infinie. Deux intervalles de confiance vont également jusqu'à des valeurs négatives sans toutefois atteindre -1, ce qui est très problématique.
+\\
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.beta %>% 
+    dplyr::filter(Pays=="Australie") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=Pred, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=Pred)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, scales = "free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(beta)))
+@
+\end{center}
+\caption{Prédictions du paramètre $\beta$ pour l'Australie avec intervalles de confiance à 95\%}
+\label{fig:3.15}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+results.beta %>% 
+    dplyr::filter(Pays=="Nouvelle-Zélande") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=Pred, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=Pred)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, ) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(beta)))
+@
+\end{center}
+\caption{Prédictions du paramètre $\beta$ pour la Nouvelle-Zélande avec intervalles de confiance à 95\%}
+\label{fig:3.16}
+\end{figure}
+
+Les figures \ref{fig:3.15} et \ref{fig:3.16} montrent bien qu'encore une fois, le pays a une importance très significative pour la détermination des paramètres. De plus, même si cela est moins considérable que pour $\xi$, les figures montrent qu'il y a bel et bien une différence entre les différents types. Pour l'Australie, les courbes sont semblables, mais tout comme avec $\rho$, le type amène une certaine translation verticale de la courbe. Pour la Nouvelle-Zélande, le type amène également des courbes différentes. Un problème flagrant est remarquable à la figure \ref{fig:3.16} pour laquelle il y a très peu de points et donc des résultats peu crédibles. Ce problème est dû au fait qu'il y a déjà très peu de données et qu'en plus une troisième variable est rajoutée, ce qui rend les sous-groupes de covariables moins populés. Une autre cause vient du fait que seulement les données au-dessus du seuil $u$ sont utilisées pour la modélisation et la Nouvelle-Zélande présente beaucoup moins de pertes qui remplissent ce critère.
+\\
+
+Il est maintenant important de vérifier l'adéquation du modèle avant d'effectuer n'importe quelle inférence. Cette étape est également utile pour voir si l'ajout d'une troisième variable améliore le modèle. Le même type de graphique que la figure \ref{fig:3.10} est tracé à la figure \ref{fig:3.17}. 
+
+
+<<echo=FALSE, results=hide>>=
+covar <- xibetaFit$beta$covar 
+
+
+count.cov <- as.data.frame(covar %>% count(Pays, Type))
+
+vec.cov <- c()
+for (i in nrow(count.cov):1){
+    vec.cov <- c(rep(i, count.cov$n[i]), vec.cov)
+}
+
+
+xibetaFit$xi$fit <- xibetaFit$xi$fit[vec.cov]
+xibetaFit$xi$CI.low <- xibetaFit$xi$CI.low[vec.cov]
+xibetaFit$xi$CI.up <- xibetaFit$xi$CI.up[vec.cov]
+
+xibetaFit$xi$covar <- covar
+
+
+
+xibetaFit.xi.boot2 <- matrix(ncol = 10)
+for (i in nrow(count.cov):1){
+    xibetaFit.xi.boot2 <- rbind(
+        do.call(rbind, replicate(count.cov$n[i], xibetaFit$xi$boot[i,], simplify=FALSE)),
+        xibetaFit.xi.boot2
+    )
+}
+
+xibetaFit$xi$boot <- xibetaFit.xi.boot2[-length(xibetaFit.xi.boot2[, 1]),]
+
+
+
+xiFit.mat <- cbind(xibetaFit$xi$fit, xibetaFit$xi$boot)
+
+betaFit.mat <- cbind(xibetaFit$beta$fit, xibetaFit$beta$boot)
+
+
+rho.res <- data.frame(rhoFit$covar, rhoFit$fit)
+
+rho.res.sel <- covar %>% 
+    inner_join(rho.res)
+
+
+
+final.results <- data.frame(Covar=xibetaFit$beta$covar,
+                            rho = rho.res.sel$rhoFit.fit,
+                            xi = xibetaFit$xi$fit,
+                            xi.low = xibetaFit$xi$CI.low,
+                            xi.up = xibetaFit$xi$CI.up,
+                            beta = xibetaFit$beta$fit,
+                            beta.low = xibetaFit$beta$CI.low,
+                            beta.up = xibetaFit$beta$CI.up)
+
+
+
+
+
+VaR <- cbind(covar, fit=sapply(1:(10+1), function(j)
+    risk.measure(cbind(rho.res.sel$rhoFit.fit, xiFit.mat[,j], betaFit.mat[,j]),
+                 alpha=.99, u=10, method="VaR")
+))
+
+VaR.boot <- VaR %>% select(-Pays, -Année, -Type, -fit.1)
+
+VaR.fit <- data.frame(covar, 
+                      fit    = VaR[, "fit.1"], 
+                      CI.low = apply(VaR.boot, 1, quantile, probs=.05/2),
+                      CI.up  = apply(VaR.boot, 1, quantile, probs=1-.05/2))
+
+
+
+final.results <- final.results %>% 
+    rename(Pays = Covar.Pays,
+           Type = Covar.Type,
+           Année = Covar.Année) 
+
+
+paci.3.param <- paci.3 %>% 
+    inner_join(final.results) %>% 
+    
+    dplyr::filter(Montant > 10) %>% 
+    mutate(Y = Montant - 10)
+
+
+
+paci.3.param$ri <- sapply(1:nrow(paci.3.param), 
+                    function(i) -log(1 - pGPD(paci.3.param$Y[i], 
+                                              paci.3.param$xi[i], 
+                                              paci.3.param$beta[i])))
+
+@
+
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=4, width=6>>=
+require(qqplotr)
+paci.3.param %>% 
+    ggplot(aes(sample = ri)) +
+    stat_qq_band(distribution = "exp", dparams = 1, conf = .95, alpha=.2, fill="blue") +
+    stat_qq_point(distribution = "exp", dparams = 1) + 
+    stat_qq_line(distribution = "exp", dparams = 1,) + 
+    theme_minimal() +
+    labs(x="Valeurs théoriques", y="Quantiles des résidus du modèle")
+  
+@
+\end{center}
+\caption{Graphique \textit{Q-Q} de $\text{Exp}(1)$}
+\label{fig:3.17}
+\end{figure}
+
+Le résultat obtenu à la figure \ref{fig:3.17} est, dans l'ensemble, très concluant, tout comme celui obtenu à la figure \ref{fig:3.10}. Il est difficile de dire lequel des graphiques est meilleur.
+
+
+Les différentes $\widehat{\text{VaR}_{0.99}}$ peuvent maintenant être calculées. Les figures \ref{fig:3.18} et \ref{fig:3.19} montrent les résultats obtenus pour les deux pays. 
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=4, width=6>>=
+VaR.fit %>% 
+    dplyr::filter(Pays=="Australie") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=fit, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=fit)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, scales="free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) +
+    labs(y=expression(hat(VaR)))
+  
+@
+\end{center}
+\caption{$\widehat{\text{VaR}_{0.99}}$ avec intervalles de confiance à 95\%}
+\label{fig:3.18}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+<<echo=FALSE, results=tex, fig=TRUE, height=3, width=6>>=
+VaR.fit %>% 
+    dplyr::filter(Pays=="Nouvelle-Zélande") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=fit, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=fit)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, scales="free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) +
+    labs(y=expression(hat(VaR)))
+@
+\end{center}
+\caption{$\widehat{\text{VaR}_{0.99}}$ avec intervalles de confiance à 95\%}
+\label{fig:3.19}
+\end{figure}
+
+Tout comme à la section précédente, il est logique de voir que la mesure de risque dépend du temps, du type et du pays car celle-ci est obtenue avec les paramètres estimés et que les valeurs obtenues pour la Nouvelle-Zélande soient inférieurs que celles de l'Australie tout simplement parce que les pertes sont généralement plus élevées pour l'Australie.
+\\
+
+C'est ce qui conclut cette section. Cette section a montré que l'ajout d'une troisième variable catégorique est possible si celle-ci n'a pas trop de niveaux. Le modèle obtenu est adéquat, mais la qualité de celui-ci n'est pas grandement différente avec celle du modèle développé à la section \ref{sec:3.3} en plus que le modèle de la présente section présente des paramètres et des mesures de risques plus volatiles et moins crédibles. 

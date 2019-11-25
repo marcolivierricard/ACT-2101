@@ -11,10 +11,10 @@
 \contentsline {section}{\numberline {2.1}Introduction}{13}{section.2.1}
 \contentsline {section}{\numberline {2.2}Approche dynamique de la th\IeC {\'e}orie des valeurs extr\IeC {\^e}mes}{14}{section.2.2}
 \contentsline {section}{\numberline {2.3}Application \IeC {\`a} des donn\IeC {\'e}es r\IeC {\'e}elles}{17}{section.2.3}
-\contentsline {section}{\numberline {2.4}Discussion}{17}{section.2.4}
-\contentsline {section}{\numberline {2.5}Algorithmes}{17}{section.2.5}
+\contentsline {section}{\numberline {2.4}Algorithmes}{17}{section.2.4}
 \contentsline {chapter}{\numberline {3}Application \IeC {\`a} des donn\IeC {\'e}es r\IeC {\'e}elles}{18}{chapter.3}
 \contentsline {section}{\numberline {3.1}Analyse de donn\IeC {\'e}es}{18}{section.3.1}
 \contentsline {section}{\numberline {3.2}Approche classique}{23}{section.3.2}
 \contentsline {section}{\numberline {3.3}Approche dynamique \IeC {\`a} deux variables}{26}{section.3.3}
-\contentsline {section}{\numberline {3.4}Approche dynamique \IeC {\`a} trois variables}{27}{section.3.4}
+\contentsline {section}{\numberline {3.4}Approche dynamique \IeC {\`a} trois variables}{30}{section.3.4}
+\contentsline {chapter}{\nameref {chap:conclusion}}{36}{section*.35}

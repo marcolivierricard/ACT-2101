@@ -1,5 +1,5 @@
 \documentclass[aspectratio=169, 12pt, french]{beamer}
-\usetheme{CambridgeUS}
+\usetheme{AnnArbor}
 \usecolortheme{beaver}
 
 
@@ -15,7 +15,7 @@
 \usepackage[comma,authoryear]{natbib}
 
 % tabular environment
-\usepackage{tabu}
+\usepackage{tabu} 
 
 % Compatibilité avec Sweave
 \input{src/sweave_config}
@@ -26,6 +26,7 @@
 % make sure pause does not increase page count
 \setbeamertemplate{footline}[frame number]{}
 
+\setbeamertemplate{frametitle continuation}[from second][(suite)]
 
 % Encoding packages
 \usepackage[utf8]{inputenc}
@@ -42,16 +43,14 @@
 \newcommand{\testset}{\mathcal{D}_{\mathcal{V}}}
 
 % Informations sur la présentation Beamer (Auteur, date, titre, etc.)
-\title[\hyperlink{start}{ACT 2105}]{\Huge Projet de recherche}
-\subtitle{Modèles de micro-réserve en assurance IARD  \\ Implémentation en R}
-\author{Gabriel Crépeault-Cauchon}
-\institute{Sous la direction de \\ Marie-Pier Côté, professeure adjointe \\ Université Laval}
-\logo{\includegraphics[width=1.5cm]{src/logo_UL.png}}
-\date{4 décembre 2019}
+\title[\hyperlink{start}{ACT-2101}]{\huge Modélisation statistique d'évènements extrêmes}
+\subtitle{\large Application multivariée dynamique aux catastrophes naturelles de l'Océanie}
+\author{\Large \textbf{Marc-Olivier Ricard}}
+\institute{\large Sous la supervision de \\ Marie-Pier Côté}
+\logo{\includegraphics[width=0.15\textwidth]{src/logo_UL.png}} 
+\date{\large 4 décembre 2019}
 
 
-%% Style de la bibliographie.
-% \bibliographystyle{francais}
 
 % Options
 
@@ -64,56 +63,277 @@
 %% Style de la bibliographie.
 \bibliographystyle{francais}
 
+\frenchbsetup{%
+    StandardItemizeEnv=true,       
+    ThinSpaceInFrenchNumbers=true, 
+    og=«, fg=»                     
+  }
+ 
 
-%% -- DÉBUT DE LA PRÉSENTATION ---
 \begin{document}
-%% ---------------------------------------------
 
-% Page titre
+
 \begin{frame}
 \titlepage
 \end{frame}
 
-% Table des matières
-\begin{frame}{Éléments de la présentation}
+
+\begin{frame}{Plan de la présentation}
 \tableofcontents
 \end{frame}
 
-\section{Prétraitement des données}
-\include{data-wrangling}
+\section{Mise en contexte}
 
 
 
-
-% Explication du 
-\subsection{Illustration}
-\begin{frame}
-\noindent
-\begin{minipage}{.6\linewidth}
-\scalebox{0.6}{\input{src/data-wrangling-beamer.tikz}}
-\end{minipage}
-\hfill
-\begin{minipage}{.3\linewidth}
+\begingroup
+\large
+\begin{frame}{Motivations}
 \begin{itemize}
-\onslide<2-3> {\item Censure des données après 2005}
-\onslide<3> {\item Coder les données sous un format \texttt{long}}
+	\item Intérêt recherche
+	\item Stage été 2019
+	\item Maîtrise
+	\item Problématiques de l'industrie
+	\item Black Swans
 \end{itemize}
-\end{minipage}
+\end{frame}
+\endgroup
 
+
+\section{Notions préliminaires}
+
+\subsection{Théorie classique des valeurs extrêmes}
+\begin{frame}{Théorie classique des valeurs extrêmes}
+Soit $M_n = \max\{X_1, \dots, X_n\}$, le maximum des n observations indépendantes et de distribution commune. 
+S'il existe des séquences de constantes $\{a_n > 0\}$ et $\{b_n\}$ tel que $$P\Bigg\{\frac{M_n - b_n}{a_n} \le z \Bigg\}\to G(z), \ \ \  \text{quand} \ \ {n \to \infty}$$ où $G$ est une fonction de répartition non-dégénératrice. Alors, $G$ appartient à une des distributions de valeur extrême, soit les lois Gumbel, Fréchet et Weibull. \\~\\
+Donc, peu importe la distribution ${F_X}_i$, les trois dernières lois sont les seules distributions limites pour $M^*_n$.
+\end{frame}
+
+\begin{frame}
+Une meilleure analyse est possible en combinant en une seule distribution les distributions Gumbel, Fréchet et Weibull:\\~\\
+Famille de distributions d'extremum généralisée (GEV)
+\begin{equation}
+\begin{gathered}
+G(z) = \exp \Bigg\{ - \Big[ 1 +\xi\Big(\frac{z-\mu}{\sigma}\Big) \Big]^{-1/\xi}  \Bigg\}
+\end{gathered}
+\end{equation} 
+Comme on peut voir, le modèle possède trois paramètres: $\mu$ (paramètre de position), $\sigma$ (paramètre d'échelle), $\xi$ (paramètre de forme).
+\end{frame}
+
+\begin{frame}
+Tout ceci mène à une première méthodologie pour modéliser les valeurs extrêmes:
+\begin{itemize}
+\item Les données sont groupées en séquence de longueur $n$
+\item Le maximum de chaque séquence est calculé
+\item Une distribution \textit{GEV} est calibrée à ces maximums
+\item La distribution peut être manipulée pour obtenir différentes statistiques
+\end{itemize}
 \end{frame}
 
 
+\subsection{Méthode par l'approche POT}
+\begin{frame}{Méthode par l'approche POT}
+Soit $X_1,\dots, X_n$, une séquence de variables indépendantes, identiquement distribuées et avec fonction de répartition marginale $F$. Nous considérons comme évènements extrêmes ceux qui dépassent un certain seuil $u$.\\~\\
+Nous savons déjà que $\Pr\{ \max\{X_1,\dots,X_n\} \le z \}\approx G(z)$
+où
+\begin{equation*}
+{G(z) = \exp \Bigg\{ - \Big[ 1 +\xi\Big(\frac{z-\mu}{\sigma}\Big) \Big]^{-1/\xi}  \Bigg\}}
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+Ensuite, pour $u$ assez grand, la fonction de répartition de $X-u\ |\ X>u$ est environ:
+\begin{equation}
+H(y) = 1 - \Big(1+\frac{\xi y}{\tilde\sigma}\Big)^{-1/\xi}
+\end{equation}
+où
+\begin{equation*}
+{\tilde{\sigma} = \sigma + \xi(u-\mu)}
+\end{equation*}
+Il s'agit ici de la famille de distributions Pareto généralisée.\\~\\
+Les paramètres de $H$ sont uniquement déterminés par ceux de la distribution \textit{GEV}. $\xi$ conserve la même valeur, par exemple.
+\end{frame}
+
+\begin{frame}
+Tout ceci mène à une deuxième méthodologie pour modéliser les valeurs extrêmes:
+\begin{itemize}
+\item Les données brutes représentent une séquence de valeurs iid  $x_1,\dots,x_n$
+\item Les valeurs extrêmes sont identifiées en définissant un seuil de grande valeur $u$
+\item Les observations qui dépassent $u$ sont définies par $x_{(1)},\dots,x_{(k)}$ et les excès de seuil par $y_j = x_{(j)} - u,\ j=1,\dots,k$
+\item Les $y_j$ sont reconnues comme des réalisations indépendantes d'une variable aléatoire dont la distribution peut être approximée par un membre de la famille Pareto généralisée
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Un des défis de cette procédure est le choix de la valeur du seuil, où il faut trouver une bonne balance entre la variance et le biais du modèle. \\~\\
+Deux méthodes:
+\begin{itemize}
+\item \textit{Mean residual plot}
+\item Estimer les paramètres du modèle pour différents seuils
+\end{itemize}
+\end{frame}
 
 
+\begin{frame}
+Niveaux de retour:
+\begin{equation}\
+\begin{split}
+{\Pr\{ X>x\ |\ X>u\} = \Big[ 1 + \xi \Big( \frac{x-u}{\sigma}\Big)\Big]^{-1/\xi}}\\
+{\Rightarrow \Pr\{X>x\} = \zeta_u \Big[1 + \xi \Big( \frac{x-u}{\sigma}\Big)\Big]^{-1/\xi}}
+\end{split}
+\end{equation}
+où $\zeta_u = \Pr\{X>u\}$. Ensuite, le niveau $x_m$ qui est dépassé en moyenne une fois chaque $m$ observations est obtenu comme suit:
+\begin{equation}
+\begin{split}
+{\frac{1}{m} = \zeta_u \Big[1 + \xi \Big( \frac{x-u}{\sigma}\Big)\Big]^{-1/\xi}}\\
+{\Rightarrow x_m = u + \frac{\sigma}{\xi} \Big[(m\zeta_u)^\xi -1\Big],\ \ x_m>u}
+\end{split}
+\end{equation}
+\end{frame}
+
+\section{Article étudié}
+
+\begin{frame}{Article étudié}
+Article choisi: \cite{chavez2016extreme}
+\begin{itemize}
+\item Tout de même récent
+\item Longueur et difficulté convenables
+\item Sujet spécifique intéressant
+\item Implémentation en \textsf{R}
+\end{itemize}
+\end{frame}
+
+\subsection{Introduction}
+\begin{frame}{Introduction}
+L'article choisi présente une méthodologie dans laquelle la modélisation des valeurs extrêmes dépend de variables exogènes associées à la variable réponse qui est modélisée.
+\begin{itemize}
+\item Ce sont les paramètres du modèle de valeurs extrêmes choisi qui dépendront des covariables disponibles.
+\item Vise à améliorer la calibration des lois aux données et du même coup rendre l'inférence plus crédible et précise.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Processus de Poisson non-homogène 
+\item Modèles additifs généralisés, splines de lissage et méthode du maximum de vraisemblance pénalisé
+\item Pareto généralisée non-stationnaire dont les paramètre dépendent des variables exogènes
+\item Algorithme basé sur les paramètres orthogonaux
+\item  L'idée de dépendance entre les paramètres du modèle et des covariables a déjà élaborée dans \cite{coles2001introduction}, ce qui est réellement nouveau dans l'approche proposée est la dépendance semi-paramétrique avec les splines de lissage
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Critères:
+\begin{itemize}
+\item Les données représentent des pertes aléatoires encourus à des temps aléatoires.
+\item Le but de l'analyse est d'estimer la distribution de la perte globale à travers le temps.
+\item Les données contiennent un nombre suffisant d'observations.
+\item Les données contiennent des évènement extrêmes.
+\item Les données contiennent des covariables significatives.
+\end{itemize}
+Notes:
+\begin{itemize}
+\item Gains
+\item $\beta$
+\end{itemize}
+\end{frame}
+\subsection{Approche dynamique de la théorie des valeurs extrêmes}
+\begin{frame}{Approche dynamique de la théorie des valeurs extrêmes}
+La dépendance entre les paramètres et les covariables peut être paramétrique, non-paramétrique ou bien semi-paramétrique et elle peut également inclure des intéractions entre les variables. L'idée générale du modèle peut être représentée par l'équation suivante:
+\begin{equation}
+g_k(\theta_k) = f_k(x) + h_k(t), \ \ k \in \{1, \dots, p \}
+\end{equation}
+où:
+\begin{itemize}
+\item $\theta$ est le vecteur des $p$ paramètres du modèle.
+\item $g_k$ est une fonction de lien.
+\item $f_k$ est la fonction pour les différents niveaux d'une variable catégorique.
+\item $h_k$ est soit une fonction linéaire paramétrique ou bien une fonction lisse non-paramétrique de $t$.
+\end{itemize}
+\end{frame}
 
 
+\begin{frame}
+On assume que le nombre d'excès du seuil $u$ sélectionné suit un processus de Poisson non-homogène avec comme taux:
+ \begin{equation}
+ \lambda = \lambda(x, t) = \exp(f_\lambda(x) + h_\lambda(t))
+  \end{equation}
+  
+L'application d'un modèle additif généralisé mène à un estimé $\hat\lambda$.
+\end{frame}
 
+\begin{frame}
+Il faut s'assurer que les procédures de calibration des paramètres $\xi$ et $\beta$ aux données convergent. Pour ce faire, il faut absolument que ces deux paramètres soient orthogonaux par rapport à l'information de Fisher.
+\begin{equation}
+ \begin{split}
+  \nu = \log((1+\xi)\beta), & \ \xi > -1 \\ 
+  \Rightarrow \beta = \frac{\exp(\nu)}{1+\xi}
+  \end{split}
+  \end{equation}
+\end{frame}
 
+\begin{frame}
+Dans la même ordre d'idée que pour $\lambda$, on définit $\xi$ et $\nu$ comme suit:
+\begin{equation}\label{eq:8}
+ \xi = \xi(x, t) = f_\xi(x) + h_\xi(t)
+\end{equation}
+  
+ \begin{equation}\label{eq:9}
+ \nu = \nu(x, t) = f_\nu(x) + h_\nu(t)
+ \end{equation}
+ 
+  \begin{equation}
+  \Rightarrow \beta = \beta(x, t) =  \frac{\exp(\nu(x,t))}{1+\xi(x,t)}
+ \end{equation}
+\end{frame}
 
-\begin{frame}{Bibliographie}
+\begin{frame}
+Les équations \ref{eq:8} et \ref{eq:9} sont donc celles qui seront estimées avec les excès de seuil disponibles pour être en mesure d'obtenir $\hat\xi$ et $\hat\beta$. Ces estimateurs sont donc des estimateurs basés sur les estimateurs $\hat{f}_\xi, \hat{h}_\xi, \hat{f}_\nu$ et $ \hat{h}_\nu$. Ces derniers estimateurs sont obtenus à partir des vecteurs observés $z_i = (t_i, x_i, {y_t}_{i})$ où:
+\begin{itemize}
+\item $i \in \{1, \dots, n\}$.
+\item $0 \leq t_1 \le \cdots \le t_n \leq T$ représente les temps d'excès de seuil.
+\item $x_i$ représente le vecteur des covariables.
+\item ${y_t}_{i}$ représente les réalisations de la variable aléatoire ${Y_t}_{i}$.
+\item ${Y_t}_{i}$ représente les excès de seuil $u$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{equation}
+\widehat{\text{VaR}_\alpha} = u + \frac{\hat\beta}{\hat\xi} \Bigg(\Bigg( \frac{1-\alpha}{\hat\lambda/n'}\Bigg)^{-\hat\xi} -1 \Bigg)
+\end{equation}
+
+\begin{equation}
+\widehat{\text{ES}_\alpha} =
+\begin{cases}
+\frac{\widehat{\text{VaR}_\alpha} + \hat\beta + u\hat\xi}{1-\hat\xi}, & \hat{\xi} \in (0,1) \\
+\infty, & \hat\xi 	\ge 1
+\end{cases}
+\end{equation}
+où $n' = n'(x,t)$ représente le nombre total de pertes pour les covariables $x$ et pour le temps $t$.\\~\\ Cependant, en pratique, il est plus utile de modéliser directement $\rho = \rho(x, t) = \lambda(x,t)/n'(x, t)$ qui représente le taux d'excès de seuil pour $x$ et $t$.
+\end{frame}
+
+\subsection{Analyse de données}
+
+\begin{frame}{Analyse de données}
 
 \end{frame}
 
-%% -- FIN DE LA PRÉSENTATION -------
+\subsection{Approche classique} 
+
+\subsection{Approche dynamique à deux variables}
+
+\subsection{Approche dynamique à trois variables}
+
+
+\section{Conclusion}
+
+\section*{Bibliographie}
+\nocite{*}
+
+\begin{frame}[allowframebreaks]{Bibliographie}
+\bibliography{biblio}
+\end{frame}
+
+
 \end{document}
-%% ---------------------------------------------

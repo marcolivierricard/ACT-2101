@@ -15,7 +15,7 @@ La méthodologie proposée dans l'article peut s'appliquer à plusieurs contexte
 \item Le but de l'analyse est d'estimer la distribution de la perte globale à travers le temps.
 \item Les données contiennent un nombre suffisant d'observations.
 \item Les données contiennent des évènement (valeurs) extrêmes.
-\item Les données contiennet des covariables significatives.
+\item Les données contiennent des covariables significatives.
 \end{itemize}
 
 Il est important de noter que l'article utilise la méthodologie proposée avec des pertes, mais travailler avec des gains serait également possible. Même chose par rapport à des très grandes valeurs ou des très petites valeurs. Les critères mentionnés sont seulement générales et représentent une situation idéale. Quelqu'un pourrait très bien tenter d'appliquer la méthode même si un ou plusiers critères ne sont pas respectés et obtenir des résultats concluants. 
@@ -28,10 +28,10 @@ Il est important de noter que l'article utilise la méthodologie proposée avec 
 
 \section{Approche dynamique de la théorie des valeurs extrêmes}
 
-Comme mentionnée à la section \ref{sec:introar}, la nouvelle méthode proposée laisse les paramètres du modèle dépendent des covariables. Cette dépendance peut être paramétrique, non-paramétrique ou bien semi-paramétrique et elle peut également inclure des intéractions entre les variables. L'idée générale du modèle de dépendance entre les paramètres et les covariables peut être représenté par l'équation suivante:
+Comme mentionnée à la section \ref{sec:introar}, la nouvelle méthode proposée laisse les paramètres du modèle dépendent des covariables. Cette dépendance peut être paramétrique, non-paramétrique ou bien semi-paramétrique et elle peut également inclure des intéractions entre les variables. L'idée générale du modèle de dépendance entre les paramètres et les covariables peut être représentée par l'équation suivante:
 
 \begin{equation}\label{eq:2.2.1}
-g_k(\theta_k) = f_k(x) + h_k(x), \ \ k \in \{1, \dots, p \}
+g_k(\theta_k) = f_k(x) + h_k(t), \ \ k \in \{1, \dots, p \}
 \end{equation}
 où:
 \begin{itemize}
@@ -52,7 +52,7 @@ où:
  
 On assume que le nombre d'excès du seuil $u$ sélectionné suit un processus de Poisson non-homogène avec comme taux:
  \begin{equation}\label{eq:2.2.3}
- \lambda = \lambda(x, t) = \exp(f_\lambda(x) + f_\lambda(t))
+ \lambda = \lambda(x, t) = \exp(f_\lambda(x) + h_\lambda(t))
   \end{equation}
   où $f_\lambda$ est une fonction pour les différents niveaux d'une variable catégorique $x$ et $h_\lambda$ est une fonction générale qui ne dépend pas de paramètres spécifiques comme c'est le cas pour $f_\lambda$. Ensuite, l'application d'un modèle additif généralisé mène à un estimé $\hat\lambda$ qui sera utile pour le reste de la modélisation. Cette étape peut être complétée avec l'aide du logiciel \textsf{R} et du paquetage \texttt{mgcv}.
   \\  
@@ -60,7 +60,7 @@ On assume que le nombre d'excès du seuil $u$ sélectionné suit un processus de
   L'approche est très semblable à l'équation \ref{eq:2.2.3} pour ce qui est de la modélisation de la sévérité de la perte. Cependant, une étape supplémentaire est nécessaire pour s'assurer que les procédures de calibration des paramètres $\xi$ et $\beta$ aux données convergent. Pour ce faire, il faut absolument que ces deux paramètres soient orthogonaux par rapport à l'information de Fisher. De ce fait, $\beta$ est reparamétrisé comme suit:
  \begin{equation}\label{eq:2.2.4}
  \begin{split}
-  \nu = \log((1+\xi)\beta) \ \ \xi > -1
+  \nu = \log((1+\xi)\beta), & \ \xi > -1 \\ 
   \Rightarrow \beta = \frac{\exp(\nu)}{1+\xi}
   \end{split}
   \end{equation}
@@ -73,18 +73,18 @@ où Y représente le vecteur des excès de seuil $u$.
 
 Dans la même ordre d'idée que pour $\lambda$, on définit $\xi$ et $\nu$ comme suit:
 \begin{equation}\label{eq:2.2.6}
- \xi = \xi(x, t) = f_\xi(x) + f_\xi(t)
+ \xi = \xi(x, t) = f_\xi(x) + h_\xi(t)
 \end{equation}
   
  \begin{equation}\label{eq:2.2.7}
- \nu = \nu(x, t) = f_\nu(x) + f_\nu(t)
+ \nu = \nu(x, t) = f_\nu(x) + h_\nu(t)
  \end{equation}
  
   \begin{equation}\label{eq:2.2.8}
   \Rightarrow \beta = \beta(x, t) =  \frac{\exp(\nu(x,t))}{1+\xi(x,t)}
  \end{equation}
 
-Les équations \ref{eq:2.2.6} et \ref{eq:2.2.7} sont donc celles qui seront estimées avec les excès de seuil disponibles pour être en mesure d'obtenir $\hat\xi$ et $\hat\beta$. Ces estimateurs sont donc des estimateurs basés sur les estimateurs $\hat{f}_\xi, \hat{h}_\xi, \hat{f}_\nu$ et$ \hat{h}_\nu$. Ces derniers estimateurs sont obtenus à partir des vecteurs observés $z_i = (t_i, x_i, {y_t}_{i})$ où:
+Les équations \ref{eq:2.2.6} et \ref{eq:2.2.7} sont donc celles qui seront estimées avec les excès de seuil disponibles pour être en mesure d'obtenir $\hat\xi$ et $\hat\beta$. Ces estimateurs sont donc des estimateurs basés sur les estimateurs $\hat{f}_\xi, \hat{h}_\xi, \hat{f}_\nu$ et $ \hat{h}_\nu$. Ces derniers estimateurs sont obtenus à partir des vecteurs observés $z_i = (t_i, x_i, {y_t}_{i})$ où:
 \begin{itemize}
 \item $i \in \{1, \dots, n\}$.
 \item $0 \leq t_1 \le \cdots \le t_n \leq T$ représente les temps d'excès de seuil.
@@ -116,7 +116,7 @@ où
 \end{itemize}
 
 Du coup, l'équation \ref{eq:2.2.9} peut être réécrite comme suit:
-\begin{equation}\label{eq:2.2.10}
+\begin{equation}\label{eq:2.2.11}
 \ell^p({f}_\xi, {h}_\xi, {f}_\nu, {h}_\nu; z_1, \dots, z_n) =  \ell^r(\xi, \nu; y) - \gamma_\xi  {h_\xi}^{\top} K {h_\xi} - \gamma_\nu  {h_\nu}^{\top} K {h_\nu}
 \end{equation}
 
@@ -124,16 +124,16 @@ C'est avec l'obtention de cette formule que devient possible le développement d
 \\
 
 Après avoir obtenu les paramètres estimés du modèle utilisé et avant d'appliquer tout genre d'inférence avec le modèle obtenu, il est nécessaire d'évaluer la qualité de celui-ci. La méthode proposée ici repose sur le fait que si les excès ${Y_t}_{i}$ suivent une distribution Pareto généralisée avec comme paramètre $\xi$ et $\beta$, $R_i = 1 - G_{\xi_i, \beta_i} ({Y_t}_{i}), \ i \in \{1, \dots, n\}$ forme approximativement un échantillon aléatoire d'une loi uniforme $U(0,1)$. Ainsi, il est possible de vérifier si les valeurs $r_i$ se comportent comme des variables aléatoires indépendantes suivant une loi exponentielle standard où
-\begin{equation}\label{eq:2.2.11}
+\begin{equation}\label{eq:2.2.12}
 r_i = -\log(1 - G_{\hat\xi_i, \hat\beta_i}({y_t}_{i})), \ \ i \in \{1, \dots, n\}
 \end{equation}
 
 Finalement, lorsque tous les paramètres sont obtenus et que l'adéquation du modèle est validé, l'inférence et plus particulièrement le calcul de mesures de risques pour des covariables et un point dans le temps en particulier est possible:
-\begin{equation}\label{eq:2.2.12}
+\begin{equation}\label{eq:2.2.13}
 \widehat{\text{VaR}_\alpha} = u + \frac{\hat\beta}{\hat\xi} \Bigg(\Bigg( \frac{1-\alpha}{\hat\lambda/n'}\Bigg)^{-\hat\xi} -1 \Bigg)
 \end{equation}
 
-\begin{equation}\label{eq:2.2.13}
+\begin{equation}\label{eq:2.2.14}
 \widehat{\text{ES}_\alpha} =
 \begin{cases}
 \frac{\widehat{\text{VaR}_\alpha} + \hat\beta + u\hat\xi}{1-\hat\xi}, & \hat{\xi} \in (0,1) \\
@@ -144,16 +144,24 @@ où $n' = n'(x,t)$ représente le nombre total de pertes pour les covariables $x
 \\
 
 Un dernier court point à couvrir est le choix du paramètre de lissage souvent reconnu comme le nombre de degrés de liberté. L'utilisation du critère d'information d'Akaike (AIC) est la technique proposée par les auteurs.
-\begin{equation}\label{eq:2.2.14}
+\begin{equation}\label{eq:2.2.15}
 \text{AIC} \propto -2 \ell(\theta; \cdot) + 2\text{Df}
 \end{equation}
 
 \section{Application à des données réelles}
-La présente section discute des fait saillants de l'application de la méthodologie à des données réelles faite par les auteurs de l'article. Voir \cite{chavez2016extreme} pour de plus amples détails.
+La présente section discute seulement des fait saillants de l'application de la méthodologie à des données réelles faite par les auteurs de l'article. Voir \cite{chavez2016extreme} pour de plus amples détails.
+\begin{itemize}
+\item L'incorporation d'une dépendance temporelle est essentielle pour palier à l'inhomogénéité des données à travers le temps.
+\item La nouvelle méthodologie permet d'utiliser l'ensemble des données pour l'ajustement du modèle même si des covariables sont considérées.
+\item Il faut clairement tenir compte qu'il y a propablement des différences dans la mesure des catastrophes à travers le temps. Le modèle tient compte du biais dans la déclaration des catastrophes à travers le temps.
+\item Il n'est pas rare que $\xi \ge 1$ et donc que $\text{ES}_\alpha$ n'existe pas.
+\item Dans la plupart des applications, $\xi$ ne dépend pas du temps.
+\item Sélectionner un seuil $u$ trop petit procure un moins bon modèle.
+\item Le choix de modèle est très peu, voire aucunement affecté par l'ajustement du modèle sur différentes périodes de temps.
+\end{itemize}
 
 
-
-\section{Discussion}
 
 \section{Algorithmes}
 \label{sec:algos}
+À compléter...

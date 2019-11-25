@@ -15,6 +15,7 @@
 \usepackage{hyperref}
 \usepackage{caption}
 \usepackage{float}
+\usepackage{listings}
 
 \setlength{\abovecaptionskip}{2pt plus 0pt minus 0pt}
 
@@ -29,9 +30,9 @@
   \bibliographystyle{francais}
 
 
-
 \newtheorem{theorem}{Théorème}[chapter]
 \numberwithin{equation}{section}
+
 
 \begin{document}
 % Tu gardes le strict minimum dans ton main (il sert juste à tout remettre ensemble pour compiler).
@@ -56,11 +57,13 @@
 
 \include{application-donnees-reelles}
 
+\include{conclusion}
 
 \bibliography{biblio}
 
 
-
+\appendix
+%\include{Annexe}
 
 
 

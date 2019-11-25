@@ -1,0 +1,13 @@
+\select@language {french}
+\beamer@sectionintoc {1}{Mise en contexte}{3}{0}{1}
+\beamer@sectionintoc {2}{Notions pr\IeC {\'e}liminaires}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Th\IeC {\'e}orie classique des valeurs extr\IeC {\^e}mes}{4}{0}{2}
+\beamer@subsectionintoc {2}{2}{M\IeC {\'e}thode par l'approche POT}{7}{0}{2}
+\beamer@sectionintoc {3}{Article \IeC {\'e}tudi\IeC {\'e}}{12}{0}{3}
+\beamer@subsectionintoc {3}{1}{Introduction}{13}{0}{3}
+\beamer@subsectionintoc {3}{2}{Approche dynamique de la th\IeC {\'e}orie des valeurs extr\IeC {\^e}mes}{16}{0}{3}
+\beamer@subsectionintoc {3}{3}{Analyse de donn\IeC {\'e}es}{22}{0}{3}
+\beamer@subsectionintoc {3}{4}{Approche classique}{23}{0}{3}
+\beamer@subsectionintoc {3}{5}{Approche dynamique \IeC {\`a} deux variables}{23}{0}{3}
+\beamer@subsectionintoc {3}{6}{Approche dynamique \IeC {\`a} trois variables}{23}{0}{3}
+\beamer@sectionintoc {4}{Conclusion}{23}{0}{4}

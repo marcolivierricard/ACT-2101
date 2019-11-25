@@ -1,0 +1,12 @@
+\select@language {french}
+\beamer@sectionintoc {1}{Mise en contexte}{3}{0}{1}
+\beamer@sectionintoc {2}{Notions pr\IeC {\'e}liminaires}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Th\IeC {\'e}orie classique des valeurs extr\IeC {\^e}mes}{4}{0}{2}
+\beamer@subsectionintoc {2}{2}{M\IeC {\'e}thode par l'approche POT}{7}{0}{2}
+\beamer@sectionintoc {3}{Article \IeC {\'e}tudi\IeC {\'e}}{12}{0}{3}
+\beamer@subsectionintoc {3}{1}{Introduction}{13}{0}{3}
+\beamer@subsectionintoc {3}{2}{Approche dynamique de la th\IeC {\'e}orie des valeurs extr\IeC {\^e}mes}{16}{0}{3}
+\beamer@sectionintoc {4}{Application \IeC {\`a} des donn\IeC {\'e}es r\IeC {\'e}elles}{22}{0}{4}
+\beamer@subsectionintoc {4}{1}{Analyse de donn\IeC {\'e}es}{22}{0}{4}
+\beamer@subsectionintoc {4}{2}{Approche classique}{27}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{28}{0}{5}

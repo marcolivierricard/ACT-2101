@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  21 NOV 2019 20:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  25 NOV 2019 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -732,30 +732,51 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks37
 \@floatcapt=\box29
 )
-\c@theorem=\count131
- (./MAIN.aux
-(./resume.aux) (./remerciments.aux) (./introduction.aux)
-(./notions-preliminaires.aux) (./article-etudie.aux
+(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count131
+\lst@gtempboxa=\box30
+\lst@token=\toks38
+\lst@length=\count132
+\lst@currlwidth=\dimen156
+\lst@column=\count133
+\lst@pos=\count134
+\lst@lostspace=\dimen157
+\lst@width=\dimen158
+\lst@newlines=\count135
+\lst@lineno=\count136
+\lst@maxwidth=\dimen159
 
-LaTeX Warning: Label `eq:2.2.10' multiply defined.
+(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count137
+\lst@skipnumbers=\count138
+\lst@framebox=\box31
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+\c@theorem=\count139
 
-) (./application-donnees-reelles.aux))
+(./MAIN.aux (./resume.aux) (./remerciments.aux) (./introduction.aux)
+(./notions-preliminaires.aux) (./article-etudie.aux)
+(./application-donnees-reelles.aux) (./conclusion.aux))
 \openout1 = `MAIN.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -791,28 +812,28 @@ LaTeX Font Info:    ... okay on input line 36.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@maskedRefs=\count132
+\c@maskedRefs=\count140
 (/usr/local/texlive/2017/texmf-dist/tex/latex/apacite/french.apc
 LaTeX Info: Redefining \BPBI on input line 130.
 LaTeX Info: Redefining \BHBI on input line 131.
 )
-LaTeX Info: Redefining \degres on input line 36.
-LaTeX Info: Redefining \dots on input line 36.
-LaTeX Info: Redefining \up on input line 36.
+LaTeX Info: Redefining \degres on input line 37.
+LaTeX Info: Redefining \dots on input line 37.
+LaTeX Info: Redefining \up on input line 37.
 
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count133
-\scratchdimen=\dimen156
-\scratchbox=\box30
-\nofMPsegments=\count134
-\nofMParguments=\count135
-\everyMPshowfont=\toks38
-\MPscratchCnt=\count136
-\MPscratchDim=\dimen157
-\MPnumerator=\count137
-\makeMPintoPDFobject=\count138
-\everyMPtoPDFconversion=\toks39
+\scratchcounter=\count141
+\scratchdimen=\dimen160
+\scratchbox=\box32
+\nofMPsegments=\count142
+\nofMParguments=\count143
+\everyMPshowfont=\toks39
+\MPscratchCnt=\count144
+\MPscratchDim=\dimen161
+\MPnumerator=\count145
+\makeMPintoPDFobject=\count146
+\everyMPtoPDFconversion=\toks40
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -830,8 +851,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box31
-Package hyperref Info: Link coloring OFF on input line 36.
+\AtBeginShipoutBox=\box33
+Package hyperref Info: Link coloring OFF on input line 37.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -839,11 +860,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count139
+\c@section@level=\count147
 )
-LaTeX Info: Redefining \ref on input line 36.
-LaTeX Info: Redefining \pageref on input line 36.
-LaTeX Info: Redefining \nameref on input line 36.
+LaTeX Info: Redefining \ref on input line 37.
+LaTeX Info: Redefining \pageref on input line 37.
+LaTeX Info: Redefining \nameref on input line 37.
 
 (./MAIN.out) (./MAIN.out)
 \@outlinefile=\write3
@@ -851,7 +872,9 @@ LaTeX Info: Redefining \nameref on input line 36.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count148
    defining Unicode char U+00AB (decimal 171)
    defining Unicode char U+00BB (decimal 187)
  (./pagetitre.tex
@@ -882,7 +905,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.42 \cleardoublepage
+l.43 \cleardoublepage
                       [1
 
 ]
@@ -903,7 +926,12 @@ l.42 \cleardoublepage
 \openout2 = `introduction.aux'.
 
 
-(./introduction.tex) [4
+(./introduction.tex
+Underfull \hbox (badness 10000) in paragraph at lines 5--7
+
+ []
+
+) [4
 
 
 
@@ -1067,10 +1095,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 142--145
 
  []
 
-
-Package natbib Warning: Citation `chavezextreme2016' on page 16 undefined on in
-put line 152.
-
 [16]) [17]
 \openout2 = `application-donnees-reelles.aux'.
 
@@ -1080,7 +1104,7 @@ Chapitre 3.
 
 
 
-] <images/fig-005.pdf, id=312, 433.62pt x 216.81pt>
+] <images/fig-005.pdf, id=316, 433.62pt x 216.81pt>
 File: images/fig-005.pdf Graphic file (type pdf)
 
 <use images/fig-005.pdf>
@@ -1090,7 +1114,7 @@ Package pdftex.def Info: images/fig-005.pdf used on input line 136.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/fig-006.pdf, id=313, 433.62pt x 216.81pt>
+<images/fig-006.pdf, id=317, 433.62pt x 216.81pt>
 File: images/fig-006.pdf Graphic file (type pdf)
  <use images/fig-006.pdf>
 Package pdftex.def Info: images/fig-006.pdf used on input line 144.
@@ -1099,7 +1123,7 @@ Package pdftex.def Info: images/fig-006.pdf used on input line 144.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/fig-007.pdf, id=314, 433.62pt x 216.81pt>
+<images/fig-007.pdf, id=318, 433.62pt x 216.81pt>
 File: images/fig-007.pdf Graphic file (type pdf)
  <use images/fig-007.pdf>
 Package pdftex.def Info: images/fig-007.pdf used on input line 153.
@@ -1109,7 +1133,7 @@ Package pdftex.def Info: images/fig-007.pdf used on input line 153.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [19] [20 <./images/fig-005.pdf>] [21 <./images/fig-006.pdf> <./images/fig-007.p
-df>] [22] <images/fig-009.pdf, id=360, 505.89pt x 289.08pt>
+df>] [22] <images/fig-009.pdf, id=364, 505.89pt x 289.08pt>
 File: images/fig-009.pdf Graphic file (type pdf)
 
 <use images/fig-009.pdf>
@@ -1120,7 +1144,7 @@ Overfull \hbox (36.13373pt too wide) in paragraph at lines 189--190
  [] 
  []
 
-<images/fig-010.pdf, id=364, 433.62pt x 361.35pt>
+<images/fig-010.pdf, id=368, 433.62pt x 361.35pt>
 File: images/fig-010.pdf Graphic file (type pdf)
  <use images/fig-010.pdf>
 Package pdftex.def Info: images/fig-010.pdf used on input line 198.
@@ -1132,7 +1156,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [23
 
  <./images/fig-009.pdf>] [24 <./images/fig-010.pdf>]
-<images/fig-011.pdf, id=391, 505.89pt x 397.485pt>
+<images/fig-011.pdf, id=395, 505.89pt x 397.485pt>
 File: images/fig-011.pdf Graphic file (type pdf)
  <use images/fig-011.pdf>
 Package pdftex.def Info: images/fig-011.pdf used on input line 240.
@@ -1142,39 +1166,215 @@ Overfull \hbox (36.13373pt too wide) in paragraph at lines 240--241
  [] 
  []
 
-[25 <./images/fig-011.pdf>] [26
+[25 <./images/fig-011.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 251--253
 
-]) [27
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 257--260
+
+ []
+
+<images/fig-013.pdf, id=416, 433.62pt x 216.81pt>
+File: images/fig-013.pdf Graphic file (type pdf)
+ <use images/fig-013.pdf>
+Package pdftex.def Info: images/fig-013.pdf used on input line 265.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
+
+ []
+
+[26
+
+ <./images/fig-013.pdf>] <images/fig-015.pdf, id=436, 433.62pt x 216.81pt>
+File: images/fig-015.pdf Graphic file (type pdf)
+
+<use images/fig-015.pdf>
+Package pdftex.def Info: images/fig-015.pdf used on input line 289.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--297
+
+ []
+
+<images/fig-016.pdf, id=438, 433.62pt x 216.81pt>
+File: images/fig-016.pdf Graphic file (type pdf)
+ <use images/fig-016.pdf>
+Package pdftex.def Info: images/fig-016.pdf used on input line 300.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--308
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 311--313
+
+ []
+
+<images/fig-018.pdf, id=447, 433.62pt x 289.08pt>
+File: images/fig-018.pdf Graphic file (type pdf)
+ <use images/fig-018.pdf>
+Package pdftex.def Info: images/fig-018.pdf used on input line 317.
+(pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/fig-019.pdf, id=448, 433.62pt x 216.81pt>
+File: images/fig-019.pdf Graphic file (type pdf)
+ <use images/fig-019.pdf>
+Package pdftex.def Info: images/fig-019.pdf used on input line 325.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 331--333
+
+ []
+
+[27 <./images/fig-015.pdf>] [28 <./images/fig-016.pdf>] [29 <./images/fig-018.p
+df> <./images/fig-019.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 373--375
+
+ []
+
+<images/fig-023.pdf, id=510, 433.62pt x 216.81pt>
+File: images/fig-023.pdf Graphic file (type pdf)
+ <use images/fig-023.pdf>
+Package pdftex.def Info: images/fig-023.pdf used on input line 380.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/fig-024.pdf, id=511, 433.62pt x 216.81pt>
+File: images/fig-024.pdf Graphic file (type pdf)
+ <use images/fig-024.pdf>
+Package pdftex.def Info: images/fig-024.pdf used on input line 388.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 394--396
+
+ []
+
+[30
+
+] <images/fig-026.pdf, id=526, 433.62pt x 216.81pt>
+File: images/fig-026.pdf Graphic file (type pdf)
+
+<use images/fig-026.pdf>
+Package pdftex.def Info: images/fig-026.pdf used on input line 411.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--419
+
+ []
+
+<images/fig-027.pdf, id=529, 433.62pt x 216.81pt>
+File: images/fig-027.pdf Graphic file (type pdf)
+ <use images/fig-027.pdf>
+Package pdftex.def Info: images/fig-027.pdf used on input line 422.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/fig-028.pdf, id=530, 433.62pt x 216.81pt>
+File: images/fig-028.pdf Graphic file (type pdf)
+ <use images/fig-028.pdf>
+Package pdftex.def Info: images/fig-028.pdf used on input line 431.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 437--439
+
+ []
+
+<images/fig-030.pdf, id=536, 433.62pt x 289.08pt>
+File: images/fig-030.pdf Graphic file (type pdf)
+ <use images/fig-030.pdf>
+Package pdftex.def Info: images/fig-030.pdf used on input line 447.
+(pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[31 <./images/fig-023.pdf>] <images/fig-031.pdf, id=560, 433.62pt x 289.08pt>
+File: images/fig-031.pdf Graphic file (type pdf)
+
+<use images/fig-031.pdf>
+Package pdftex.def Info: images/fig-031.pdf used on input line 459.
+(pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<images/fig-032.pdf, id=561, 433.62pt x 216.81pt>
+File: images/fig-032.pdf Graphic file (type pdf)
+ <use images/fig-032.pdf>
+Package pdftex.def Info: images/fig-032.pdf used on input line 467.
+(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 473--475
+
+ []
+
+) [32 <./images/fig-024.pdf>] [33 <./images/fig-026.pdf> <./images/fig-027.pdf>
+] [34 <./images/fig-028.pdf> <./images/fig-030.pdf>] [35 <./images/fig-031.pdf>
+ <./images/fig-032.pdf>]
+\openout2 = `conclusion.aux'.
+
+ (./conclusion.tex) [36
+
+
 
 ] (./MAIN.bbl
 (/usr/local/texlive/2017/texmf-dist/tex/latex/francais-bst/francaisbst.tex))
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 74.
 
-Package natbib Warning: There were undefined citations.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 71.
-[28
+[37
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 71.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 74.
  (./MAIN.aux (./resume.aux) (./remerciments.aux) (./introduction.aux)
 (./notions-preliminaires.aux) (./article-etudie.aux)
-(./application-donnees-reelles.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 71.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 71.
+(./application-donnees-reelles.aux) (./conclusion.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 74.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 74.
 Package rerunfilecheck Info: File `MAIN.out' has not changed.
-(rerunfilecheck)             Checksum: 19EB2CEE069A0B18A8A645E735782697;1355.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 71.
+(rerunfilecheck)             Checksum: D263B3BB3C8AF103B88A258F2F19F9E9;1346.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 74.
  ) 
 Here is how much of TeX's memory you used:
- 10497 strings out of 492995
- 151288 string characters out of 6132704
- 276831 words of memory out of 5000000
- 13705 multiletter control sequences out of 15000+600000
+ 11945 strings out of 492995
+ 172139 string characters out of 6132704
+ 297910 words of memory out of 5000000
+ 15091 multiletter control sequences out of 15000+600000
  24978 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  36i,20n,41p,1786b,444s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1206,10 +1406,10 @@ ts/type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2017/texmf-dist/fonts
 /type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/public/cm-super/sfti1200.pfb></usr/local/texlive/2017/texmf-dist/fonts/typ
 e1/public/cm-super/sftt1095.pfb>
-Output written on MAIN.pdf (29 pages, 577519 bytes).
+Output written on MAIN.pdf (38 pages, 694534 bytes).
 PDF statistics:
- 534 PDF objects out of 1000 (max. 8388607)
- 457 compressed objects within 5 object streams
- 115 named destinations out of 1000 (max. 500000)
- 188 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 782 PDF objects out of 1000 (max. 8388607)
+ 668 compressed objects within 7 object streams
+ 145 named destinations out of 1000 (max. 500000)
+ 253 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,55 @@
+\begin{thebibliography}{6}
+\ProvideTextCommand{\guillemotleft}{OT1}{%
+  \leavevmode\raise .27ex\hbox{$\scriptscriptstyle\ll$}}
+\ProvideTextCommand{\guillemotright}{OT1}{%
+  \leavevmode\raise .27ex\hbox{$\scriptscriptstyle\gg$}}
+\newcommand{\enquote}[1]{\guillemotleft#1\guillemotright}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\selectlanguage}[1]{\relax}
+\input{francaisbst.tex}
+\newcommand{\Capitalize}[1]{\uppercase{#1}}
+\newcommand{\capitalize}[1]{\expandafter\Capitalize#1}
+
+\bibitem[{Chavez-Demoulin \bbletal{}(2016)Chavez-Demoulin, Embrechts \bbland{}
+  Hofert}]{chavez2016extreme}
+Chavez-Demoulin, V., P.~Embrechts \bbland{} M.~Hofert. 2016, \enquote{An
+  extreme value approach for modeling operational risk losses depending on
+  covariates}, \emph{Journal of Risk and Insurance}, \bblvol{}~83, \bblno{}~3,
+  \bblpp{} 735--776.
+
+\bibitem[{Coles \bbletal{}(2001)Coles, Bawa, Trenner \bbland{}
+  Dorazio}]{coles2001introduction}
+Coles, S., J.~Bawa, L.~Trenner \bbland{} P.~Dorazio. 2001, \emph{An
+  introduction to statistical modeling of extreme values}, \bblvol{} 208,
+  Springer.
+
+\bibitem[{Cox \bbland{} Reid(1987)}]{cox1987parameter}
+Cox, D.~R. \bbland{} N.~Reid. 1987, \enquote{Parameter orthogonality and
+  approximate conditional inference}, \emph{Journal of the Royal Statistical
+  Society: Series B (Methodological)}, \bblvol{}~49, \bblno{}~1, \bblpp{}
+  1--18.
+
+\bibitem[{Green \bbland{} Silverman(1993)}]{green1993nonparametric}
+Green, P.~J. \bbland{} B.~W. Silverman. 1993, \emph{Nonparametric regression
+  and generalized linear models: a roughness penalty approach}, Chapman and
+  Hall/CRC.
+
+\bibitem[{Thiombiano \bbletal{}(2017)Thiombiano, El~Adlouni, St-Hilaire, Ouarda
+  \bbland{} El-Jabi}]{thiombiano2017nonstationary}
+Thiombiano, A.~N., S.~El~Adlouni, A.~St-Hilaire, T.~B. Ouarda \bbland{}
+  N.~El-Jabi. 2017, \enquote{Nonstationary frequency analysis of extreme daily
+  precipitation amounts in southeastern canada using a peaks-over-threshold
+  approach}, \emph{Theoretical and Applied Climatology}, \bblvol{} 129,
+  \bblno{} 1-2, \bblpp{} 413--426.
+
+\bibitem[{Wood(2017)}]{wood2017generalized}
+Wood, S.~N. 2017, \emph{Generalized additive models: an introduction with R},
+  Chapman and Hall/CRC.
+
+\end{thebibliography}

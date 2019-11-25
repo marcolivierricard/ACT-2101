@@ -1,0 +1,106 @@
+%% Application à des données réelles
+% le Sweaveopt
+\SweaveOpts{prefix.string=images/fig}
+
+\section{Application à des données réelles}
+
+\subsection{Analyse de données}
+
+
+<<echo=FALSE, results=hide>>=
+libs <- c('dplyr', 'ggplot2', 'gridExtra', 'ismev', 'evir', 'xtable',
+          'summarytools', 'utils', 'QRM', 'CASdatasets', 'tidyr')
+sapply(libs, require, character.only = T)
+
+data("auscathist")
+data("nzcathist")
+
+auscathist <- auscathist %>%
+    select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
+    mutate(Country = as.factor("AUS"))
+
+nzcathist <- nzcathist %>%
+    select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
+    mutate(Country = as.factor("N-Z"))
+
+auscathist <- auscathist %>%
+    mutate(CostUS2019 = NormCost2014 * (114.8/105.9) * .7032) %>%
+    select(-NormCost2014)
+
+nzcathist <- nzcathist %>%
+    mutate(CostUS2019 = NormCost2014 * (1039.0/974.7) * .6727) %>%
+    select(-NormCost2014)
+
+pacicathist <- rbind(auscathist, nzcathist) %>%
+    dplyr::filter(CostUS2019 > 0) %>%
+    mutate(Type = as.factor(Type)) %>%
+    select(Year, Type, Country, CostUS2019)
+
+colnames(pacicathist) <- c("Année", "Type", "Pays", "Montant")
+
+pacicathist <- pacicathist %>% 
+    dplyr::filter(Montant < 4000) %>% 
+    dplyr::filter(Type != "Earthquake" | Montant < 2000)
+
+levels(pacicathist$Pays)[levels(pacicathist$Pays)=="AUS"] <- "Australie"
+levels(pacicathist$Pays)[levels(pacicathist$Pays)=="N-Z"] <- "Nouvelle-Zélande"
+@
+
+\begin{frame}{Analyse de données}
+Pour mettre en application l'approche proposée par \cite{chavez2016extreme}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. \\~\\
+
+Ces données représentent respectivement l'historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande. Les prochaines diapositives présentent une analyse globale des données utilisées.
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-005.pdf}
+\caption{Densité du logarithme du montant des catastrophes}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-006.pdf}
+\caption{Nombre cumulatif de catastrophes par pays}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-007.pdf}
+\caption{Évolution des catastrophes par pays}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+<<echo=FALSE, results=tex>>=
+print(
+  xtable(data.frame(pacicathist %>% 
+    group_by(Type) %>% 
+    summarise(N = n(),
+              Moyenne = mean(Montant),
+              Écart = sd(Montant), 
+              Minimum = min(Montant),
+              Médiane = median(Montant),
+              Q3 = quantile(Montant, .75),
+              Maximum = max(Montant))), 
+    caption = "Résumé statistique des montants (M USD) de catastrophes par Type", label="tab:3.6", align=rep("c",9), digits=0, table.placement="t"), include.rownames = FALSE)
+@
+\end{frame}
+
+\subsection{Approche classique}
+
+\begin{frame}
+\begin{itemize}
+\item Par souci de manque de temps, les résultats obtenus avec l'approche classique ne seront pas montrés de façon détaillée. On conlut que cette approche n'est pas tout à fait adéquate dans le cas présent. 
+\item Cette approche reste viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles.
+\item Un seuil de 10 M USD fut sélectionné
+\end{itemize}
+\end{frame}
+
+\subsection{Approche dynamique à deux variables}
+
+
+\subsection{Approche dynamique à trois variables}

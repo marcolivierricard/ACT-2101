@@ -1,0 +1,633 @@
+%% Annexe
+% le Sweaveopt
+
+
+
+\chapter{Code \textsf{R}}
+\label{chap:code} 
+
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\NoAutoSpacing
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mymauve},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  firstnumber=1,                % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=R,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right) 
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mygreen},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+
+
+Cette section contient l'ensemble du code \textsf{R} qui a été utilisé pour ce rapport. À noter que ceci n'est qu'une petite partie de l'ensemble de la programmation qui a été nécessaire pour le projet et que seulement le nécessaire est inclus. Par exemple, lorsque plusieurs modèles sont comparés, la démarche de sélection n'est pas inclue et seulement le modèle final est danc cet annexe.
+
+\begin{lstlisting}
+libs <- c('dplyr', 'ggplot2', 'gridExtra', 'ismev', 'evir', 'xtable',
+          'summarytools', 'utils', 'QRM', 'CASdatasets', 'tidyr')
+sapply(libs, require, character.only = T)
+
+data("auscathist")
+data("nzcathist")
+
+
+print(
+  xtable(descr(auscathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour l'Australie", label="tab:3.1", align=rep("c",8), digits=0, table.placement="h")
+)
+
+print(
+xtable(freq(auscathist$Type), caption = "Distribution du Type de catastrophe pour l'Australie", label="tab:3.2", align=rep("c",6), digits=0, table.placement="h")
+)
+
+
+print(
+  xtable(descr(nzcathist, stats = "common", transpose = T), caption = "Résumé statistique des variables numériques pour la Nouvelle-Zélande", label="tab:3.3", align=rep("c",8), digits=3, table.placement="h")
+)
+
+print(
+xtable(freq(nzcathist$Type), caption = "Distribution du Type de catastrophe pour la Nouvelle-Zélande", label="tab:3.4", align=rep("c",6), digits=0, table.placement="h")
+)
+
+tab <- data.frame(c(105.9, 974.7), c(114.8, 1039.0), c(0.7031, 0.6722))
+rownames(tab) <- c("AUS", "NZ")
+colnames(tab) <- c("IPC 2014", "IPC 2019", "Taux de change 2019")
+
+print(
+  xtable(tab, caption="Valeurs utilisées pour CostUS2019", label="tab:3.5", align=rep("c",4), digits=4, table.placement="h")
+)
+
+auscathist <- auscathist %>%
+    select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
+    mutate(Country = as.factor("AUS"))
+
+nzcathist <- nzcathist %>%
+    select(Year, Quarter, FirstDay, Event, Type, Location, NormCost2014) %>%
+    mutate(Country = as.factor("N-Z"))
+
+auscathist <- auscathist %>%
+    mutate(CostUS2019 = NormCost2014 * (114.8/105.9) * .7032) %>%
+    select(-NormCost2014)
+
+nzcathist <- nzcathist %>%
+    mutate(CostUS2019 = NormCost2014 * (1039.0/974.7) * .6727) %>%
+    select(-NormCost2014)
+
+pacicathist <- rbind(auscathist, nzcathist) %>%
+    dplyr::filter(CostUS2019 > 0) %>%
+    mutate(Type = as.factor(Type)) %>%
+    select(Year, Type, Country, CostUS2019)
+
+colnames(pacicathist) <- c("Année", "Type", "Pays", "Montant")
+
+pacicathist <- pacicathist %>% 
+    dplyr::filter(Montant < 4000) %>% 
+    dplyr::filter(Type != "Earthquake" | Montant < 2000)
+
+
+grid.arrange(
+  pacicathist %>%
+    ggplot(aes(log(Montant))) +
+    geom_density(alpha=.44, fill=1) +
+    theme_minimal() +
+    labs(x="log(Montant) (M USD)", y="Densité"),
+
+  pacicathist %>% 
+    ggplot(aes(log(Montant), fill=Pays)) + 
+    geom_density(alpha=.44) + 
+    theme_minimal() +
+    labs(x="log(Montant) (M USD)", y="Densité") + 
+    theme(legend.position = c(.9,.9)),
+  
+  ncol=2
+)
+  
+
+levels(pacicathist$Pays)[levels(pacicathist$Pays)=="AUS"] <- "Australie"
+levels(pacicathist$Pays)[levels(pacicathist$Pays)=="N-Z"] <- "Nouvelle-Zélande"
+
+pacicathist %>% 
+    group_by(Pays) %>%
+    arrange(Année) %>% 
+    mutate(cun = cumsum(as.numeric(Montant>0))) %>% 
+    ungroup() %>% 
+    ggplot(aes(x=Année, y=cun, col=Pays)) + 
+    geom_line() +
+    theme_minimal() +
+    labs(y="N") + 
+    theme(legend.position = c(.25,.8))
+    
+    
+pacicathist %>% 
+    ggplot() +
+    geom_point(aes(x=Année, y=Montant, col=Pays)) + 
+    facet_wrap(~Pays, scales="free") + 
+    theme_bw() +
+    theme(legend.position = "")+
+    labs(y="Montant (M USD)")
+    
+
+print(
+  xtable(data.frame(pacicathist %>% 
+    group_by(Type) %>% 
+    summarise(N = n(),
+              Moyenne = mean(Montant),
+              Écart = sd(Montant), 
+              Minimum = min(Montant),
+              Médiane = median(Montant),
+              Q3 = quantile(Montant, .75),
+              Maximum = max(Montant))), 
+    caption = "Résumé statistique des montants (M USD) de catastrophes par Type", label="tab:3.6", align=rep("c",9), digits=0, table.placement="t"), include.rownames = FALSE)    
+
+
+par(mfrow=c(1,2))
+mrl.plot(pacicathist$Montant)
+mrl.plot(pacicathist$Montant, umax = 25)
+
+
+par(mfrow=c(1,1))
+gpd.fitrange(pacicathist$Montant, 
+             nint=20,
+             umin=1, 
+             umax = 50)
+             
+             
+gpd.diag(gpd.fit(pacicathist$Montant, 10, show=FALSE))
+
+
+paci.1 <- pacicathist %>% 
+    select(-Type)
+
+rate.exc.1 <- as.data.frame(paci.1 %>% 
+                                mutate(rate.exc = as.numeric(Montant > 10)))
+
+
+modrho <- gam(rate.exc ~ Pays + s(Année, fx=TRUE, k=2+1, bs="cr", by=Pays) - 1, 
+              data=rate.exc.1, family=binomial(link=logit)) 
+
+
+rhoFit <- QRM:::get.gam.fit(modrho)   
+
+rhoPred <- QRM:::gam.predict(modrho, alpha=.05, value="rho")
+
+
+rhoPred$predict <- exp(rhoPred$predict) / (exp(rhoPred$predict) + 1)
+rhoPred$CI.low <- exp(rhoPred$CI.low) / (exp(rhoPred$CI.low) + 1)
+rhoPred$CI.up <- exp(rhoPred$CI.up) / (exp(rhoPred$CI.up) + 1)
+
+
+
+results.rho <- data.frame(rhoPred$covar, Pred=rhoPred$predict,
+                          CI.low=rhoPred$CI.low, CI.up=rhoPred$CI.up)
+                          
+
+results.rho %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Année, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Année, y=Pred, col=Pays)) + 
+    facet_wrap(~Pays) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(rho)))
+    
+
+bootGPD <- QRM::gamGPDboot(paci.1, B=10, threshold=10, datvar="Montant",
+                         
+                         xiFrhs = ~ Pays - 1, 
+                         nuFrhs = ~ Pays + s(Année, fx=TRUE, k=3+1, bs="cr", by=Pays) - 1, 
+                         
+                         niter=10, eps.xi=.005, eps.nu=.005)
+
+
+
+xibetaFit <- QRM::get.GPD.fit(bootGPD, alpha=.05) 
+
+xibetaPred <- QRM::GPD.predict(bootGPD)
+
+
+results.xi <- data.frame(xibetaFit$xi$covar, Pred=xibetaFit$xi$fit,
+                          CI.low=xibetaFit$xi$CI.low, CI.up=xibetaFit$xi$CI.up)
+
+
+results.beta <- data.frame(xibetaFit$beta$covar, Pred=xibetaFit$beta$fit,
+                         CI.low=xibetaFit$beta$CI.low, CI.up=xibetaFit$beta$CI.up)
+
+
+results.xi %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Pays, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Pays, y=Pred, size=2, col=Pays)) + 
+    theme_minimal() + 
+    theme(legend.position = "", strip.text = element_text(size=12))+ 
+    labs(y=expression(hat(xi))) +
+    ylim(c(0,1))
+    
+
+results.beta %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=Pred, col=Pays), size=2) + 
+    geom_line(aes(x=Année, y=Pred)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Pays, scales="free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12))+ 
+    labs(y=expression(hat(beta)))
+    
+    
+covar <- xibetaFit$beta$covar 
+
+
+count.cov <- as.data.frame(covar %>% count(Pays))
+
+vec.cov <- c()
+for (i in nrow(count.cov):1){
+    vec.cov <- c(rep(i, count.cov$n[i]), vec.cov)
+}
+
+
+xibetaFit$xi$fit <- xibetaFit$xi$fit[vec.cov]
+xibetaFit$xi$CI.low <- xibetaFit$xi$CI.low[vec.cov]
+xibetaFit$xi$CI.up <- xibetaFit$xi$CI.up[vec.cov]
+
+xibetaFit$xi$covar <- covar
+
+
+
+xibetaFit.xi.boot2 <- matrix(ncol = 10)
+for (i in nrow(count.cov):1){
+    xibetaFit.xi.boot2 <- rbind(
+        do.call(rbind, replicate(count.cov$n[i], xibetaFit$xi$boot[i,], simplify=FALSE)),
+        xibetaFit.xi.boot2
+    )
+}
+
+xibetaFit$xi$boot <- xibetaFit.xi.boot2[-length(xibetaFit.xi.boot2[, 1]),]
+
+
+
+xiFit.mat <- cbind(xibetaFit$xi$fit, xibetaFit$xi$boot)
+
+betaFit.mat <- cbind(xibetaFit$beta$fit, xibetaFit$beta$boot)
+
+
+rho.res <- data.frame(rhoFit$covar, rhoFit$fit)
+
+rho.res.sel <- covar %>% 
+    inner_join(rho.res)
+
+
+
+final.results <- data.frame(Covar=xibetaFit$beta$covar,
+                            rho = rho.res.sel$rhoFit.fit,
+                            xi = xibetaFit$xi$fit,
+                            xi.low = xibetaFit$xi$CI.low,
+                            xi.up = xibetaFit$xi$CI.up,
+                            beta = xibetaFit$beta$fit,
+                            beta.low = xibetaFit$beta$CI.low,
+                            beta.up = xibetaFit$beta$CI.up)
+
+
+
+
+
+VaR <- cbind(covar, fit=sapply(1:(10+1), function(j)
+    risk.measure(cbind(rho.res.sel$rhoFit.fit, xiFit.mat[,j], betaFit.mat[,j]),
+                 alpha=.99, u=10, method="VaR")
+))
+
+VaR.boot <- VaR %>% select(-Pays, -Année, -fit.1)
+
+VaR.fit <- data.frame(covar, 
+                      fit    = VaR[, "fit.1"], 
+                      CI.low = apply(VaR.boot, 1, quantile, probs=.05/2),
+                      CI.up  = apply(VaR.boot, 1, quantile, probs=1-.05/2))
+
+
+
+final.results <- final.results %>% 
+    rename(Pays = Covar.Pays,
+           Année = Covar.Année) 
+
+
+paci.1.param <- paci.1 %>% 
+    inner_join(final.results) %>% 
+    
+    dplyr::filter(Montant > 10) %>% 
+    mutate(Y = Montant - 10)
+
+
+
+paci.1.param$ri <- sapply(1:nrow(paci.1.param), 
+                          function(i) -log(1 - pGPD(paci.1.param$Y[i], 
+                                                    paci.1.param$xi[i], 
+                                                    paci.1.param$beta[i])))
+
+
+require(qqplotr)
+paci.1.param %>% 
+    ggplot(aes(sample = ri)) +
+    stat_qq_band(distribution = "exp", dparams = 1, conf = .95, alpha=.2, fill="blue") +
+    stat_qq_point(distribution = "exp", dparams = 1) + 
+    stat_qq_line(distribution = "exp", dparams = 1,) + 
+    theme_minimal() +
+    labs(x="Valeurs théoriques", y="Quantiles des résidus du modèle")
+    
+    
+VaR.fit %>%  
+    ggplot() + 
+    geom_point(aes(x=Année, y=fit, col=Pays), size=2) + 
+    geom_line(aes(x=Année, y=fit)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Pays, scales = "free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) +
+    labs(y=expression(hat(VaR)))
+    
+    
+paci.3 <- pacicathist
+
+Type2 <- data.frame(Type = c("Bushfire", "Hailstorm", "Cyclone", 
+                             "Flood", "Flood, Storm", "Storm", 
+                             "Other", "Tornado", "Earthquake", "Weather", "Power outage"),
+                    Type2 = c("Bushfire", "Hailstorm", "Cyclone",
+                              rep("Flood, Storm",3), 
+                              rep("Other",5)))
+
+paci.3 <- paci.3 %>% 
+    inner_join(Type2)
+
+paci.3 %>% 
+    count(Type2) %>% 
+    arrange(-n)
+
+
+paci.3 <- paci.3 %>% 
+    mutate(Type=as.factor(Type2)) %>% 
+    select(-Type2)
+
+
+paci.3 <- droplevels(paci.3)
+
+
+print(
+  xtable(Type2, caption = "Regroupement des types de catastrophes", label="tab:3.7", align=rep("c",3), digits=0, table.placement="h"), include.rownames = FALSE
+)
+
+
+rate.exc.3 <- as.data.frame(paci.3 %>% 
+                                mutate(rate.exc = as.numeric(Montant > 10)))
+
+modrho <- gam(rate.exc ~ Pays + s(Année, fx=TRUE, k=2+1, bs="cr", by=Pays) + Type - 1, 
+              data=rate.exc.3, family=binomial(link=logit))
+
+
+rhoFit <- QRM:::get.gam.fit(modrho)   
+
+rhoPred <- QRM:::gam.predict(modrho, alpha=.05, value="rho")
+
+
+rhoPred$predict <- exp(rhoPred$predict) / (exp(rhoPred$predict) + 1)
+rhoPred$CI.low <- exp(rhoPred$CI.low) / (exp(rhoPred$CI.low) + 1)
+rhoPred$CI.up <- exp(rhoPred$CI.up) / (exp(rhoPred$CI.up) + 1)
+
+
+results.rho <- data.frame(rhoPred$covar, Pred=rhoPred$predict,
+                          CI.low=rhoPred$CI.low, CI.up=rhoPred$CI.up)
+
+
+results.rho %>% 
+    dplyr::filter(Pays == "Australie") %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Année, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Année, y=Pred, col=Type)) + 
+    facet_wrap(~Type) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(rho)))
+
+
+results.rho %>% 
+    dplyr::filter(Pays == "Nouvelle-Zélande") %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Année, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Année, y=Pred, col=Type)) + 
+    facet_wrap(~Type) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(rho)))
+    
+
+bootGPD <- QRM::gamGPDboot(paci.3, B=10, threshold=10, datvar="Montant",
+                            
+                            xiFrhs = ~ Pays + Type - 1,  
+                            nuFrhs = ~ Pays + Type + s(Année, fx=TRUE, k=4+1, bs="cr", by=Pays) - 1, 
+                            
+                            niter=10, eps.xi=.005, eps.nu=.005)
+
+
+
+
+
+xibetaFit <- QRM::get.GPD.fit(bootGPD, alpha=.05) 
+
+xibetaPred <- QRM::GPD.predict(bootGPD)
+
+
+
+results.xi <- data.frame(xibetaFit$xi$covar, Pred=xibetaFit$xi$fit,
+                         CI.low=xibetaFit$xi$CI.low, CI.up=xibetaFit$xi$CI.up)
+
+
+results.beta <- data.frame(xibetaFit$beta$covar, Pred=xibetaFit$beta$fit,
+                           CI.low=xibetaFit$beta$CI.low, CI.up=xibetaFit$beta$CI.up)
+
+
+results.xi %>% 
+    ggplot() + 
+    geom_errorbar(aes(x=Type, ymin=CI.low, ymax=CI.up), alpha=.44, width=.1) +
+    geom_point(aes(x=Type, y=Pred, col=Type), size=2.5) + 
+    coord_flip() + 
+    facet_wrap(~Pays) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(xi)))
+
+
+results.beta %>% 
+    dplyr::filter(Pays=="Australie") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=Pred, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=Pred)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, scales = "free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(beta)))
+    
+
+results.beta %>% 
+    dplyr::filter(Pays=="Nouvelle-Zélande") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=Pred, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=Pred)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, ) + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) + 
+    labs(y=expression(hat(beta)))
+    
+    
+covar <- xibetaFit$beta$covar 
+
+
+count.cov <- as.data.frame(covar %>% count(Pays, Type))
+
+vec.cov <- c()
+for (i in nrow(count.cov):1){
+    vec.cov <- c(rep(i, count.cov$n[i]), vec.cov)
+}
+
+
+xibetaFit$xi$fit <- xibetaFit$xi$fit[vec.cov]
+xibetaFit$xi$CI.low <- xibetaFit$xi$CI.low[vec.cov]
+xibetaFit$xi$CI.up <- xibetaFit$xi$CI.up[vec.cov]
+
+xibetaFit$xi$covar <- covar
+
+
+
+xibetaFit.xi.boot2 <- matrix(ncol = 10)
+for (i in nrow(count.cov):1){
+    xibetaFit.xi.boot2 <- rbind(
+        do.call(rbind, replicate(count.cov$n[i], xibetaFit$xi$boot[i,], simplify=FALSE)),
+        xibetaFit.xi.boot2
+    )
+}
+
+xibetaFit$xi$boot <- xibetaFit.xi.boot2[-length(xibetaFit.xi.boot2[, 1]),]
+
+
+
+xiFit.mat <- cbind(xibetaFit$xi$fit, xibetaFit$xi$boot)
+
+betaFit.mat <- cbind(xibetaFit$beta$fit, xibetaFit$beta$boot)
+
+
+rho.res <- data.frame(rhoFit$covar, rhoFit$fit)
+
+rho.res.sel <- covar %>% 
+    inner_join(rho.res)
+
+
+
+final.results <- data.frame(Covar=xibetaFit$beta$covar,
+                            rho = rho.res.sel$rhoFit.fit,
+                            xi = xibetaFit$xi$fit,
+                            xi.low = xibetaFit$xi$CI.low,
+                            xi.up = xibetaFit$xi$CI.up,
+                            beta = xibetaFit$beta$fit,
+                            beta.low = xibetaFit$beta$CI.low,
+                            beta.up = xibetaFit$beta$CI.up)
+
+
+
+
+
+VaR <- cbind(covar, fit=sapply(1:(10+1), function(j)
+    risk.measure(cbind(rho.res.sel$rhoFit.fit, xiFit.mat[,j], betaFit.mat[,j]),
+                 alpha=.99, u=10, method="VaR")
+))
+
+VaR.boot <- VaR %>% select(-Pays, -Année, -Type, -fit.1)
+
+VaR.fit <- data.frame(covar, 
+                      fit    = VaR[, "fit.1"], 
+                      CI.low = apply(VaR.boot, 1, quantile, probs=.05/2),
+                      CI.up  = apply(VaR.boot, 1, quantile, probs=1-.05/2))
+
+
+
+final.results <- final.results %>% 
+    rename(Pays = Covar.Pays,
+           Type = Covar.Type,
+           Année = Covar.Année) 
+
+
+paci.3.param <- paci.3 %>% 
+    inner_join(final.results) %>% 
+    
+    dplyr::filter(Montant > 10) %>% 
+    mutate(Y = Montant - 10)
+
+
+
+paci.3.param$ri <- sapply(1:nrow(paci.3.param), 
+                    function(i) -log(1 - pGPD(paci.3.param$Y[i], 
+                                              paci.3.param$xi[i], 
+                                              paci.3.param$beta[i])))
+
+
+require(qqplotr)
+paci.3.param %>% 
+    ggplot(aes(sample = ri)) +
+    stat_qq_band(distribution = "exp", dparams = 1, conf = .95, alpha=.2, fill="blue") +
+    stat_qq_point(distribution = "exp", dparams = 1) + 
+    stat_qq_line(distribution = "exp", dparams = 1,) + 
+    theme_minimal() +
+    labs(x="Valeurs théoriques", y="Quantiles des résidus du modèle")
+    
+    
+VaR.fit %>% 
+    dplyr::filter(Pays=="Australie") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=fit, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=fit)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, scales="free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) +
+    labs(y=expression(hat(VaR)))
+    
+    
+VaR.fit %>% 
+    dplyr::filter(Pays=="Nouvelle-Zélande") %>% 
+    ggplot() + 
+    geom_point(aes(x=Année, y=fit, col=Type), size=2) + 
+    geom_line(aes(x=Année, y=fit)) + 
+    geom_line(aes(x=Année, y=CI.low), linetype="dashed", alpha=.8) + 
+    geom_line(aes(x=Année, y=CI.up), linetype="dashed", alpha=.8) + 
+    facet_wrap(~Type, scales="free") + 
+    theme_bw() + 
+    theme(legend.position = "", strip.text = element_text(size=12)) +
+    labs(y=expression(hat(VaR)))                                                               
+\end{lstlisting}
