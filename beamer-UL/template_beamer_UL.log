@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  25 NOV 2019 16:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  3 DEC 2019 15:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1439,7 +1439,7 @@ Package babel Info: Making ? an active character on input line 365.
 ))
 (/usr/local/texlive/2017/texmf-dist/tex/latex/carlisle/scalefnt.sty)
 Package frenchb.ldf Info: No list customisation for the beamer class,
-(frenchb.ldf)             reported on input line 37.
+(frenchb.ldf)             reported on input line 38.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
@@ -1540,28 +1540,28 @@ Package: icomma 2002/03/10 v2.0 (WaS)
 (./template_beamer_UL.aux (./donneesR.aux))
 \openout1 = `template_beamer_UL.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 71.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 71.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 72.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 72.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 71.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 72.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1632,7 +1632,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box89
-Package hyperref Info: Link coloring OFF on input line 71.
+Package hyperref Info: Link coloring OFF on input line 72.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1642,60 +1642,60 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count196
 )
-LaTeX Info: Redefining \ref on input line 71.
-LaTeX Info: Redefining \pageref on input line 71.
-LaTeX Info: Redefining \nameref on input line 71.
+LaTeX Info: Redefining \ref on input line 72.
+LaTeX Info: Redefining \pageref on input line 72.
+LaTeX Info: Redefining \nameref on input line 72.
 
 (./template_beamer_UL.out) (./template_beamer_UL.out)
 \@outlinefile=\write6
 \openout6 = `template_beamer_UL.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 71.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 72.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/bx/n on input line 71.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/bx/n on input line 72.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 71.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 72.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 71.
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 72.
 \symnumbers=\mathgroup7
 \sympureletters=\mathgroup8
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 71.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 71.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 72.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 71.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 71.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 71.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 72.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 71.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 71.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 71.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 72.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 71.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 71.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 71.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 72.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 71.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 71.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 72.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 71.
+(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 72.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 71.
+(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmr/bx/n on input line 71.
+(Font)                  OT1/lmss/bx/n --> T1/lmr/bx/n on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/bx/n --> T1/lmss/bx/n on input line 71.
+(Font)                  T1/lmss/bx/n --> T1/lmss/bx/n on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 71.
+(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 71.
+(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 72.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/bx/n on input line 71.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/bx/n on input line 72.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/dicts/translato
 r-basic-dictionary/translator-basic-dictionary-English.dict
@@ -1745,10 +1745,10 @@ Dictionary: translator-theorem-dictionary, Language: English
 r-theorem-dictionary/translator-theorem-dictionary-French.dict
 Dictionary: translator-theorem-dictionary, Language: French 
 )
-LaTeX Info: Redefining \includegraphics on input line 71.
-LaTeX Info: Redefining \degres on input line 71.
-LaTeX Info: Redefining \dots on input line 71.
-LaTeX Info: Redefining \up on input line 71.
+LaTeX Info: Redefining \includegraphics on input line 72.
+LaTeX Info: Redefining \degres on input line 72.
+LaTeX Info: Redefining \dots on input line 72.
+LaTeX Info: Redefining \up on input line 72.
    defining Unicode char U+00AB (decimal 171)
    defining Unicode char U+00BB (decimal 187)
 
@@ -1756,16 +1756,19 @@ LaTeX Info: Redefining \up on input line 71.
 <src/logo_UL.png, id=71, 1297.84875pt x 534.99875pt>
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 76.
+Package pdftex.def Info: src/logo_UL.png used on input line 77.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
 
 [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./src/l
-ogo_UL.png>] (./template_beamer_UL.toc)
+ogo_UL.png>] (./template_beamer_UL.toc
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <12> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 5.
+)
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 81.
+Package pdftex.def Info: src/logo_UL.png used on input line 82.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [2
 
@@ -1778,75 +1781,73 @@ Package pdftex.def Info: src/logo_UL.png used on input line 97.
  [3
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 108
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 110
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 108.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 110.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 108
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 110
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 108
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 110
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 108.
+(Font)              <12> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 108.
+(Font)              <8> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 108.
-LaTeX Font Info:    Try loading font information for U+msa on input line 108.
+(Font)              <6> on input line 110.
+LaTeX Font Info:    Try loading font information for U+msa on input line 110.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 108.
+LaTeX Font Info:    Try loading font information for U+msb on input line 110.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 108.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 110.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <12> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 108.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 108.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 110.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 108.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 110.
 File: src/logo_UL.png Graphic file (type png)
 
 <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 108.
+Package pdftex.def Info: src/logo_UL.png used on input line 110.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [4
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 119.
+Package pdftex.def Info: src/logo_UL.png used on input line 110.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [5
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 129.
+Package pdftex.def Info: src/logo_UL.png used on input line 110.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
 
 [6
@@ -1854,21 +1855,21 @@ Package pdftex.def Info: src/logo_UL.png used on input line 129.
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 140.
+Package pdftex.def Info: src/logo_UL.png used on input line 110.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [7
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 153.
+Package pdftex.def Info: src/logo_UL.png used on input line 122.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [8
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 163.
+Package pdftex.def Info: src/logo_UL.png used on input line 122.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
 
 [9
@@ -1876,94 +1877,342 @@ Package pdftex.def Info: src/logo_UL.png used on input line 163.
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 172.
+Package pdftex.def Info: src/logo_UL.png used on input line 131.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [10
 
 ]
-Overfull \hbox (2.61107pt too wide) detected at line 190
- []
- []
-
 File: src/logo_UL.png Graphic file (type png)
-<use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 190.
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 131.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [11
 
 ]
 File: src/logo_UL.png Graphic file (type png)
- <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 202.
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 131.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [12
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 211.
+Package pdftex.def Info: src/logo_UL.png used on input line 131.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
-
-[13
+ [13
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 221.
+Package pdftex.def Info: src/logo_UL.png used on input line 138.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [14
+
+[14
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 237.
+Package pdftex.def Info: src/logo_UL.png used on input line 151.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [15
 
 ]
 File: src/logo_UL.png Graphic file (type png)
-
-<use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 251.
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 151.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [16
 
 ]
 File: src/logo_UL.png Graphic file (type png)
- <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 261.
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 161.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [17
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 271.
+Package pdftex.def Info: src/logo_UL.png used on input line 161.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
-
-[18
+ [18
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 286.
+Package pdftex.def Info: src/logo_UL.png used on input line 161.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [19
+
+[19
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 297.
+Package pdftex.def Info: src/logo_UL.png used on input line 161.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [20
 
 ]
 File: src/logo_UL.png Graphic file (type png)
-
-<use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 312.
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 161.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
  [21
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 170.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [22
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 170.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [23
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 183.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[24
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 193.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [25
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 193.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [26
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 193.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [27
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 202.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [28
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 202.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[29
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 202.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [30
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 202.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [31
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 213.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [32
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 213.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [33
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 213.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[34
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 213.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [35
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 213.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [36
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 213.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [37
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 228.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [38
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 228.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[39
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 228.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [40
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 228.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [41
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 238.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [42
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 249.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [43
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 249.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[44
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 264.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [45
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 277.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [46
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 277.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [47
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 277.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [48
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 277.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[49
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 277.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [50
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 277.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [51
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 277.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [52
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 292.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [53
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 292.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[54
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 292.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [55
 
 ]
 \openout2 = `donneesR.aux'.
@@ -1979,13 +2228,20 @@ File: src/logo_UL.png Graphic file (type png)
 <use src/logo_UL.png>
 Package pdftex.def Info: src/logo_UL.png used on input line 15.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [22
+ [56
 
 
-] <images/fig-005.pdf, id=271, 433.62pt x 216.81pt>
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 15.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [57
+
+]
+<images/fig-005.pdf, id=546, 433.62pt x 216.81pt>
 File: images/fig-005.pdf Graphic file (type pdf)
-
-<use images/fig-005.pdf>
+ <use images/fig-005.pdf>
 Package pdftex.def Info: images/fig-005.pdf used on input line 23.
 (pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
 LaTeX Font Info:    Try loading font information for T1+lmr on input line 23.
@@ -2001,10 +2257,10 @@ File: src/logo_UL.png Graphic file (type png)
 <use src/logo_UL.png>
 Package pdftex.def Info: src/logo_UL.png used on input line 23.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [23
+ [58
 
  <./images/fig-005.pdf>]
-<images/fig-006.pdf, id=289, 433.62pt x 216.81pt>
+<images/fig-006.pdf, id=564, 433.62pt x 216.81pt>
 File: images/fig-006.pdf Graphic file (type pdf)
  <use images/fig-006.pdf>
 Package pdftex.def Info: images/fig-006.pdf used on input line 30.
@@ -2014,10 +2270,10 @@ File: src/logo_UL.png Graphic file (type png)
 <use src/logo_UL.png>
 Package pdftex.def Info: src/logo_UL.png used on input line 30.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [24
+ [59
 
  <./images/fig-006.pdf>]
-<images/fig-007.pdf, id=303, 433.62pt x 216.81pt>
+<images/fig-007.pdf, id=577, 433.62pt x 216.81pt>
 File: images/fig-007.pdf Graphic file (type pdf)
  <use images/fig-007.pdf>
 Package pdftex.def Info: images/fig-007.pdf used on input line 37.
@@ -2027,50 +2283,358 @@ File: src/logo_UL.png Graphic file (type png)
 <use src/logo_UL.png>
 Package pdftex.def Info: src/logo_UL.png used on input line 37.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [25
+ [60
 
  <./images/fig-007.pdf>]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 63.
+Package pdftex.def Info: src/logo_UL.png used on input line 64.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
 
-[26
+[61
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 73.
+Package pdftex.def Info: src/logo_UL.png used on input line 75.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [27
+ [62
 
-]) (./template_beamer_UL.bbl
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 75.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [63
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 75.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [64
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 75.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [65
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 84.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[66
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 84.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [67
+
+]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <17.28> on input line 92.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 92.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <17.28> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 92.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 92.
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 92.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [68
+
+]
+<images/fig-013.pdf, id=652, 433.62pt x 216.81pt>
+File: images/fig-013.pdf Graphic file (type pdf)
+ <use images/fig-013.pdf>
+Package pdftex.def Info: images/fig-013.pdf used on input line 99.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 99.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [69
+
+ <./images/fig-013.pdf>]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 112.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[70
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 112.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [71
+
+]
+<images/fig-015.pdf, id=684, 433.62pt x 216.81pt>
+File: images/fig-015.pdf Graphic file (type pdf)
+ <use images/fig-015.pdf>
+Package pdftex.def Info: images/fig-015.pdf used on input line 119.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 119.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 119.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 119.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [72
+
+ <./images/fig-015.pdf>]
+<images/fig-016.pdf, id=703, 433.62pt x 216.81pt>
+File: images/fig-016.pdf Graphic file (type pdf)
+ <use images/fig-016.pdf>
+Package pdftex.def Info: images/fig-016.pdf used on input line 127.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 127.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [73
+
+ <./images/fig-016.pdf>]
+<images/fig-018.pdf, id=722, 433.62pt x 289.08pt>
+File: images/fig-018.pdf Graphic file (type pdf)
+ <use images/fig-018.pdf>
+Package pdftex.def Info: images/fig-018.pdf used on input line 134.
+(pdftex.def)             Requested size: 259.04922pt x 172.70828pt.
+
+Overfull \vbox (15.66875pt too high) detected at line 134
+ []
+
+File: src/logo_UL.png Graphic file (type png)
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 134.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [74
+
+ <./images/fig-018.pdf>]
+<images/fig-019.pdf, id=741, 433.62pt x 216.81pt>
+File: images/fig-019.pdf Graphic file (type pdf)
+ <use images/fig-019.pdf>
+Package pdftex.def Info: images/fig-019.pdf used on input line 142.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+
+Overfull \vbox (14.57265pt too high) detected at line 142
+ []
+
+File: src/logo_UL.png Graphic file (type png)
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 142.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [75
+
+ <./images/fig-019.pdf>]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 151.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[76
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 163.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [77
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 163.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [78
+
+]
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 189.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [79
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 196.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [80
+
+]
+<images/fig-023.pdf, id=795, 433.62pt x 216.81pt>
+File: images/fig-023.pdf Graphic file (type pdf)
+ <use images/fig-023.pdf>
+Package pdftex.def Info: images/fig-023.pdf used on input line 203.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 203.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [81
+
+ <./images/fig-023.pdf>]
+<images/fig-024.pdf, id=813, 433.62pt x 216.81pt>
+File: images/fig-024.pdf Graphic file (type pdf)
+ <use images/fig-024.pdf>
+Package pdftex.def Info: images/fig-024.pdf used on input line 210.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 210.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [82
+
+ <./images/fig-024.pdf>]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 220.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[83
+
+] <images/fig-026.pdf, id=838, 433.62pt x 216.81pt>
+File: images/fig-026.pdf Graphic file (type pdf)
+
+<use images/fig-026.pdf>
+Package pdftex.def Info: images/fig-026.pdf used on input line 227.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 227.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [84
+
+ <./images/fig-026.pdf>]
+<images/fig-027.pdf, id=856, 433.62pt x 216.81pt>
+File: images/fig-027.pdf Graphic file (type pdf)
+ <use images/fig-027.pdf>
+Package pdftex.def Info: images/fig-027.pdf used on input line 235.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 235.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [85
+
+ <./images/fig-027.pdf>]
+<images/fig-028.pdf, id=875, 433.62pt x 216.81pt>
+File: images/fig-028.pdf Graphic file (type pdf)
+ <use images/fig-028.pdf>
+Package pdftex.def Info: images/fig-028.pdf used on input line 242.
+(pdftex.def)             Requested size: 345.39677pt x 172.70718pt.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 242.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [86
+
+ <./images/fig-028.pdf>]
+<images/fig-030.pdf, id=894, 433.62pt x 289.08pt>
+File: images/fig-030.pdf Graphic file (type pdf)
+ <use images/fig-030.pdf>
+Package pdftex.def Info: images/fig-030.pdf used on input line 251.
+(pdftex.def)             Requested size: 259.04922pt x 172.70828pt.
+
+Overfull \vbox (15.66875pt too high) detected at line 251
+ []
+
+File: src/logo_UL.png Graphic file (type png)
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 251.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [87
+
+ <./images/fig-030.pdf>]
+<images/fig-031.pdf, id=911, 433.62pt x 289.08pt>
+File: images/fig-031.pdf Graphic file (type pdf)
+ <use images/fig-031.pdf>
+Package pdftex.def Info: images/fig-031.pdf used on input line 259.
+(pdftex.def)             Requested size: 323.82474pt x 156.48903pt.
+File: src/logo_UL.png Graphic file (type png)
+
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 259.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [88
+
+ <./images/fig-031.pdf>]
+<images/fig-032.pdf, id=928, 433.62pt x 216.81pt>
+File: images/fig-032.pdf Graphic file (type pdf)
+ <use images/fig-032.pdf>
+Package pdftex.def Info: images/fig-032.pdf used on input line 266.
+(pdftex.def)             Requested size: 323.80824pt x 161.91235pt.
+
+Overfull \vbox (4.26447pt too high) detected at line 266
+ []
+
+File: src/logo_UL.png Graphic file (type png)
+<use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 266.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [89
+
+ <./images/fig-032.pdf>]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 275.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+
+[90
+
+])
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 304.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [91
+
+
+]
+File: src/logo_UL.png Graphic file (type png)
+ <use src/logo_UL.png>
+Package pdftex.def Info: src/logo_UL.png used on input line 310.
+(pdftex.def)             Requested size: 64.759pt x 26.69435pt.
+ [92
+
+]
+(./template_beamer_UL.bbl
 (/usr/local/texlive/2017/texmf-dist/tex/latex/francais-bst/francaisbst.tex))
 File: src/logo_UL.png Graphic file (type png)
 
 <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 325.
+Package pdftex.def Info: src/logo_UL.png used on input line 317.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [28
-
-
-\@writefile{toc}{\beamer@subsectionintoc {4}{3}{Approche dynamique \IeC {\`a} d
-eux variables}{28}{0}{4}}
-\@writefile{nav}{\headcommand {\beamer@subsectionentry {0}{4}{3}{28}{Approche d
-ynamique \IeC {\`a} deux variables}}\headcommand {\beamer@subsectionpages {27}{
-27}}}
-\@writefile{toc}{\beamer@subsectionintoc {4}{4}{Approche dynamique \IeC {\`a} t
-rois variables}{28}{0}{4}}
-\@writefile{nav}{\headcommand {\beamer@subsectionentry {0}{4}{4}{28}{Approche d
-ynamique \IeC {\`a} trois variables}}\headcommand {\beamer@subsectionpages {28}
-{27}}}
+ [93
 
 ]
 File: src/logo_UL.png Graphic file (type png)
  <use src/logo_UL.png>
-Package pdftex.def Info: src/logo_UL.png used on input line 325.
+Package pdftex.def Info: src/logo_UL.png used on input line 317.
 (pdftex.def)             Requested size: 64.759pt x 26.69435pt.
- [29
+ [94
 
 
 ]
@@ -2083,51 +2647,56 @@ Package pdftex.def Info: src/logo_UL.png used on input line 325.
 \tf@snm=\write9
 \openout9 = `template_beamer_UL.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 328.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 328.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 320.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 320.
  (./template_beamer_UL.aux (./donneesR.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 328.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 328.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 320.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 320.
 Package rerunfilecheck Info: File `template_beamer_UL.out' has not changed.
-(rerunfilecheck)             Checksum: 6DAFB3A7B3A55FB11B4775EE8A9E7ABB;949.
+(rerunfilecheck)             Checksum: 5373267347E8A4D96AC62E049D025A61;975.
  ) 
 Here is how much of TeX's memory you used:
- 27776 strings out of 492995
- 552112 string characters out of 6132704
- 654497 words of memory out of 5000000
- 30558 multiletter control sequences out of 15000+600000
- 53454 words of font info for 50 fonts, out of 8000000 for 9000
+ 28066 strings out of 492995
+ 555783 string characters out of 6132704
+ 653640 words of memory out of 5000000
+ 30697 multiletter control sequences out of 15000+600000
+ 81909 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,21n,71p,803b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{eq\\unskip\040\\penalty\040\\@M\040\040:9} has be
-en referenced but does not exist, replaced by a fixed one
+ 56i,17n,71p,803b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{eq\\penalty\040\\@M\040\040:9} has been reference
+d but does not exist, replaced by a fixed one
 
-pdfTeX warning (dest): name{eq\\unskip\040\\penalty\040\\@M\040\040:8} has been
- referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{eq\\penalty\040\\@M\040\040:8} has been referenced 
+but does not exist, replaced by a fixed one
 
-{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/te
-xlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2017
-/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2017/texmf-dist/fo
+pdfTeX warning (dest): name{eq\\penalty\040\\@M\040\040:1} has been referenced 
+but does not exist, replaced by a fixed one
+
+{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/te
+xlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2017/tex
+mf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2017/texmf-dist/fo
 nts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dv
 ips/lm/lm-mathex.enc}</usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/
 lmcsc10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmex10.pf
-b></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/lo
-cal/texlive/2017/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive
-/2017/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2017/texmf
--dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2017/texmf-dist/font
-s/type1/public/lm/lmss12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/pu
-blic/lm/lmss17.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lm
-ss8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb>
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmsso12.pfb></usr/loc
-al/texlive/2017/texmf-dist/fonts/type1/public/lm/lmsso8.pfb></usr/local/texlive
-/2017/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2017/texm
-f-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2017/texmf-dist/font
-s/type1/public/lm/lmtt12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msbm10.pfb>
-Output written on template_beamer_UL.pdf (29 pages, 338690 bytes).
+b></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/lo
+cal/texlive/2017/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texliv
+e/2017/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2017/texm
+f-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2017/texmf-dist/font
+s/type1/public/lm/lmss10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/pu
+blic/lm/lmss12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lm
+ss17.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmss8.pfb></
+usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/loca
+l/texlive/2017/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></usr/local/texlive
+/2017/texmf-dist/fonts/type1/public/lm/lmsso12.pfb></usr/local/texlive/2017/tex
+mf-dist/fonts/type1/public/lm/lmsso8.pfb></usr/local/texlive/2017/texmf-dist/fo
+nts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/
+public/lm/lmsy8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/lm/l
+mtt12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb>
+Output written on template_beamer_UL.pdf (94 pages, 553427 bytes).
 PDF statistics:
- 429 PDF objects out of 1000 (max. 8388607)
- 359 compressed objects within 4 object streams
- 85 named destinations out of 1000 (max. 500000)
- 197 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1101 PDF objects out of 1200 (max. 8388607)
+ 932 compressed objects within 10 object streams
+ 218 named destinations out of 1000 (max. 500000)
+ 262 words of extra memory for PDF output out of 10000 (max. 10000000)
 

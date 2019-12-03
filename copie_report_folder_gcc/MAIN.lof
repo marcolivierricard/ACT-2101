@@ -1,0 +1,23 @@
+\select@language {french}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Densit\IeC {\'e} du logarithme du montant des catastrophes\relax }}{22}{figure.caption.15}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Nombre cumulatif de catastrophes par pays\relax }}{23}{figure.caption.16}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces \IeC {\'E}volution des catastrophes par pays\relax }}{23}{figure.caption.17}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces \textit {Mean residual plot}\relax }}{25}{figure.caption.19}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Estimation des param\IeC {\`e}tres du mod\IeC {\`e}le pour diff\IeC {\'e}rents seuils\relax }}{26}{figure.caption.20}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Graphiques de validation du mod\IeC {\`e}le\relax }}{27}{figure.caption.21}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Pr\IeC {\'e}dictions du taux d'exc\IeC {\`e}s de seuil avec intervalles de confiance \IeC {\`a} 95\%\relax }}{28}{figure.caption.22}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Pr\IeC {\'e}dictions du param\IeC {\`e}tre $\xi $ avec intervalles de confiance \IeC {\`a} 95\%\relax }}{29}{figure.caption.23}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Pr\IeC {\'e}dictions du param\IeC {\`e}tre $\beta $ avec intervalles de confiance \IeC {\`a} 95\%\relax }}{30}{figure.caption.24}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Graphique \textit {Q-Q} de $\text {Exp}(1)$\relax }}{31}{figure.caption.25}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \text {VaR}_{0.99}$}\mathaccent "0362{\text {VaR}_{0.99}}$ avec intervalles de confiance \IeC {\`a} 95\%\relax }}{31}{figure.caption.26}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Pr\IeC {\'e}dictions du param\IeC {\`e}tre $\rho $ pour l'Australie avec intervalles de confiance \IeC {\`a} 95\%\relax }}{33}{figure.caption.28}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Pr\IeC {\'e}dictions du param\IeC {\`e}tre $\rho $ pour la Nouvelle-Z\IeC {\'e}lande avec intervalles de confiance \IeC {\`a} 95\%\relax }}{34}{figure.caption.29}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Pr\IeC {\'e}dictions du param\IeC {\`e}tre $\xi $ avec intervalles de confiance \IeC {\`a} 95\%\relax }}{35}{figure.caption.30}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Pr\IeC {\'e}dictions du param\IeC {\`e}tre $\beta $ pour l'Australie avec intervalles de confiance \IeC {\`a} 95\%\relax }}{35}{figure.caption.31}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Pr\IeC {\'e}dictions du param\IeC {\`e}tre $\beta $ pour la Nouvelle-Z\IeC {\'e}lande avec intervalles de confiance \IeC {\`a} 95\%\relax }}{36}{figure.caption.32}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Graphique \textit {Q-Q} de $\text {Exp}(1)$\relax }}{36}{figure.caption.33}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \text {VaR}_{0.99}$}\mathaccent "0362{\text {VaR}_{0.99}}$ avec intervalles de confiance \IeC {\`a} 95\%\relax }}{37}{figure.caption.34}
+\contentsline {figure}{\numberline {3.19}{\ignorespaces $\setbox \z@ \hbox {\frozen@everymath \@emptytoks \mathsurround \z@ $\textstyle \text {VaR}_{0.99}$}\mathaccent "0362{\text {VaR}_{0.99}}$ avec intervalles de confiance \IeC {\`a} 95\%\relax }}{37}{figure.caption.35}

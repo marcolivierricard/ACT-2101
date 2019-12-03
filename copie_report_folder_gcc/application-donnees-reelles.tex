@@ -27,7 +27,7 @@ Les tables \ref{tab:3.1} et \ref{tab:3.2} contiennent un résumé statistique de
 
 
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Mon Nov 25 09:26:46 2019
+% Mon Dec  2 15:08:45 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccccc}
@@ -44,7 +44,7 @@ NormCost2011 & 254 & 589 & 2 & 66 & 4296 & 190 & 92 \\
 \caption{Résumé statistique des variables numériques pour l'Australie} 
 \label{tab:3.1}
 \end{table}% latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Mon Nov 25 09:26:46 2019
+% Mon Dec  2 15:08:45 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -68,7 +68,7 @@ Bushfire & 26 & 13 & 13 & 13 & 13 \\
 \label{tab:3.2}
 \end{table}
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Mon Nov 25 09:26:46 2019
+% Mon Dec  2 15:08:45 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccccc}
@@ -85,7 +85,7 @@ NormCost2011 & 17.169 & 40.885 & 0.010 & 5.270 & 371.120 & 129.000 & 88.966 \\
 \caption{Résumé statistique des variables numériques pour la Nouvelle-Zélande} 
 \label{tab:3.3}
 \end{table}% latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Mon Nov 25 09:26:46 2019
+% Mon Dec  2 15:08:45 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -113,7 +113,7 @@ Cyclone & 4 & 3 & 3 & 3 & 3 \\
 Pour chaque jeu de données, une nouvelle variable du montant de catastrophe est créée à partir de la variable \texttt{NormCost2014} (\texttt{CostUS2019}). Cette nouvelle variable représente le coût ajusté au niveau du 30 juin 2019 en considérant l'indice du prix à la consommation de chaque pays et le coût est également converti en dollar américain. La table \ref{tab:3.5} contient les chiffres utilisés \footnote{https://www.rateinflation.com/consumer-price-index  \newline https://www.exchange-rates.org/Rate/AUD/USD/6-30-2019}.
 
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Mon Nov 25 09:26:46 2019
+% Mon Dec  2 15:08:45 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccc}
@@ -157,7 +157,7 @@ AUS & 105.9000 & 114.8000 & 0.7031 \\
 \end{figure}   
 
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Mon Nov 25 09:26:49 2019
+% Mon Dec  2 15:08:47 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccccc}
@@ -234,7 +234,7 @@ Suite aux résultats obtenus, les graphiques de validation mentionnés à la sec
 \
 
 
-Pour conclure, le modèle proposé dans cette section représente un modèle de base qui considère toutes les données de la manière sans égard aux informations supplémentaires disponibles par rapport aux montants des catastrophes. Il n'est donc pas surprenant de voir que cette aproche n'est pas tout à fait adéquate dans le cas présent, mais reste que cette approche est viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles. Il est également important de savoir que le modèle testé dans cette section est la base de tous autres modèles plus avancés, tous comme les modèles qui seront testés aux prochaines sections.
+Pour conclure, le modèle proposé dans cette section représente un modèle de base qui considère toutes les données de la manière sans égard aux informations supplémentaires disponibles par rapport aux montants des catastrophes. Il n'est donc pas surprenant de voir que cette approche n'est pas tout à fait adéquate dans le cas présent, mais reste que cette approche est viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles. Il est également important de savoir que le modèle testé dans cette section est la base de tous autres modèles plus avancés, tous comme les modèles qui seront testés aux prochaines sections.
 \begin{figure}[h]
 \begin{center}
 \includegraphics{images/fig-011}
@@ -251,7 +251,7 @@ Pour conclure, le modèle proposé dans cette section représente un modèle de 
 Cette section applique la méthodologie et le modèle proposés au chapitre \ref{chap:article} avec deux variables, l'année et le pays. On considère donc une variable numérique de temps ainsi qu'une variable catégorique à deux niveaux. Seulement deux variables sont initialemment utilisées étant donné que c'est ce que l'article étudié utilise pour ilustrer la méthode. De plus, étant donné le nombre limité de données disponibles, il est préférable de ne pas commencer avec un nombre de sous-groupes trop élevés. Une troisième variable sera considérée à la section \ref{sec:3.4}. Avant même de commencer, les figures \ref{fig:3.1} et \ref{fig:3.2} suggèrent que les paramètres du modèles devraient bel et bien varier entre les deux pays et à travers le temps. Dans le cadre de la modélisation, seulement l'ajustement du paramètre $\rho$ est inclu dans le rapport, voir \ref{eq:2.2.13}. Un seuil de valeur 10 M USD est toujours utilisé, voir les figures \ref{fig:3.4} et \ref{fig:3.5}. 
 \\
 
-Premièrement, le paramètre $\rho$ du modèle est ajuté aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\rho$ dépend du pays et du temps et a la forme suivante:
+Premièrement, le paramètre $\rho$ du modèle est ajusté aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\rho$ dépend du pays et du temps et a la forme suivante:
 \begin{equation}\label{eq:3.3.1}
 \log\Bigg(\frac{\hat\rho(x,t)}{1-\hat\rho(x,t)}\Bigg) = \hat{f}_\rho(pays) + \hat{h}^{(2)}_\rho(annee)
 \end{equation}
@@ -306,7 +306,7 @@ La figure \ref{fig:3.8} montre qu'il y a bel et bien une différence entre les d
 La figure \ref{fig:3.9} montre bien que les deux variables sélectionnées ont bel et bien un impact sur le paramètre $\beta$. Tout comme avec $\xi$, il est logique que les paramètres de la Nouvelle-Zélande soient inférieurs que ceux de l'Australie tout simplement parce que les pertes sont généralement plus élevées, voir la figure \ref{fig:3.1}. La figure montre également que, de façon générale, le paramètre dimiunue avec le temps.
 \\
 
-Même si les paramètres du modèle sont maintenant obtenus, il est important de vérifier l'adéquation du modèle avant d'effectuer n'importe quelle inférence. Comme l'explique l'équation \ref{eq:2.2.12}, une validation possible de vérifier si les $r_i$ se comportent comme des variables aléatoires indépendantes suivant une loi exponentielle standards. Le graphique \textit{Q-Q} de cette loi est donc tracé à la figure \ref{fig:3.10}.
+Même si les paramètres du modèle sont maintenant obtenus, il est important de vérifier l'adéquation du modèle avant d'effectuer n'importe quelle inférence. Comme l'explique l'équation \ref{eq:2.2.12}, une validation possible est de vérifier si les $r_i$ se comportent comme des variables aléatoires indépendantes suivant une loi exponentielle standards. Le graphique \textit{Q-Q} de cette loi est donc tracé à la figure \ref{fig:3.10}.
 
 La figure montre que la calibration du modèle n'est pas tout si mal et même bonne dans l'ensemble. Le graphique n'est pas catastrophique et tout de même mieux que celui de la figure \ref{fig:3.6}. Peut-être que l'ajout d'une troisième variable à la section \ref{sec:3.4} va améliorer la qualité du modèle obtenu.
 \\
@@ -342,7 +342,7 @@ Dans cette section, la même procédure que la section \ref{sec:3.3} est employ�
 
 
 % latex table generated in R 3.6.1 by xtable 1.8-4 package
-% Mon Nov 25 09:26:59 2019
+% Mon Dec  2 15:11:12 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cc}

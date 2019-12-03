@@ -44,12 +44,38 @@ pacicathist <- pacicathist %>%
 
 levels(pacicathist$Pays)[levels(pacicathist$Pays)=="AUS"] <- "Australie"
 levels(pacicathist$Pays)[levels(pacicathist$Pays)=="N-Z"] <- "Nouvelle-Zélande"
+
+
+
+paci.3 <- pacicathist
+
+Type2 <- data.frame(Type = c("Bushfire", "Hailstorm", "Cyclone", 
+                             "Flood", "Flood, Storm", "Storm", 
+                             "Other", "Tornado", "Earthquake", "Weather", "Power outage"),
+                    Type2 = c("Bushfire", "Hailstorm", "Cyclone",
+                              rep("Flood, Storm",3), 
+                              rep("Other",5)))
+
+paci.3 <- paci.3 %>% 
+    inner_join(Type2)
+
+paci.3 %>% 
+    count(Type2) %>% 
+    arrange(-n)
+
+
+paci.3 <- paci.3 %>% 
+    mutate(Type=as.factor(Type2)) %>% 
+    select(-Type2)
+
+
+paci.3 <- droplevels(paci.3)
 @
 
 \begin{frame}{Analyse de données}
-Pour mettre en application l'approche proposée par \cite{chavez2016extreme}, deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}. \\~\\
+Deux jeux de données du paquetage \texttt{CASdatasets} sont utilisés. Soit \texttt{auscathist} et \texttt{nzcathist}.\\~\\ \pause
 
-Ces données représentent respectivement l'historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande. Les prochaines diapositives présentent une analyse globale des données utilisées.
+Historique des catastrophes naturelles pour l'Australie ainsi que pour la Nouvelle-Zélande.
 \end{frame}
 
 
@@ -74,6 +100,7 @@ Ces données représentent respectivement l'historique des catastrophes naturell
 \end{figure}
 \end{frame}
 
+
 \begin{frame}
 <<echo=FALSE, results=tex>>=
 print(
@@ -82,25 +109,201 @@ print(
     summarise(N = n(),
               Moyenne = mean(Montant),
               Écart = sd(Montant), 
-              Minimum = min(Montant),
               Médiane = median(Montant),
-              Q3 = quantile(Montant, .75),
               Maximum = max(Montant))), 
-    caption = "Résumé statistique des montants (M USD) de catastrophes par Type", label="tab:3.6", align=rep("c",9), digits=0, table.placement="t"), include.rownames = FALSE)
+    caption = "Résumé statistique des montants (M USD) par type", label="tab:3.6", align=rep("c",7), digits=0, table.placement="t"), include.rownames = FALSE)
 @
 \end{frame}
 
 \subsection{Approche classique}
 
-\begin{frame}
+\begin{frame}{Approche classique}
 \begin{itemize}
-\item Par souci de manque de temps, les résultats obtenus avec l'approche classique ne seront pas montrés de façon détaillée. On conlut que cette approche n'est pas tout à fait adéquate dans le cas présent. 
-\item Cette approche reste viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles.
-\item Un seuil de 10 M USD fut sélectionné
+\item Résultats pas montrés de façon détaillée. \pause
+\item Approche pas tout à fait adéquate dans le cas présent. \pause
+\item Viable, rapide et peut être une bonne solution lorsque seulement les montants sont disponibles. \pause
+\item Un seuil de 10 M USD fut sélectionné.
 \end{itemize}
 \end{frame}
 
 \subsection{Approche dynamique à deux variables}
 
+\begin{frame}{Approche dynamique à deux variables}
+\begin{itemize}
+\item Année et pays. \pause
+\item Variable numérique de temps et variable catégorique à deux niveaux.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Paramètre $\rho$}
+Le modèle sélectionné pour $\hat\rho$ dépend du pays et du temps:
+\begin{equation*}
+\log\Bigg(\frac{\hat\rho(x,t)}{1-\hat\rho(x,t)}\Bigg) = \hat{f}_\rho(pays) + \hat{h}^{(2)}_\rho(annee),
+\end{equation*}
+où ${h}^{(\text{Df})}$ représente une spline naturelle quadratique avec $\text{Df}$ degrés de liberté.
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-013.pdf}
+\caption{Prédictions du taux d'excès de seuil}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Paramètres de la loi Pareto généralisée}
+Le modèle sélectionné pour $\hat\xi$ dépend du pays et non du temps:
+\begin{equation*}
+\hat\xi(x,t) = \hat{f}_\xi(pays).
+\end{equation*}
+\pause
+Le modèle sélectionné pour $\hat\beta$ dépend du pays et du temps:
+\begin{equation*}
+\hat\beta(x,t) = \hat{f}_\beta(pays) + \hat{h}^{(3)}_\beta(annee).
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-015.pdf}
+\caption{Prédictions du paramètre $\xi$}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-016.pdf}
+\caption{Prédictions du paramètre $\beta$}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Validation du modèle}
+\begin{figure}
+\includegraphics[width=.6\textwidth]{images/fig-018.pdf}
+\caption{Graphique \textit{Q-Q} de $\text{Exp}(1)$}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Mesure \text{VaR}}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-019.pdf}
+\caption{$\widehat{\text{VaR}_{0.99}}$}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Résumé}
+\begin{itemize}
+\item Méthodologie fonctionne. 
+\item Donnent les résultats escomptés pour les variables.
+\item Amélioration du modèle classique.
+\end{itemize}
+\end{frame}
+
+
+
 
 \subsection{Approche dynamique à trois variables}
+
+\begin{frame}{Approche dynamique à trois variables}
+\begin{itemize}
+\item Année, pays et type \pause
+\item Regroupement des types.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+<<echo=FALSE, results=tex>>=
+print(
+  xtable(Type2, caption = "Regroupement des types de catastrophes", label="tab:3.7", align=rep("c",3), digits=0, table.placement="h"), include.rownames = FALSE
+)
+@
+\end{frame}
+
+
+\begin{frame}{Paramètre $\rho$}
+\begin{equation*}
+\log\Bigg(\frac{\hat\rho(x,t)}{1-\hat\rho(x,t)}\Bigg) = \hat{f}_\rho(pays) + \hat{f}_\rho(type) + \hat{h}^{(2)}_\rho(annee)
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-023.pdf}
+\caption{Prédictions du paramètre $\rho$ pour l'Australie}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-024.pdf}
+\caption{Prédictions du paramètre $\rho$ pour la Nouvelle-Zélande}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Paramètres de la loi Pareto généralisée}
+\begin{equation*}
+\hat\xi(x,t) = \hat{f}_\xi(pays) + \hat{f}_\xi(type)
+\end{equation*}
+\begin{equation*}
+\hat\beta(x,t) = \hat{f}_\beta(pays) + \hat{f}_\xi(type) + \hat{h}^{(4)}_\beta(annee)
+\end{equation*}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-026.pdf}
+\caption{Prédictions du paramètre $\xi$}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-027.pdf}
+\caption{Prédictions du paramètre $\beta$ pour l'Australie}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=.8\textwidth]{images/fig-028.pdf}
+\caption{Prédictions du paramètre $\beta$ pour la Nouvelle-Zélande}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Validation du modèle}
+\begin{figure}
+\includegraphics[width=.6\textwidth]{images/fig-030.pdf}
+\caption{Graphique \textit{Q-Q} de $\text{Exp}(1)$}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Mesure \text{VaR}}
+\begin{figure}
+\includegraphics[width=.75\textwidth, height=5.5cm]{images/fig-031.pdf}
+\caption{$\widehat{\text{VaR}_{0.99}}$ pour l'Australie}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Mesure \text{VaR}}
+\begin{figure}
+\includegraphics[width=.75\textwidth]{images/fig-032.pdf}
+\caption{$\widehat{\text{VaR}_{0.99}}$ pour la Nouvelle-Zélande}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Résumé}
+\begin{itemize}
+\item Modèle adéquat. 
+\item Aucun gain significatif. 
+\item Paramètres et mesures de risques plus volatiles et moins crédibles. 
+\end{itemize}
+\end{frame}

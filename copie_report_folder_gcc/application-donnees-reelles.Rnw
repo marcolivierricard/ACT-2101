@@ -153,7 +153,7 @@ pacicathist %>%
 <<echo=FALSE, fig=TRUE, height=3, width=6>>=
 pacicathist %>% 
     ggplot() +
-    geom_point(aes(x=Année, y=Montant, col=Pays)) + 
+    geom_point(aes(x=Année, y=Montant, col=Pays, alpha=.44)) + 
     facet_wrap(~Pays, scales="free") + 
     theme_bw() +
     theme(legend.position = "")+
@@ -261,7 +261,7 @@ gpd.diag(gpd.fit(pacicathist$Montant, 10, show=FALSE))
 Cette section applique la méthodologie et le modèle proposés au chapitre \ref{chap:article} avec deux variables, l'année et le pays. On considère donc une variable numérique de temps ainsi qu'une variable catégorique à deux niveaux. Seulement deux variables sont initialemment utilisées étant donné que c'est ce que l'article étudié utilise pour ilustrer la méthode. De plus, étant donné le nombre limité de données disponibles, il est préférable de ne pas commencer avec un nombre de sous-groupes trop élevés. Une troisième variable sera considérée à la section \ref{sec:3.4}. Avant même de commencer, les figures \ref{fig:3.1} et \ref{fig:3.2} suggèrent que les paramètres du modèles devraient bel et bien varier entre les deux pays et à travers le temps. Dans le cadre de la modélisation, seulement l'ajustement du paramètre $\rho$ est inclu dans le rapport, voir \ref{eq:2.2.13}. Un seuil de valeur 10 M USD est toujours utilisé, voir les figures \ref{fig:3.4} et \ref{fig:3.5}. 
 \\
 
-Premièrement, le paramètre $\rho$ du modèle est ajuté aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\rho$ dépend du pays et du temps et a la forme suivante:
+Premièrement, le paramètre $\rho$ du modèle est ajusté aux données. Après avoir statistiquement comparé les différents modèles, le modèle sélectionné pour $\hat\rho$ dépend du pays et du temps et a la forme suivante:
 \begin{equation}\label{eq:3.3.1}
 \log\Bigg(\frac{\hat\rho(x,t)}{1-\hat\rho(x,t)}\Bigg) = \hat{f}_\rho(pays) + \hat{h}^{(2)}_\rho(annee)
 \end{equation}
@@ -327,12 +327,12 @@ De son côté, le modèle sélectionné pour $\hat\beta$ dépend du pays et du t
 \end{equation}
 
 <<echo=FALSE, results=hide>>=
-bootGPD <- QRM::gamGPDboot(paci.1, B=10, threshold=10, datvar="Montant",
+bootGPD <- QRM::gamGPDboot(paci.1, B=500, threshold=10, datvar="Montant",
                          
                          xiFrhs = ~ Pays - 1, 
                          nuFrhs = ~ Pays + s(Année, fx=TRUE, k=3+1, bs="cr", by=Pays) - 1, 
                          
-                         niter=10, eps.xi=.005, eps.nu=.005)
+                         niter=500, eps.xi=.005, eps.nu=.005)
 
 
 
@@ -394,7 +394,7 @@ results.beta %>%
 La figure \ref{fig:3.9} montre bien que les deux variables sélectionnées ont bel et bien un impact sur le paramètre $\beta$. Tout comme avec $\xi$, il est logique que les paramètres de la Nouvelle-Zélande soient inférieurs que ceux de l'Australie tout simplement parce que les pertes sont généralement plus élevées, voir la figure \ref{fig:3.1}. La figure montre également que, de façon générale, le paramètre dimiunue avec le temps.
 \\
 
-Même si les paramètres du modèle sont maintenant obtenus, il est important de vérifier l'adéquation du modèle avant d'effectuer n'importe quelle inférence. Comme l'explique l'équation \ref{eq:2.2.12}, une validation possible de vérifier si les $r_i$ se comportent comme des variables aléatoires indépendantes suivant une loi exponentielle standards. Le graphique \textit{Q-Q} de cette loi est donc tracé à la figure \ref{fig:3.10}.
+Même si les paramètres du modèle sont maintenant obtenus, il est important de vérifier l'adéquation du modèle avant d'effectuer n'importe quelle inférence. Comme l'explique l'équation \ref{eq:2.2.12}, une validation possible est de vérifier si les $r_i$ se comportent comme des variables aléatoires indépendantes suivant une loi exponentielle standards. Le graphique \textit{Q-Q} de cette loi est donc tracé à la figure \ref{fig:3.10}.
 <<echo=FALSE, results=hide>>=
 covar <- xibetaFit$beta$covar 
 
@@ -415,7 +415,7 @@ xibetaFit$xi$covar <- covar
 
 
 
-xibetaFit.xi.boot2 <- matrix(ncol = 10)
+xibetaFit.xi.boot2 <- matrix(ncol = 500)
 for (i in nrow(count.cov):1){
     xibetaFit.xi.boot2 <- rbind(
         do.call(rbind, replicate(count.cov$n[i], xibetaFit$xi$boot[i,], simplify=FALSE)),
@@ -452,7 +452,7 @@ final.results <- data.frame(Covar=xibetaFit$beta$covar,
 
 
 
-VaR <- cbind(covar, fit=sapply(1:(10+1), function(j)
+VaR <- cbind(covar, fit=sapply(1:(500+1), function(j)
     risk.measure(cbind(rho.res.sel$rhoFit.fit, xiFit.mat[,j], betaFit.mat[,j]),
                  alpha=.99, u=10, method="VaR")
 ))
@@ -654,12 +654,12 @@ De son côté, le modèle sélectionné pour $\hat\beta$ dépend du pays, du typ
 \end{equation}
 
 <<echo=FALSE, results=hide>>=
-bootGPD <- QRM::gamGPDboot(paci.3, B=10, threshold=10, datvar="Montant",
+bootGPD <- QRM::gamGPDboot(paci.3, B=500, threshold=10, datvar="Montant",
                             
                             xiFrhs = ~ Pays + Type - 1,  
                             nuFrhs = ~ Pays + Type + s(Année, fx=TRUE, k=4+1, bs="cr", by=Pays) - 1, 
                             
-                            niter=10, eps.xi=.005, eps.nu=.005)
+                            niter=500, eps.xi=.005, eps.nu=.005)
 
 
 
@@ -770,7 +770,7 @@ xibetaFit$xi$covar <- covar
 
 
 
-xibetaFit.xi.boot2 <- matrix(ncol = 10)
+xibetaFit.xi.boot2 <- matrix(ncol = 500)
 for (i in nrow(count.cov):1){
     xibetaFit.xi.boot2 <- rbind(
         do.call(rbind, replicate(count.cov$n[i], xibetaFit$xi$boot[i,], simplify=FALSE)),
@@ -807,7 +807,7 @@ final.results <- data.frame(Covar=xibetaFit$beta$covar,
 
 
 
-VaR <- cbind(covar, fit=sapply(1:(10+1), function(j)
+VaR <- cbind(covar, fit=sapply(1:(500+1), function(j)
     risk.measure(cbind(rho.res.sel$rhoFit.fit, xiFit.mat[,j], betaFit.mat[,j]),
                  alpha=.99, u=10, method="VaR")
 ))
